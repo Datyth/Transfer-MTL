@@ -1,0 +1,24 @@
+schema_version: 1
+status: PROPOSED
+seed: 0
+pilot_tasks:
+  exist: {exclude_relation: true}
+  verifyAttr: {exclude_relation: true}
+  verifyRel: {exclude_relation: false}
+  compare: {exclude_relation: true}
+  logic: {exclude_relation: false}
+proposal_patterns:
+  - {regex: '^exist.*$', task: exist, reason: 'Intended GQA exist family'}
+  - {regex: '^verifyAttr.*$', task: verifyAttr, reason: 'Intended GQA attribute verification family'}
+  - {regex: '^verifyRel.*$', task: verifyRel, reason: 'Intended GQA relation verification family'}
+  - {regex: '^(twoSame|twoDiff).*$', task: compare, reason: 'Pooling twoSame and twoDiff needs human review', ambiguous: true}
+  - {regex: '^(logicAnd|logicOr).*$', task: logic, reason: 'Pooling logicAnd and logicOr needs human review', ambiguous: true}
+unmatched_task: secondary
+unmatched_reason: 'Outside the intended pilot families; review before freezing'
+relation_definitions:
+  R_strict:
+    operation_heads: [relate]
+  R_broad:
+    operation_regexes: ['(^relate(\s|$)|\brel\b|\brelation\b)']
+    argument_regexes: ['^[^,]+,[^,]+,[so](\s*\([^)]*\))?$']
+type_mappings: {}
