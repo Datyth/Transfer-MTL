@@ -95,3 +95,10 @@ def test_small_stage1_reports_schema_and_is_deterministic(tmp_path, monkeypatch)
     assert any("image/png" in output_data.get("data", {}) for cell in notebook["cells"] for output_data in cell.get("outputs", []))
     assert stage1.run_stage1(questions) == 1
     assert (output / "STAGE1_SUMMARY.md").read_bytes() == first_summary
+    del samples["train"]["q1"]["annotations"]
+    (questions / "train_balanced_questions.json").write_text(
+        json.dumps(samples["train"]), encoding="utf-8"
+    )
+    assert stage1.run_stage1(questions) == 1
+    schema = (output / "schema_report.md").read_text(encoding="utf-8")
+    assert "| train | `annotations` | 1 |" in schema

@@ -1,6 +1,11 @@
 schema_version: 1
 status: PROPOSED
 seed: 0
+eligibility:
+  binary_answers:
+  - true
+  - false
+  require_nonempty_semantic: true
 pilot_tasks:
   exist:
     exclude_relation: true

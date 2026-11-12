@@ -280,7 +280,9 @@ def run_stage1(questions_dir: Path) -> int:
                             relation_writer.writerow([split, question_id, index, operation, argument, int(strict), int(broad)])
                     count = candidate[(split, detailed)]
                     count["raw"] += 1
-                    if answer_class in {"yes", "no"} and semantic:
+                    if normalized in task_rules["eligibility"]["binary_answers"] and (
+                        semantic or not task_rules["eligibility"]["require_nonempty_semantic"]
+                    ):
                         count["eligible"] += 1
                         count["strict_removed"] += int(question_strict)
                         count["broad_removed"] += int(question_broad)
@@ -331,7 +333,7 @@ def run_stage1(questions_dir: Path) -> int:
     candidate_rows = []
     for (split, detailed), counts in sorted(candidate.items()):
         mapping = task_rules["type_mappings"][detailed]
-        if mapping["task"] == "secondary":
+        if mapping["task"] == task_rules["unmatched_task"]:
             continue
         candidate_rows.append({
             "split": split, "task": mapping["task"], "types_detailed": detailed,
@@ -356,7 +358,7 @@ def run_stage1(questions_dir: Path) -> int:
     ]
     by_type = {(row["split"], row["types_detailed"]): row["count"] for row in inventory_rows}
     for detailed, mapping in task_rules["type_mappings"].items():
-        if mapping["task"] == "secondary":
+        if mapping["task"] == task_rules["unmatched_task"]:
             continue
         nums = [by_type.get((split, detailed), 0) for split in SPLITS]
         summary.append(f"| {mapping['task']} | `{detailed}` | {nums[0]:,} | {nums[1]:,} | {nums[2]:,} | {sum(nums):,} | {mapping.get('flag', '')} |")
