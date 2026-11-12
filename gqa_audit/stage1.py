@@ -62,11 +62,10 @@ def propose_type_mapping(raw_type: str, rules: dict[str, Any]) -> dict[str, Any]
             "reason": rules["unmatched_reason"],
             "flag": "UNMATCHED",
         }
-    tasks = {p["task"] for p in matches}
-    if len(tasks) != 1:
-        return {"task": "secondary", "reason": "Multiple proposal patterns matched", "flag": "AMBIGUOUS"}
     item = {"task": matches[0]["task"], "reason": matches[0]["reason"]}
-    if any(p.get("ambiguous") for p in matches):
+    if len({p["task"] for p in matches}) > 1:
+        item["reason"] += "; also matches another family prefix"
+    if any(p.get("ambiguous") for p in matches) or len({p["task"] for p in matches}) > 1:
         item["flag"] = "AMBIGUOUS"
     return item
 

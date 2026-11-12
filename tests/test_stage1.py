@@ -35,11 +35,15 @@ def test_relation_definitions_cover_operation_and_argument():
 
 def test_proposals_assign_at_most_one_task_and_cover_operations():
     task, operations = _configs()
-    types = ("exist", "verifyAttr", "verifyRel", "twoSameColor", "twoDiffColor", "logicAnd", "weatherVerifyC")
+    types = (
+        "exist", "verifyAttr", "relVerify", "twoSameColor", "twoDifferent",
+        "existAnd", "verifyAttrs", "weatherVerifyC",
+    )
     mapped = {raw: stage1.propose_type_mapping(raw, task) for raw in types}
     assert [mapped[t]["task"] for t in types] == [
-        "exist", "verifyAttr", "verifyRel", "compare", "compare", "logic", "secondary"
+        "exist", "verifyAttr", "verifyRel", "compare", "compare", "logic", "logic", "secondary"
     ]
+    assert mapped["existAnd"]["flag"] == "AMBIGUOUS"
     assert all(isinstance(value["task"], str) for value in mapped.values())
     assert stage1.propose_op_mapping("verify rel", operations)["families"] == ["relation"]
     assert stage1.propose_op_mapping("choose rel", operations)["families"] == ["choose", "relation"]

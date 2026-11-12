@@ -1,16 +1,48 @@
 schema_version: 1
 status: PROPOSED
-allowed_families: [select, filter_attribute, query_attribute, verify_attribute, relation, exist, compare, choose, logic]
+allowed_families:
+- select
+- filter_attribute
+- query_attribute
+- verify_attribute
+- relation
+- exist
+- compare
+- choose
+- logic
 proposal_patterns:
-  - {regex: '^select(\s|$)', families: [select]}
-  - {regex: '^filter(\s|$)', families: [filter_attribute]}
-  - {regex: '^query(\s|$)', families: [query_attribute]}
-  - {regex: '^verify rel(\s|$)', families: [relation]}
-  - {regex: '^verify(\s|$)', families: [verify_attribute]}
-  - {regex: '^relate(\s|$)', families: [relation]}
-  - {regex: '^exist(\s|$)', families: [exist]}
-  - {regex: '^(same|different|common|compare)(\s|$)', families: [compare]}
-  - {regex: '^choose rel(\s|$)', families: [choose, relation]}
-  - {regex: '^choose(\s|$)', families: [choose]}
-  - {regex: '^(and|or)(\s|$)', families: [logic]}
+- regex: ^select(\s|$)
+  families:
+  - select
+- regex: ^filter(\s|$)
+  families:
+  - filter_attribute
+- regex: ^query(\s|$)
+  families:
+  - query_attribute
+- regex: ^verify rel(\s|$)
+  families:
+  - relation
+- regex: ^verify(\s|$)
+  families:
+  - verify_attribute
+- regex: ^relate(\s|$)
+  families:
+  - relation
+- regex: ^exist(\s|$)
+  families:
+  - exist
+- regex: ^(same|different|common|compare)(\s|$)
+  families:
+  - compare
+- regex: ^choose rel(\s|$)
+  families:
+  - choose
+  - relation
+- regex: ^choose(\s|$)
+  families:
+  - choose
+- regex: ^(and|or)(\s|$)
+  families:
+  - logic
 operations: {}
