@@ -81,6 +81,7 @@ def test_small_stage1_reports_schema_and_is_deterministic(tmp_path, monkeypatch)
     }
     for split, data in samples.items():
         (questions / f"{split}_balanced_questions.json").write_text(json.dumps(data), encoding="utf-8")
+    (questions / "val_all_questions.json").write_text("not parsed", encoding="utf-8")
     monkeypatch.setattr(stage1, "ROOT", tmp_path)
     monkeypatch.setattr(stage1, "CONFIG", config)
     monkeypatch.setattr(stage1, "OUTPUT", output)
@@ -101,4 +102,5 @@ def test_small_stage1_reports_schema_and_is_deterministic(tmp_path, monkeypatch)
     )
     assert stage1.run_stage1(questions) == 1
     schema = (output / "schema_report.md").read_text(encoding="utf-8")
+    assert "val_all_questions.json" in schema
     assert "| train | `annotations` | 1 |" in schema

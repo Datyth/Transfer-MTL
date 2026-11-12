@@ -121,6 +121,7 @@ def _record_issue(issues: Counter, examples: list[str], key: str, detail: str) -
 def _schema_report(
     split_sizes: Counter, key_counts: Counter, missing: Counter,
     examples: dict[str, list[dict[str, Any]]], issues: Counter, issue_examples: list[str],
+    unbalanced_files: list[Path], questions_dir: Path,
 ) -> str:
     lines = ["# Stage 1 schema report", "", "| Split | Questions |", "|---|---:|"]
     lines.extend(f"| {split} | {split_sizes[split]:,} |" for split in SPLITS)
@@ -138,6 +139,12 @@ def _schema_report(
     lines.extend(f"| {key} | {count:,} |" for key, count in sorted(issues.items()))
     lines += ["", "### Example issues", ""]
     lines.extend(f"- {detail}" for detail in issue_examples)
+    lines += ["", "## Available unbalanced files (existence only; not parsed)", "",
+              "| File | Size (bytes) |", "|---|---:|"]
+    lines.extend(
+        f"| {path.relative_to(questions_dir)} | {path.stat().st_size:,} |"
+        for path in unbalanced_files
+    )
     for split in SPLITS:
         lines += ["", f"## Three abbreviated examples: {split}", ""]
         for item in examples[split]:
@@ -190,6 +197,7 @@ def run_stage1(questions_dir: Path) -> int:
         op_rules = yaml.safe_load(stream)
     if task_rules.get("status") != "PROPOSED" or op_rules.get("status") != "PROPOSED":
         raise ValueError("Stage 1 requires PROPOSED config files")
+    unbalanced_files = sorted(path for path in questions_dir.rglob("*all*questions*.json") if path.is_file())
     OUTPUT.mkdir(parents=True, exist_ok=True)
 
     split_sizes: Counter = Counter()
@@ -347,7 +355,11 @@ def run_stage1(questions_dir: Path) -> int:
     ], candidate_rows)
 
     (OUTPUT / "schema_report.md").write_text(
-        _schema_report(split_sizes, key_counts, missing, examples, issues, issue_examples), encoding="utf-8"
+        _schema_report(
+            split_sizes, key_counts, missing, examples, issues, issue_examples,
+            unbalanced_files, questions_dir,
+        ),
+        encoding="utf-8",
     )
     summary = [
         "# Stage 1 summary — proposal only", "",
