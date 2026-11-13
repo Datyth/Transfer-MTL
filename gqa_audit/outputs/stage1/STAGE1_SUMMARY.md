@@ -1,6 +1,6 @@
 # Stage 1 summary — proposal only
 
-No task rules have been frozen. Review both `.PROPOSED.yaml` files before Stage 2.
+No task rules have been frozen. Review all three `.PROPOSED.yaml` files before Stage 2.
 
 ## Intended detailed-type families
 
@@ -145,14 +145,123 @@ No task rules have been frozen. Review both `.PROPOSED.yaml` files before Stage 
 
 | Task | Split | Eligible | R_strict removed | R_broad removed |
 |---|---|---:|---:|---:|
-| exist | train | 0 | 0 | 0 |
-| exist | val | 0 | 0 | 0 |
-| exist | testdev | 0 | 0 | 0 |
-| verifyAttr | train | 0 | 0 | 0 |
-| verifyAttr | val | 0 | 0 | 0 |
-| verifyAttr | testdev | 0 | 0 | 0 |
-| compare | train | 0 | 0 | 0 |
-| compare | val | 0 | 0 | 0 |
-| compare | testdev | 0 | 0 | 0 |
+| exist | train | 74,826 | 53,822 | 53,822 |
+| exist | val | 10,548 | 7,669 | 7,669 |
+| exist | testdev | 556 | 394 | 394 |
+| verifyAttr | train | 34,979 | 8,796 | 8,796 |
+| verifyAttr | val | 4,914 | 1,281 | 1,281 |
+| verifyAttr | testdev | 712 | 139 | 139 |
+| compare | train | 19,548 | 0 | 0 |
+| compare | val | 2,772 | 0 | 0 |
+| compare | testdev | 444 | 0 | 0 |
 
 Exact matching operation and argument strings are in `relation_matches.csv`.
+
+
+## Eligibility correction and validation
+
+The previous run was invalid for eligibility and filter impact: unquoted YAML yes/no values were loaded as booleans, so string answers never matched. The config now uses quoted strings and is type-checked before scanning. Raw answer counts independently check every pilot type's eligible count. No task definitions were changed for this correction.
+
+Integrity checks: 336 PASS, 0 FAIL. See validation_checks.csv.
+
+## Task counts by proposed variant
+
+All variants are diagnostics, not a frozen primary rule. semantic_sensitivity replaces the exist program filter with the benchmark semantic label. See variant_equivalence.csv for exact membership comparisons.
+
+| Variant | Task | Split | Questions | Yes ratio | Filter exclusion rate |
+|---|---|---|---:|---:|---:|
+| unfiltered | exist | train | 74,826 | 0.4971 | 0.0000 |
+| unfiltered | verifyAttr | train | 34,979 | 0.4945 | 0.0000 |
+| unfiltered | verifyRel | train | 56,523 | 0.4914 | 0.0000 |
+| unfiltered | compare | train | 19,548 | 0.4898 | 0.0000 |
+| unfiltered | logic | train | 114,029 | 0.5066 | 0.0000 |
+| unfiltered | exist | val | 10,548 | 0.4998 | 0.0000 |
+| unfiltered | verifyAttr | val | 4,914 | 0.4943 | 0.0000 |
+| unfiltered | verifyRel | val | 7,933 | 0.4897 | 0.0000 |
+| unfiltered | compare | val | 2,772 | 0.4737 | 0.0000 |
+| unfiltered | logic | val | 16,096 | 0.5188 | 0.0000 |
+| unfiltered | exist | testdev | 556 | 0.5414 | 0.0000 |
+| unfiltered | verifyAttr | testdev | 712 | 0.5660 | 0.0000 |
+| unfiltered | verifyRel | testdev | 769 | 0.5735 | 0.0000 |
+| unfiltered | compare | testdev | 444 | 0.4099 | 0.0000 |
+| unfiltered | logic | testdev | 1,803 | 0.4886 | 0.0000 |
+| program_strict | exist | train | 21,004 | 0.4992 | 0.7193 |
+| program_strict | verifyAttr | train | 26,183 | 0.4941 | 0.2515 |
+| program_strict | verifyRel | train | 56,523 | 0.4914 | 0.0000 |
+| program_strict | compare | train | 19,548 | 0.4898 | 0.0000 |
+| program_strict | logic | train | 114,029 | 0.5066 | 0.0000 |
+| program_strict | exist | val | 2,879 | 0.5082 | 0.7271 |
+| program_strict | verifyAttr | val | 3,633 | 0.4930 | 0.2607 |
+| program_strict | verifyRel | val | 7,933 | 0.4897 | 0.0000 |
+| program_strict | compare | val | 2,772 | 0.4737 | 0.0000 |
+| program_strict | logic | val | 16,096 | 0.5188 | 0.0000 |
+| program_strict | exist | testdev | 162 | 0.5123 | 0.7086 |
+| program_strict | verifyAttr | testdev | 573 | 0.5707 | 0.1952 |
+| program_strict | verifyRel | testdev | 769 | 0.5735 | 0.0000 |
+| program_strict | compare | testdev | 444 | 0.4099 | 0.0000 |
+| program_strict | logic | testdev | 1,803 | 0.4886 | 0.0000 |
+| program_broad | exist | train | 21,004 | 0.4992 | 0.7193 |
+| program_broad | verifyAttr | train | 26,183 | 0.4941 | 0.2515 |
+| program_broad | verifyRel | train | 56,523 | 0.4914 | 0.0000 |
+| program_broad | compare | train | 19,548 | 0.4898 | 0.0000 |
+| program_broad | logic | train | 114,029 | 0.5066 | 0.0000 |
+| program_broad | exist | val | 2,879 | 0.5082 | 0.7271 |
+| program_broad | verifyAttr | val | 3,633 | 0.4930 | 0.2607 |
+| program_broad | verifyRel | val | 7,933 | 0.4897 | 0.0000 |
+| program_broad | compare | val | 2,772 | 0.4737 | 0.0000 |
+| program_broad | logic | val | 16,096 | 0.5188 | 0.0000 |
+| program_broad | exist | testdev | 162 | 0.5123 | 0.7086 |
+| program_broad | verifyAttr | testdev | 573 | 0.5707 | 0.1952 |
+| program_broad | verifyRel | testdev | 769 | 0.5735 | 0.0000 |
+| program_broad | compare | testdev | 444 | 0.4099 | 0.0000 |
+| program_broad | logic | testdev | 1,803 | 0.4886 | 0.0000 |
+| semantic_sensitivity | exist | train | 21,004 | 0.4992 | 0.7193 |
+| semantic_sensitivity | verifyAttr | train | 26,183 | 0.4941 | 0.2515 |
+| semantic_sensitivity | verifyRel | train | 56,523 | 0.4914 | 0.0000 |
+| semantic_sensitivity | compare | train | 19,548 | 0.4898 | 0.0000 |
+| semantic_sensitivity | logic | train | 114,029 | 0.5066 | 0.0000 |
+| semantic_sensitivity | exist | val | 2,879 | 0.5082 | 0.7271 |
+| semantic_sensitivity | verifyAttr | val | 3,633 | 0.4930 | 0.2607 |
+| semantic_sensitivity | verifyRel | val | 7,933 | 0.4897 | 0.0000 |
+| semantic_sensitivity | compare | val | 2,772 | 0.4737 | 0.0000 |
+| semantic_sensitivity | logic | val | 16,096 | 0.5188 | 0.0000 |
+| semantic_sensitivity | exist | testdev | 162 | 0.5123 | 0.7086 |
+| semantic_sensitivity | verifyAttr | testdev | 573 | 0.5707 | 0.1952 |
+| semantic_sensitivity | verifyRel | testdev | 769 | 0.5735 | 0.0000 |
+| semantic_sensitivity | compare | testdev | 444 | 0.4099 | 0.0000 |
+| semantic_sensitivity | logic | testdev | 1,803 | 0.4886 | 0.0000 |
+
+## Answer-family pairing and flags
+
+| Task | Family | Detailed types | Train yes | Train no | Flag |
+|---|---|---|---:|---:|---|
+| exist | exist | exist, existC | 5564 | 5721 |  |
+| logic | existAnd | existAnd, existAndC | 10683 | 10753 |  |
+| exist | existAttr | existAttr, existAttrC | 1410 | 1418 |  |
+| exist | existAttrNot | existAttrNot, existAttrNotC | 1513 | 1440 |  |
+| logic | existAttrOr | existAttrOr, existAttrOrC | 8378 | 7958 |  |
+| exist | existMaterial | existMaterial, existMaterialC | 179 | 165 |  |
+| exist | existMaterialNot | existMaterialNot, existMaterialNotC | 210 | 189 |  |
+| logic | existOr | existOr, existOrC | 21405 | 21511 |  |
+| exist | existRelS | existRelS, existRelSC, existRelSRC | 26711 | 27111 |  |
+| exist | existThat | existThat, existThatC | 1482 | 1440 |  |
+| exist | existThatNot | existThatNot, existThatNotC | 128 | 145 |  |
+| logic | existThatOr | existThatOr, existThatOrC | 4254 | 4045 |  |
+| verifyRel | relVerify | relVerify, relVerifyCo, relVerifyCop, relVerifyCr | 27777 | 28746 |  |
+| compare | twoDifferent | twoDifferent, twoDifferentC | 4476 | 4361 |  |
+| compare | twoSame | twoSame, twoSameC | 4398 | 4464 |  |
+| compare | twoSameMaterial | twoSameMaterial, twoSameMaterialC | 701 | 1148 |  |
+| verifyAttr | verifyAttr | verifyAttr, verifyAttrC | 6650 | 6833 |  |
+| logic | verifyAttrAnd | verifyAttrAnd | 1219 | 0 | SINGLE_CLASS |
+| verifyAttr | verifyAttrThis | verifyAttrCThis, verifyAttrThis | 618 | 641 |  |
+| verifyAttr | verifyAttrK | verifyAttrK, verifyAttrKC | 10028 | 10209 |  |
+| logic | verifyAttrs | verifyAttrs, verifyAttrsC | 11742 | 11999 |  |
+| logic | verifyMaterialAnd | verifyMaterialAnd | 82 | 0 | SINGLE_CLASS |
+
+Single-class and empty families are reported without rebalancing or changing assignments. Family flags per split and variant are in variant_counts.csv.
+
+## Suffix examples and open decisions
+
+See suffix_examples.md for up to five seeded train examples and a factual observation per detailed type. The meanings of Co, Cr, Cop, K, That and other suffixes remain for human review.
+
+Material/position verification and animal/gender comparison types remain secondary in this rerun. The previous task proposal is preserved so the bug correction is comparable. Their inclusion, family pooling, and a primary relation rule require human review.

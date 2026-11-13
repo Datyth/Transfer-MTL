@@ -1,6 +1,29 @@
 {
-  "created_at_utc": "2026-11-12T17:51:01.435836+00:00",
-  "git_commit": "d23b500bf66739d886f23d71d6f0e6acddf5508c",
+  "config_input_sha256": {
+    "answer_families.PROPOSED.yaml": "85463a64781579f63ced8c2aaacd3c78d5354f5bec4c39eae98995e470e53a8b",
+    "op_family_map.PROPOSED.yaml": "4f8ae7148b4a8f9862599c3314e4a908f414924b64585f82b69fe8ecff7a7647",
+    "task_rules.PROPOSED.yaml": "94e08239a9cf55c6c8a16823427732f76f9d9c27a1c32aada89ef5ac63730464"
+  },
+  "configs": {
+    "answer_families.PROPOSED.yaml": {
+      "path": "/home/dat/projects/vqa-mtl/gqa_audit/config/answer_families.PROPOSED.yaml",
+      "sha256": "f7ca6306e505e63fdf2e7219cef730afd145bbf3ae0b027ac3c90b1d9092394f",
+      "snapshot": "/home/dat/projects/vqa-mtl/gqa_audit/outputs/stage1/answer_families.PROPOSED.yaml"
+    },
+    "op_family_map.PROPOSED.yaml": {
+      "path": "/home/dat/projects/vqa-mtl/gqa_audit/config/op_family_map.PROPOSED.yaml",
+      "sha256": "8899b3622bc5029e96de87bd69df644e3c61fb2a884ec2358d217fb85c18f8fa",
+      "snapshot": "/home/dat/projects/vqa-mtl/gqa_audit/outputs/stage1/op_family_map.PROPOSED.yaml"
+    },
+    "task_rules.PROPOSED.yaml": {
+      "path": "/home/dat/projects/vqa-mtl/gqa_audit/config/task_rules.PROPOSED.yaml",
+      "sha256": "61cda0fd1e7163354db0a3ab00e95322778cd852311b7291aa9a71f369fa6eeb",
+      "snapshot": "/home/dat/projects/vqa-mtl/gqa_audit/outputs/stage1/task_rules.PROPOSED.yaml"
+    }
+  },
+  "created_at_utc": "2026-11-13T01:54:23.994342+00:00",
+  "eligibility_bug": "PyYAML converted unquoted yes/no to booleans; string comparisons rejected all answers",
+  "git_commit": "c091fd75c7125ea98475fd5592170e8b391cf7e4",
   "inputs": {
     "testdev": {
       "path": "/home/dat/projects/vqa-mtl/data/gqa/questions/testdev_balanced_questions.json",
@@ -29,6 +52,19 @@
   "python": "3.11.18",
   "schema_issue_counts": {},
   "seed": 0,
+  "source_sha256": {
+    "gqa_audit/__init__.py": "37c56f7d78d4cbf6f65f4b3b07eb47311e27d4666587e53eff495e880224a52e",
+    "gqa_audit/__main__.py": "911542a017d85732da66ee1c28116b876898701531b1646fd5a387fca343700c",
+    "gqa_audit/checks.py": "f96f71496c5ce38b3631b704d318444b018e331c249cb7dc9536e0893c9d8710",
+    "gqa_audit/diagnostics.py": "a930b15b6a8f17e9a5425309a867a54b5ce0ab939b23415e4a2ad500b518cd1f",
+    "gqa_audit/notebook.py": "68adec154fb4ca37cddfb6022531deace91fcfc588bbbe652d15d0885a155db1",
+    "gqa_audit/stage1.py": "3ae0f58735e0e3be1c9ba93527fc25e212a8259a7e49d76a53992e4bee36cd01",
+    "gqa_audit/verify_stage1.py": "5a21c2ad2ea7cfd640c27c1f5cb39af61b0b6b0c8b2f534398c6146420922694"
+  },
   "stage": 1,
-  "unmapped_operations": []
+  "unmapped_operations": [],
+  "validation": {
+    "fail": 0,
+    "pass": 336
+  }
 }

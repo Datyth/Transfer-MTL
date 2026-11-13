@@ -1,0 +1,152 @@
+schema_version: 1
+status: PROPOSED
+reason: Diagnostic pairing of detailed types; suffix meanings remain unconfirmed. No rebalancing.
+pairing_suffixes:
+- C
+overrides:
+  existRelS:
+  - existRelS
+  - existRelSC
+  - existRelSRC
+  relVerify:
+  - relVerify
+  - relVerifyCo
+  - relVerifyCr
+  - relVerifyCop
+  verifyAttrThis:
+  - verifyAttrThis
+  - verifyAttrCThis
+families:
+  exist:
+    task: exist
+    detailed_types:
+    - exist
+    - existC
+    reason: Provisional suffix pairing; meaning requires human review
+  existAnd:
+    task: logic
+    detailed_types:
+    - existAnd
+    - existAndC
+    reason: Provisional suffix pairing; meaning requires human review
+  existAttr:
+    task: exist
+    detailed_types:
+    - existAttr
+    - existAttrC
+    reason: Provisional suffix pairing; meaning requires human review
+  existAttrNot:
+    task: exist
+    detailed_types:
+    - existAttrNot
+    - existAttrNotC
+    reason: Provisional suffix pairing; meaning requires human review
+  existAttrOr:
+    task: logic
+    detailed_types:
+    - existAttrOr
+    - existAttrOrC
+    reason: Provisional suffix pairing; meaning requires human review
+  existMaterial:
+    task: exist
+    detailed_types:
+    - existMaterial
+    - existMaterialC
+    reason: Provisional suffix pairing; meaning requires human review
+  existMaterialNot:
+    task: exist
+    detailed_types:
+    - existMaterialNot
+    - existMaterialNotC
+    reason: Provisional suffix pairing; meaning requires human review
+  existOr:
+    task: logic
+    detailed_types:
+    - existOr
+    - existOrC
+    reason: Provisional suffix pairing; meaning requires human review
+  existRelS:
+    task: exist
+    detailed_types:
+    - existRelS
+    - existRelSC
+    - existRelSRC
+    reason: Provisional suffix pairing; meaning requires human review
+  existThat:
+    task: exist
+    detailed_types:
+    - existThat
+    - existThatC
+    reason: Provisional suffix pairing; meaning requires human review
+  existThatNot:
+    task: exist
+    detailed_types:
+    - existThatNot
+    - existThatNotC
+    reason: Provisional suffix pairing; meaning requires human review
+  existThatOr:
+    task: logic
+    detailed_types:
+    - existThatOr
+    - existThatOrC
+    reason: Provisional suffix pairing; meaning requires human review
+  relVerify:
+    task: verifyRel
+    detailed_types:
+    - relVerify
+    - relVerifyCo
+    - relVerifyCop
+    - relVerifyCr
+    reason: Provisional suffix pairing; meaning requires human review
+  twoDifferent:
+    task: compare
+    detailed_types:
+    - twoDifferent
+    - twoDifferentC
+    reason: Provisional suffix pairing; meaning requires human review
+  twoSame:
+    task: compare
+    detailed_types:
+    - twoSame
+    - twoSameC
+    reason: Provisional suffix pairing; meaning requires human review
+  twoSameMaterial:
+    task: compare
+    detailed_types:
+    - twoSameMaterial
+    - twoSameMaterialC
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyAttr:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttr
+    - verifyAttrC
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyAttrAnd:
+    task: logic
+    detailed_types:
+    - verifyAttrAnd
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyAttrThis:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttrCThis
+    - verifyAttrThis
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyAttrK:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttrK
+    - verifyAttrKC
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyAttrs:
+    task: logic
+    detailed_types:
+    - verifyAttrs
+    - verifyAttrsC
+    reason: Provisional suffix pairing; meaning requires human review
+  verifyMaterialAnd:
+    task: logic
+    detailed_types:
+    - verifyMaterialAnd
+    reason: Provisional suffix pairing; meaning requires human review

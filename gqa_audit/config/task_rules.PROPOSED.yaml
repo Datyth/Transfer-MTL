@@ -11,25 +11,39 @@ diagnostics:
   semantic_filter_task: exist
   semantic_filter_value: obj
   taxonomy_checks:
-    logic: {structural: logical}
-    verifyRel: {semantic: rel}
-    verifyAttr: {semantic: attr}
-    compare: {semantic: attr}
-  exhaustive_taxonomy_tasks: [logic]
+    logic:
+      structural: logical
+    verifyRel:
+      semantic: rel
+    verifyAttr:
+      semantic: attr
+    compare:
+      semantic: attr
+  exhaustive_taxonomy_tasks:
+  - logic
 audit_variants:
   unfiltered: {}
   program_strict:
-    exist: {relation: R_strict}
-    verifyAttr: {relation: R_strict}
-    compare: {relation: R_strict}
+    exist:
+      relation: R_strict
+    verifyAttr:
+      relation: R_strict
+    compare:
+      relation: R_strict
   program_broad:
-    exist: {relation: R_broad}
-    verifyAttr: {relation: R_broad}
-    compare: {relation: R_broad}
+    exist:
+      relation: R_broad
+    verifyAttr:
+      relation: R_broad
+    compare:
+      relation: R_broad
   semantic_sensitivity:
-    exist: {types_semantic: obj}
-    verifyAttr: {relation: R_strict}
-    compare: {relation: R_strict}
+    exist:
+      types_semantic: obj
+    verifyAttr:
+      relation: R_strict
+    compare:
+      relation: R_strict
 pilot_tasks:
   exist:
     exclude_relation: true

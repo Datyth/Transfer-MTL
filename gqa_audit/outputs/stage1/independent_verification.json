@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "raw_question_counts": {
+    "testdev": 12578,
+    "train": 943000,
+    "val": 132062
+  },
+  "candidate_rows_checked": 135,
+  "variant_rows_checked": 324,
+  "embedded_plots_checked": 6,
+  "errors": [],
+  "method": "Separate raw JSON recount; production eligibility, relation and rollup functions are not reused"
+}

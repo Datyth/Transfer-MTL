@@ -1,0 +1,494 @@
+schema_version: 1
+status: PROPOSED
+seed: 0
+eligibility:
+  binary_answers:
+  - 'yes'
+  - 'no'
+  require_nonempty_semantic: true
+diagnostics:
+  samples_per_type: 5
+  semantic_filter_task: exist
+  semantic_filter_value: obj
+  taxonomy_checks:
+    logic:
+      structural: logical
+    verifyRel:
+      semantic: rel
+    verifyAttr:
+      semantic: attr
+    compare:
+      semantic: attr
+  exhaustive_taxonomy_tasks:
+  - logic
+audit_variants:
+  unfiltered: {}
+  program_strict:
+    exist:
+      relation: R_strict
+    verifyAttr:
+      relation: R_strict
+    compare:
+      relation: R_strict
+  program_broad:
+    exist:
+      relation: R_broad
+    verifyAttr:
+      relation: R_broad
+    compare:
+      relation: R_broad
+  semantic_sensitivity:
+    exist:
+      types_semantic: obj
+    verifyAttr:
+      relation: R_strict
+    compare:
+      relation: R_strict
+pilot_tasks:
+  exist:
+    exclude_relation: true
+  verifyAttr:
+    exclude_relation: true
+  verifyRel:
+    exclude_relation: false
+  compare:
+    exclude_relation: true
+  logic:
+    exclude_relation: false
+proposal_patterns:
+- regex: ^(existAnd|existOr|existAttrOr|existThatOr).*$
+  task: logic
+  reason: Observed and/or composition; overlaps the exist family and needs human review
+  ambiguous: true
+- regex: ^(verifyAttrAnd|verifyAttrs|verifyMaterialAnd).*$
+  task: logic
+  reason: Observed and composition; overlaps attribute verification and needs human review
+  ambiguous: true
+- regex: ^relVerify.*$
+  task: verifyRel
+  reason: Observed GQA relation-verification family; programs contain verify rel
+- regex: ^exist.*$
+  task: exist
+  reason: Intended GQA exist family
+- regex: ^verifyAttr.*$
+  task: verifyAttr
+  reason: Intended GQA attribute verification family
+- regex: ^verifyRel.*$
+  task: verifyRel
+  reason: Intended GQA relation verification family
+- regex: ^(twoSame|twoDiff|twoDifferent).*$
+  task: compare
+  reason: Pooling twoSame and twoDifferent needs human review
+  ambiguous: true
+- regex: ^(logicAnd|logicOr).*$
+  task: logic
+  reason: Intended GQA logic family; pooling and/or needs human review
+  ambiguous: true
+unmatched_task: secondary
+unmatched_reason: Outside the intended pilot families; review before freezing
+relation_definitions:
+  R_strict:
+    operation_heads:
+    - relate
+  R_broad:
+    operation_regexes:
+    - (^relate(\s|$)|\brel\b|\brelation\b)
+    argument_regexes:
+    - ^[^,]+,[^,]+,[so](\s*\([^)]*\))?$
+type_mappings:
+  activity:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  activityChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  activityWho:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  category:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryAttr:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelO:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelOChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelS:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThat:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThatChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThis:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThisChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  chooseAttr:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  company:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  comparativeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffAnimals:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffAnimalsC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffGender:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  dir:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  directOf:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  directWhich:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  exist:
+    task: exist
+    reason: Intended GQA exist family
+  existAnd:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existAndC:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existAttr:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrC:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrNot:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrOr:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existAttrOrC:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existC:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterial:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialC:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialNot:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existOr:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existOrC:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existRelS:
+    task: exist
+    reason: Intended GQA exist family
+  existRelSC:
+    task: exist
+    reason: Intended GQA exist family
+  existRelSRC:
+    task: exist
+    reason: Intended GQA exist family
+  existThat:
+    task: exist
+    reason: Intended GQA exist family
+  existThatC:
+    task: exist
+    reason: Intended GQA exist family
+  existThatNot:
+    task: exist
+    reason: Intended GQA exist family
+  existThatNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existThatOr:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  existThatOrC:
+    task: logic
+    reason: Observed and/or composition; overlaps the exist family and needs human review; also matches another family prefix
+    flag: AMBIGUOUS
+  how:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  material:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  objThisChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  place:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionQuery:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relChooser:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relO:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relS:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relVerify:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCo:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCop:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCr:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  sameAnimals:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameAnimalsC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameGender:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameGenderC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameMaterialRelate:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameRelate:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  state:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  stateChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  twoCommon:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  twoDifferent:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  twoDifferentC:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  twoSame:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  twoSameC:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  twoSameMaterial:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  twoSameMaterialC:
+    task: compare
+    reason: Pooling twoSame and twoDifferent needs human review
+    flag: AMBIGUOUS
+  typeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  typeVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  typeVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  verifyAttr:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrAnd:
+    task: logic
+    reason: Observed and composition; overlaps attribute verification and needs human review; also matches another family
+      prefix
+    flag: AMBIGUOUS
+  verifyAttrC:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrCThis:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrK:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrKC:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrThis:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrs:
+    task: logic
+    reason: Observed and composition; overlaps attribute verification and needs human review; also matches another family
+      prefix
+    flag: AMBIGUOUS
+  verifyAttrsC:
+    task: logic
+    reason: Observed and composition; overlaps attribute verification and needs human review; also matches another family
+      prefix
+    flag: AMBIGUOUS
+  verifyMaterialAnd:
+    task: logic
+    reason: Observed and composition; overlaps attribute verification and needs human review
+    flag: AMBIGUOUS
+  weather:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED

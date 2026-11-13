@@ -1,0 +1,337 @@
+check,scope,status,detail
+inventory_total,train,PASS,stream=943000; inventory=943000
+inventory_total,val,PASS,stream=132062; inventory=132062
+inventory_total,testdev,PASS,stream=12578; inventory=12578
+eligibility,train/exist,PASS,raw=5564; eligible=5564; independently_expected=5564
+relation_bounds,train/exist,PASS,strict=0; broad=0; eligible=5564
+eligibility,train/existAnd,PASS,raw=10683; eligible=10683; independently_expected=10683
+relation_bounds,train/existAnd,PASS,strict=0; broad=0; eligible=10683
+eligibility,train/existAndC,PASS,raw=10753; eligible=10753; independently_expected=10753
+relation_bounds,train/existAndC,PASS,strict=0; broad=0; eligible=10753
+eligibility,train/existAttr,PASS,raw=1410; eligible=1410; independently_expected=1410
+relation_bounds,train/existAttr,PASS,strict=0; broad=0; eligible=1410
+eligibility,train/existAttrC,PASS,raw=1418; eligible=1418; independently_expected=1418
+relation_bounds,train/existAttrC,PASS,strict=0; broad=0; eligible=1418
+eligibility,train/existAttrNot,PASS,raw=1513; eligible=1513; independently_expected=1513
+relation_bounds,train/existAttrNot,PASS,strict=0; broad=0; eligible=1513
+eligibility,train/existAttrNotC,PASS,raw=1440; eligible=1440; independently_expected=1440
+relation_bounds,train/existAttrNotC,PASS,strict=0; broad=0; eligible=1440
+eligibility,train/existAttrOr,PASS,raw=8378; eligible=8378; independently_expected=8378
+relation_bounds,train/existAttrOr,PASS,strict=0; broad=0; eligible=8378
+eligibility,train/existAttrOrC,PASS,raw=7958; eligible=7958; independently_expected=7958
+relation_bounds,train/existAttrOrC,PASS,strict=0; broad=0; eligible=7958
+eligibility,train/existC,PASS,raw=5721; eligible=5721; independently_expected=5721
+relation_bounds,train/existC,PASS,strict=0; broad=0; eligible=5721
+eligibility,train/existMaterial,PASS,raw=179; eligible=179; independently_expected=179
+relation_bounds,train/existMaterial,PASS,strict=0; broad=0; eligible=179
+eligibility,train/existMaterialC,PASS,raw=165; eligible=165; independently_expected=165
+relation_bounds,train/existMaterialC,PASS,strict=0; broad=0; eligible=165
+eligibility,train/existMaterialNot,PASS,raw=210; eligible=210; independently_expected=210
+relation_bounds,train/existMaterialNot,PASS,strict=0; broad=0; eligible=210
+eligibility,train/existMaterialNotC,PASS,raw=189; eligible=189; independently_expected=189
+relation_bounds,train/existMaterialNotC,PASS,strict=0; broad=0; eligible=189
+eligibility,train/existOr,PASS,raw=21405; eligible=21405; independently_expected=21405
+relation_bounds,train/existOr,PASS,strict=0; broad=0; eligible=21405
+eligibility,train/existOrC,PASS,raw=21511; eligible=21511; independently_expected=21511
+relation_bounds,train/existOrC,PASS,strict=0; broad=0; eligible=21511
+eligibility,train/existRelS,PASS,raw=26711; eligible=26711; independently_expected=26711
+relation_bounds,train/existRelS,PASS,strict=26711; broad=26711; eligible=26711
+eligibility,train/existRelSC,PASS,raw=19663; eligible=19663; independently_expected=19663
+relation_bounds,train/existRelSC,PASS,strict=19663; broad=19663; eligible=19663
+eligibility,train/existRelSRC,PASS,raw=7448; eligible=7448; independently_expected=7448
+relation_bounds,train/existRelSRC,PASS,strict=7448; broad=7448; eligible=7448
+eligibility,train/existThat,PASS,raw=1482; eligible=1482; independently_expected=1482
+relation_bounds,train/existThat,PASS,strict=0; broad=0; eligible=1482
+eligibility,train/existThatC,PASS,raw=1440; eligible=1440; independently_expected=1440
+relation_bounds,train/existThatC,PASS,strict=0; broad=0; eligible=1440
+eligibility,train/existThatNot,PASS,raw=128; eligible=128; independently_expected=128
+relation_bounds,train/existThatNot,PASS,strict=0; broad=0; eligible=128
+eligibility,train/existThatNotC,PASS,raw=145; eligible=145; independently_expected=145
+relation_bounds,train/existThatNotC,PASS,strict=0; broad=0; eligible=145
+eligibility,train/existThatOr,PASS,raw=4254; eligible=4254; independently_expected=4254
+relation_bounds,train/existThatOr,PASS,strict=0; broad=0; eligible=4254
+eligibility,train/existThatOrC,PASS,raw=4045; eligible=4045; independently_expected=4045
+relation_bounds,train/existThatOrC,PASS,strict=0; broad=0; eligible=4045
+eligibility,train/relVerify,PASS,raw=27777; eligible=27777; independently_expected=27777
+relation_bounds,train/relVerify,PASS,strict=5135; broad=27777; eligible=27777
+eligibility,train/relVerifyCo,PASS,raw=21726; eligible=21726; independently_expected=21726
+relation_bounds,train/relVerifyCo,PASS,strict=5416; broad=21726; eligible=21726
+eligibility,train/relVerifyCop,PASS,raw=35; eligible=35; independently_expected=35
+relation_bounds,train/relVerifyCop,PASS,strict=0; broad=35; eligible=35
+eligibility,train/relVerifyCr,PASS,raw=6985; eligible=6985; independently_expected=6985
+relation_bounds,train/relVerifyCr,PASS,strict=1562; broad=6985; eligible=6985
+eligibility,train/twoDifferent,PASS,raw=4476; eligible=4476; independently_expected=4476
+relation_bounds,train/twoDifferent,PASS,strict=0; broad=0; eligible=4476
+eligibility,train/twoDifferentC,PASS,raw=4361; eligible=4361; independently_expected=4361
+relation_bounds,train/twoDifferentC,PASS,strict=0; broad=0; eligible=4361
+eligibility,train/twoSame,PASS,raw=4398; eligible=4398; independently_expected=4398
+relation_bounds,train/twoSame,PASS,strict=0; broad=0; eligible=4398
+eligibility,train/twoSameC,PASS,raw=4464; eligible=4464; independently_expected=4464
+relation_bounds,train/twoSameC,PASS,strict=0; broad=0; eligible=4464
+eligibility,train/twoSameMaterial,PASS,raw=701; eligible=701; independently_expected=701
+relation_bounds,train/twoSameMaterial,PASS,strict=0; broad=0; eligible=701
+eligibility,train/twoSameMaterialC,PASS,raw=1148; eligible=1148; independently_expected=1148
+relation_bounds,train/twoSameMaterialC,PASS,strict=0; broad=0; eligible=1148
+eligibility,train/verifyAttr,PASS,raw=6650; eligible=6650; independently_expected=6650
+relation_bounds,train/verifyAttr,PASS,strict=434; broad=434; eligible=6650
+eligibility,train/verifyAttrAnd,PASS,raw=1219; eligible=1219; independently_expected=1219
+relation_bounds,train/verifyAttrAnd,PASS,strict=766; broad=766; eligible=1219
+eligibility,train/verifyAttrC,PASS,raw=6833; eligible=6833; independently_expected=6833
+relation_bounds,train/verifyAttrC,PASS,strict=501; broad=501; eligible=6833
+eligibility,train/verifyAttrCThis,PASS,raw=641; eligible=641; independently_expected=641
+relation_bounds,train/verifyAttrCThis,PASS,strict=0; broad=0; eligible=641
+eligibility,train/verifyAttrK,PASS,raw=10028; eligible=10028; independently_expected=10028
+relation_bounds,train/verifyAttrK,PASS,strict=3926; broad=3926; eligible=10028
+eligibility,train/verifyAttrKC,PASS,raw=10209; eligible=10209; independently_expected=10209
+relation_bounds,train/verifyAttrKC,PASS,strict=3935; broad=3935; eligible=10209
+eligibility,train/verifyAttrThis,PASS,raw=618; eligible=618; independently_expected=618
+relation_bounds,train/verifyAttrThis,PASS,strict=0; broad=0; eligible=618
+eligibility,train/verifyAttrs,PASS,raw=11742; eligible=11742; independently_expected=11742
+relation_bounds,train/verifyAttrs,PASS,strict=4112; broad=4112; eligible=11742
+eligibility,train/verifyAttrsC,PASS,raw=11999; eligible=11999; independently_expected=11999
+relation_bounds,train/verifyAttrsC,PASS,strict=4284; broad=4284; eligible=11999
+eligibility,train/verifyMaterialAnd,PASS,raw=82; eligible=82; independently_expected=82
+relation_bounds,train/verifyMaterialAnd,PASS,strict=48; broad=48; eligible=82
+eligibility,val/exist,PASS,raw=791; eligible=791; independently_expected=791
+relation_bounds,val/exist,PASS,strict=0; broad=0; eligible=791
+eligibility,val/existAnd,PASS,raw=1551; eligible=1551; independently_expected=1551
+relation_bounds,val/existAnd,PASS,strict=0; broad=0; eligible=1551
+eligibility,val/existAndC,PASS,raw=1395; eligible=1395; independently_expected=1395
+relation_bounds,val/existAndC,PASS,strict=0; broad=0; eligible=1395
+eligibility,val/existAttr,PASS,raw=199; eligible=199; independently_expected=199
+relation_bounds,val/existAttr,PASS,strict=0; broad=0; eligible=199
+eligibility,val/existAttrC,PASS,raw=183; eligible=183; independently_expected=183
+relation_bounds,val/existAttrC,PASS,strict=0; broad=0; eligible=183
+eligibility,val/existAttrNot,PASS,raw=210; eligible=210; independently_expected=210
+relation_bounds,val/existAttrNot,PASS,strict=0; broad=0; eligible=210
+eligibility,val/existAttrNotC,PASS,raw=175; eligible=175; independently_expected=175
+relation_bounds,val/existAttrNotC,PASS,strict=0; broad=0; eligible=175
+eligibility,val/existAttrOr,PASS,raw=1189; eligible=1189; independently_expected=1189
+relation_bounds,val/existAttrOr,PASS,strict=0; broad=0; eligible=1189
+eligibility,val/existAttrOrC,PASS,raw=1125; eligible=1125; independently_expected=1125
+relation_bounds,val/existAttrOrC,PASS,strict=0; broad=0; eligible=1125
+eligibility,val/existC,PASS,raw=791; eligible=791; independently_expected=791
+relation_bounds,val/existC,PASS,strict=0; broad=0; eligible=791
+eligibility,val/existMaterial,PASS,raw=19; eligible=19; independently_expected=19
+relation_bounds,val/existMaterial,PASS,strict=0; broad=0; eligible=19
+eligibility,val/existMaterialC,PASS,raw=21; eligible=21; independently_expected=21
+relation_bounds,val/existMaterialC,PASS,strict=0; broad=0; eligible=21
+eligibility,val/existMaterialNot,PASS,raw=28; eligible=28; independently_expected=28
+relation_bounds,val/existMaterialNot,PASS,strict=0; broad=0; eligible=28
+eligibility,val/existMaterialNotC,PASS,raw=31; eligible=31; independently_expected=31
+relation_bounds,val/existMaterialNotC,PASS,strict=0; broad=0; eligible=31
+eligibility,val/existOr,PASS,raw=3109; eligible=3109; independently_expected=3109
+relation_bounds,val/existOr,PASS,strict=0; broad=0; eligible=3109
+eligibility,val/existOrC,PASS,raw=3026; eligible=3026; independently_expected=3026
+relation_bounds,val/existOrC,PASS,strict=0; broad=0; eligible=3026
+eligibility,val/existRelS,PASS,raw=3809; eligible=3809; independently_expected=3809
+relation_bounds,val/existRelS,PASS,strict=3809; broad=3809; eligible=3809
+eligibility,val/existRelSC,PASS,raw=2742; eligible=2742; independently_expected=2742
+relation_bounds,val/existRelSC,PASS,strict=2742; broad=2742; eligible=2742
+eligibility,val/existRelSRC,PASS,raw=1118; eligible=1118; independently_expected=1118
+relation_bounds,val/existRelSRC,PASS,strict=1118; broad=1118; eligible=1118
+eligibility,val/existThat,PASS,raw=201; eligible=201; independently_expected=201
+relation_bounds,val/existThat,PASS,strict=0; broad=0; eligible=201
+eligibility,val/existThatC,PASS,raw=202; eligible=202; independently_expected=202
+relation_bounds,val/existThatC,PASS,strict=0; broad=0; eligible=202
+eligibility,val/existThatNot,PASS,raw=15; eligible=15; independently_expected=15
+relation_bounds,val/existThatNot,PASS,strict=0; broad=0; eligible=15
+eligibility,val/existThatNotC,PASS,raw=13; eligible=13; independently_expected=13
+relation_bounds,val/existThatNotC,PASS,strict=0; broad=0; eligible=13
+eligibility,val/existThatOr,PASS,raw=591; eligible=591; independently_expected=591
+relation_bounds,val/existThatOr,PASS,strict=0; broad=0; eligible=591
+eligibility,val/existThatOrC,PASS,raw=529; eligible=529; independently_expected=529
+relation_bounds,val/existThatOrC,PASS,strict=0; broad=0; eligible=529
+eligibility,val/relVerify,PASS,raw=3885; eligible=3885; independently_expected=3885
+relation_bounds,val/relVerify,PASS,strict=695; broad=3885; eligible=3885
+eligibility,val/relVerifyCo,PASS,raw=3046; eligible=3046; independently_expected=3046
+relation_bounds,val/relVerifyCo,PASS,strict=811; broad=3046; eligible=3046
+eligibility,val/relVerifyCop,PASS,raw=6; eligible=6; independently_expected=6
+relation_bounds,val/relVerifyCop,PASS,strict=0; broad=6; eligible=6
+eligibility,val/relVerifyCr,PASS,raw=996; eligible=996; independently_expected=996
+relation_bounds,val/relVerifyCr,PASS,strict=207; broad=996; eligible=996
+eligibility,val/twoDifferent,PASS,raw=622; eligible=622; independently_expected=622
+relation_bounds,val/twoDifferent,PASS,strict=0; broad=0; eligible=622
+eligibility,val/twoDifferentC,PASS,raw=632; eligible=632; independently_expected=632
+relation_bounds,val/twoDifferentC,PASS,strict=0; broad=0; eligible=632
+eligibility,val/twoSame,PASS,raw=584; eligible=584; independently_expected=584
+relation_bounds,val/twoSame,PASS,strict=0; broad=0; eligible=584
+eligibility,val/twoSameC,PASS,raw=666; eligible=666; independently_expected=666
+relation_bounds,val/twoSameC,PASS,strict=0; broad=0; eligible=666
+eligibility,val/twoSameMaterial,PASS,raw=107; eligible=107; independently_expected=107
+relation_bounds,val/twoSameMaterial,PASS,strict=0; broad=0; eligible=107
+eligibility,val/twoSameMaterialC,PASS,raw=161; eligible=161; independently_expected=161
+relation_bounds,val/twoSameMaterialC,PASS,strict=0; broad=0; eligible=161
+eligibility,val/verifyAttr,PASS,raw=901; eligible=901; independently_expected=901
+relation_bounds,val/verifyAttr,PASS,strict=54; broad=54; eligible=901
+eligibility,val/verifyAttrAnd,PASS,raw=152; eligible=152; independently_expected=152
+relation_bounds,val/verifyAttrAnd,PASS,strict=94; broad=94; eligible=152
+eligibility,val/verifyAttrC,PASS,raw=933; eligible=933; independently_expected=933
+relation_bounds,val/verifyAttrC,PASS,strict=67; broad=67; eligible=933
+eligibility,val/verifyAttrCThis,PASS,raw=92; eligible=92; independently_expected=92
+relation_bounds,val/verifyAttrCThis,PASS,strict=0; broad=0; eligible=92
+eligibility,val/verifyAttrK,PASS,raw=1427; eligible=1427; independently_expected=1427
+relation_bounds,val/verifyAttrK,PASS,strict=584; broad=584; eligible=1427
+eligibility,val/verifyAttrKC,PASS,raw=1460; eligible=1460; independently_expected=1460
+relation_bounds,val/verifyAttrKC,PASS,strict=576; broad=576; eligible=1460
+eligibility,val/verifyAttrThis,PASS,raw=101; eligible=101; independently_expected=101
+relation_bounds,val/verifyAttrThis,PASS,strict=0; broad=0; eligible=101
+eligibility,val/verifyAttrs,PASS,raw=1741; eligible=1741; independently_expected=1741
+relation_bounds,val/verifyAttrs,PASS,strict=625; broad=625; eligible=1741
+eligibility,val/verifyAttrsC,PASS,raw=1670; eligible=1670; independently_expected=1670
+relation_bounds,val/verifyAttrsC,PASS,strict=576; broad=576; eligible=1670
+eligibility,val/verifyMaterialAnd,PASS,raw=18; eligible=18; independently_expected=18
+relation_bounds,val/verifyMaterialAnd,PASS,strict=12; broad=12; eligible=18
+eligibility,testdev/exist,PASS,raw=28; eligible=28; independently_expected=28
+relation_bounds,testdev/exist,PASS,strict=0; broad=0; eligible=28
+eligibility,testdev/existAnd,PASS,raw=48; eligible=48; independently_expected=48
+relation_bounds,testdev/existAnd,PASS,strict=0; broad=0; eligible=48
+eligibility,testdev/existAndC,PASS,raw=56; eligible=56; independently_expected=56
+relation_bounds,testdev/existAndC,PASS,strict=0; broad=0; eligible=56
+eligibility,testdev/existAttr,PASS,raw=17; eligible=17; independently_expected=17
+relation_bounds,testdev/existAttr,PASS,strict=0; broad=0; eligible=17
+eligibility,testdev/existAttrC,PASS,raw=12; eligible=12; independently_expected=12
+relation_bounds,testdev/existAttrC,PASS,strict=0; broad=0; eligible=12
+eligibility,testdev/existAttrNot,PASS,raw=15; eligible=15; independently_expected=15
+relation_bounds,testdev/existAttrNot,PASS,strict=0; broad=0; eligible=15
+eligibility,testdev/existAttrNotC,PASS,raw=19; eligible=19; independently_expected=19
+relation_bounds,testdev/existAttrNotC,PASS,strict=0; broad=0; eligible=19
+eligibility,testdev/existAttrOr,PASS,raw=66; eligible=66; independently_expected=66
+relation_bounds,testdev/existAttrOr,PASS,strict=0; broad=0; eligible=66
+eligibility,testdev/existAttrOrC,PASS,raw=97; eligible=97; independently_expected=97
+relation_bounds,testdev/existAttrOrC,PASS,strict=0; broad=0; eligible=97
+eligibility,testdev/existC,PASS,raw=29; eligible=29; independently_expected=29
+relation_bounds,testdev/existC,PASS,strict=0; broad=0; eligible=29
+eligibility,testdev/existMaterial,PASS,raw=2; eligible=2; independently_expected=2
+relation_bounds,testdev/existMaterial,PASS,strict=0; broad=0; eligible=2
+eligibility,testdev/existMaterialC,PASS,raw=0; eligible=0; independently_expected=0
+relation_bounds,testdev/existMaterialC,PASS,strict=0; broad=0; eligible=0
+eligibility,testdev/existMaterialNot,PASS,raw=2; eligible=2; independently_expected=2
+relation_bounds,testdev/existMaterialNot,PASS,strict=0; broad=0; eligible=2
+eligibility,testdev/existMaterialNotC,PASS,raw=1; eligible=1; independently_expected=1
+relation_bounds,testdev/existMaterialNotC,PASS,strict=0; broad=0; eligible=1
+eligibility,testdev/existOr,PASS,raw=105; eligible=105; independently_expected=105
+relation_bounds,testdev/existOr,PASS,strict=0; broad=0; eligible=105
+eligibility,testdev/existOrC,PASS,raw=103; eligible=103; independently_expected=103
+relation_bounds,testdev/existOrC,PASS,strict=0; broad=0; eligible=103
+eligibility,testdev/existRelS,PASS,raw=218; eligible=218; independently_expected=218
+relation_bounds,testdev/existRelS,PASS,strict=218; broad=218; eligible=218
+eligibility,testdev/existRelSC,PASS,raw=148; eligible=148; independently_expected=148
+relation_bounds,testdev/existRelSC,PASS,strict=148; broad=148; eligible=148
+eligibility,testdev/existRelSRC,PASS,raw=28; eligible=28; independently_expected=28
+relation_bounds,testdev/existRelSRC,PASS,strict=28; broad=28; eligible=28
+eligibility,testdev/existThat,PASS,raw=19; eligible=19; independently_expected=19
+relation_bounds,testdev/existThat,PASS,strict=0; broad=0; eligible=19
+eligibility,testdev/existThatC,PASS,raw=16; eligible=16; independently_expected=16
+relation_bounds,testdev/existThatC,PASS,strict=0; broad=0; eligible=16
+eligibility,testdev/existThatNot,PASS,raw=0; eligible=0; independently_expected=0
+relation_bounds,testdev/existThatNot,PASS,strict=0; broad=0; eligible=0
+eligibility,testdev/existThatNotC,PASS,raw=2; eligible=2; independently_expected=2
+relation_bounds,testdev/existThatNotC,PASS,strict=0; broad=0; eligible=2
+eligibility,testdev/existThatOr,PASS,raw=25; eligible=25; independently_expected=25
+relation_bounds,testdev/existThatOr,PASS,strict=0; broad=0; eligible=25
+eligibility,testdev/existThatOrC,PASS,raw=68; eligible=68; independently_expected=68
+relation_bounds,testdev/existThatOrC,PASS,strict=0; broad=0; eligible=68
+eligibility,testdev/relVerify,PASS,raw=441; eligible=441; independently_expected=441
+relation_bounds,testdev/relVerify,PASS,strict=47; broad=441; eligible=441
+eligibility,testdev/relVerifyCo,PASS,raw=273; eligible=273; independently_expected=273
+relation_bounds,testdev/relVerifyCo,PASS,strict=37; broad=273; eligible=273
+eligibility,testdev/relVerifyCop,PASS,raw=0; eligible=0; independently_expected=0
+relation_bounds,testdev/relVerifyCop,PASS,strict=0; broad=0; eligible=0
+eligibility,testdev/relVerifyCr,PASS,raw=55; eligible=55; independently_expected=55
+relation_bounds,testdev/relVerifyCr,PASS,strict=11; broad=55; eligible=55
+eligibility,testdev/twoDifferent,PASS,raw=59; eligible=59; independently_expected=59
+relation_bounds,testdev/twoDifferent,PASS,strict=0; broad=0; eligible=59
+eligibility,testdev/twoDifferentC,PASS,raw=79; eligible=79; independently_expected=79
+relation_bounds,testdev/twoDifferentC,PASS,strict=0; broad=0; eligible=79
+eligibility,testdev/twoSame,PASS,raw=77; eligible=77; independently_expected=77
+relation_bounds,testdev/twoSame,PASS,strict=0; broad=0; eligible=77
+eligibility,testdev/twoSameC,PASS,raw=76; eligible=76; independently_expected=76
+relation_bounds,testdev/twoSameC,PASS,strict=0; broad=0; eligible=76
+eligibility,testdev/twoSameMaterial,PASS,raw=46; eligible=46; independently_expected=46
+relation_bounds,testdev/twoSameMaterial,PASS,strict=0; broad=0; eligible=46
+eligibility,testdev/twoSameMaterialC,PASS,raw=107; eligible=107; independently_expected=107
+relation_bounds,testdev/twoSameMaterialC,PASS,strict=0; broad=0; eligible=107
+eligibility,testdev/verifyAttr,PASS,raw=151; eligible=151; independently_expected=151
+relation_bounds,testdev/verifyAttr,PASS,strict=1; broad=1; eligible=151
+eligibility,testdev/verifyAttrAnd,PASS,raw=38; eligible=38; independently_expected=38
+relation_bounds,testdev/verifyAttrAnd,PASS,strict=20; broad=20; eligible=38
+eligibility,testdev/verifyAttrC,PASS,raw=116; eligible=116; independently_expected=116
+relation_bounds,testdev/verifyAttrC,PASS,strict=0; broad=0; eligible=116
+eligibility,testdev/verifyAttrCThis,PASS,raw=11; eligible=11; independently_expected=11
+relation_bounds,testdev/verifyAttrCThis,PASS,strict=0; broad=0; eligible=11
+eligibility,testdev/verifyAttrK,PASS,raw=234; eligible=234; independently_expected=234
+relation_bounds,testdev/verifyAttrK,PASS,strict=75; broad=75; eligible=234
+eligibility,testdev/verifyAttrKC,PASS,raw=182; eligible=182; independently_expected=182
+relation_bounds,testdev/verifyAttrKC,PASS,strict=63; broad=63; eligible=182
+eligibility,testdev/verifyAttrThis,PASS,raw=18; eligible=18; independently_expected=18
+relation_bounds,testdev/verifyAttrThis,PASS,strict=0; broad=0; eligible=18
+eligibility,testdev/verifyAttrs,PASS,raw=589; eligible=589; independently_expected=589
+relation_bounds,testdev/verifyAttrs,PASS,strict=181; broad=181; eligible=589
+eligibility,testdev/verifyAttrsC,PASS,raw=598; eligible=598; independently_expected=598
+relation_bounds,testdev/verifyAttrsC,PASS,strict=189; broad=189; eligible=598
+eligibility,testdev/verifyMaterialAnd,PASS,raw=10; eligible=10; independently_expected=10
+relation_bounds,testdev/verifyMaterialAnd,PASS,strict=4; broad=4; eligible=10
+operation_head_totals,all,PASS,Each full operation contributes once to its head total
+family_coverage,all,PASS,45 memberships; 45 pilot detailed types
+family_task_rollup,unfiltered/train/exist,PASS,task_questions=74826
+family_task_rollup,unfiltered/train/verifyAttr,PASS,task_questions=34979
+family_task_rollup,unfiltered/train/verifyRel,PASS,task_questions=56523
+family_task_rollup,unfiltered/train/compare,PASS,task_questions=19548
+family_task_rollup,unfiltered/train/logic,PASS,task_questions=114029
+family_task_rollup,unfiltered/val/exist,PASS,task_questions=10548
+family_task_rollup,unfiltered/val/verifyAttr,PASS,task_questions=4914
+family_task_rollup,unfiltered/val/verifyRel,PASS,task_questions=7933
+family_task_rollup,unfiltered/val/compare,PASS,task_questions=2772
+family_task_rollup,unfiltered/val/logic,PASS,task_questions=16096
+family_task_rollup,unfiltered/testdev/exist,PASS,task_questions=556
+family_task_rollup,unfiltered/testdev/verifyAttr,PASS,task_questions=712
+family_task_rollup,unfiltered/testdev/verifyRel,PASS,task_questions=769
+family_task_rollup,unfiltered/testdev/compare,PASS,task_questions=444
+family_task_rollup,unfiltered/testdev/logic,PASS,task_questions=1803
+family_task_rollup,program_strict/train/exist,PASS,task_questions=21004
+family_task_rollup,program_strict/train/verifyAttr,PASS,task_questions=26183
+family_task_rollup,program_strict/train/verifyRel,PASS,task_questions=56523
+family_task_rollup,program_strict/train/compare,PASS,task_questions=19548
+family_task_rollup,program_strict/train/logic,PASS,task_questions=114029
+family_task_rollup,program_strict/val/exist,PASS,task_questions=2879
+family_task_rollup,program_strict/val/verifyAttr,PASS,task_questions=3633
+family_task_rollup,program_strict/val/verifyRel,PASS,task_questions=7933
+family_task_rollup,program_strict/val/compare,PASS,task_questions=2772
+family_task_rollup,program_strict/val/logic,PASS,task_questions=16096
+family_task_rollup,program_strict/testdev/exist,PASS,task_questions=162
+family_task_rollup,program_strict/testdev/verifyAttr,PASS,task_questions=573
+family_task_rollup,program_strict/testdev/verifyRel,PASS,task_questions=769
+family_task_rollup,program_strict/testdev/compare,PASS,task_questions=444
+family_task_rollup,program_strict/testdev/logic,PASS,task_questions=1803
+family_task_rollup,program_broad/train/exist,PASS,task_questions=21004
+family_task_rollup,program_broad/train/verifyAttr,PASS,task_questions=26183
+family_task_rollup,program_broad/train/verifyRel,PASS,task_questions=56523
+family_task_rollup,program_broad/train/compare,PASS,task_questions=19548
+family_task_rollup,program_broad/train/logic,PASS,task_questions=114029
+family_task_rollup,program_broad/val/exist,PASS,task_questions=2879
+family_task_rollup,program_broad/val/verifyAttr,PASS,task_questions=3633
+family_task_rollup,program_broad/val/verifyRel,PASS,task_questions=7933
+family_task_rollup,program_broad/val/compare,PASS,task_questions=2772
+family_task_rollup,program_broad/val/logic,PASS,task_questions=16096
+family_task_rollup,program_broad/testdev/exist,PASS,task_questions=162
+family_task_rollup,program_broad/testdev/verifyAttr,PASS,task_questions=573
+family_task_rollup,program_broad/testdev/verifyRel,PASS,task_questions=769
+family_task_rollup,program_broad/testdev/compare,PASS,task_questions=444
+family_task_rollup,program_broad/testdev/logic,PASS,task_questions=1803
+family_task_rollup,semantic_sensitivity/train/exist,PASS,task_questions=21004
+family_task_rollup,semantic_sensitivity/train/verifyAttr,PASS,task_questions=26183
+family_task_rollup,semantic_sensitivity/train/verifyRel,PASS,task_questions=56523
+family_task_rollup,semantic_sensitivity/train/compare,PASS,task_questions=19548
+family_task_rollup,semantic_sensitivity/train/logic,PASS,task_questions=114029
+family_task_rollup,semantic_sensitivity/val/exist,PASS,task_questions=2879
+family_task_rollup,semantic_sensitivity/val/verifyAttr,PASS,task_questions=3633
+family_task_rollup,semantic_sensitivity/val/verifyRel,PASS,task_questions=7933
+family_task_rollup,semantic_sensitivity/val/compare,PASS,task_questions=2772
+family_task_rollup,semantic_sensitivity/val/logic,PASS,task_questions=16096
+family_task_rollup,semantic_sensitivity/testdev/exist,PASS,task_questions=162
+family_task_rollup,semantic_sensitivity/testdev/verifyAttr,PASS,task_questions=573
+family_task_rollup,semantic_sensitivity/testdev/verifyRel,PASS,task_questions=769
+family_task_rollup,semantic_sensitivity/testdev/compare,PASS,task_questions=444
+family_task_rollup,semantic_sensitivity/testdev/logic,PASS,task_questions=1803
+taxonomy_labels,all,PASS,{}
