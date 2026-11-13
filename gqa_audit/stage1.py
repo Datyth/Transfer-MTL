@@ -5,7 +5,9 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import random
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -17,6 +19,10 @@ from typing import Any, Iterator
 import ijson
 import yaml
 
+from .checks import is_eligible, validate_configs
+from .diagnostics import (
+    build_variant_rows, check_aggregates, diagnostics_summary, propose_families, suffix_report,
+)
 
 SPLITS = ("train", "val", "testdev")
 EXPECTED_FIELDS = (
@@ -51,6 +57,13 @@ def relation_flags(operation: str, argument: str, rules: dict[str, Any]) -> tupl
 def iter_records(path: Path) -> Iterator[tuple[str, Any]]:
     """Iterate question-id/record pairs without loading the top-level JSON dict."""
     with path.open("rb") as stream:
+        while True:
+            first = stream.read(1)
+            if not first or not first.isspace():
+                break
+        if first != b"{":
+            raise ijson.JSONError(f"{path}: expected a question-id -> record JSON object")
+        stream.seek(0)
         yield from ijson.kvitems(stream, "")
 
 
@@ -76,7 +89,7 @@ def propose_op_mapping(operation: str, rules: dict[str, Any]) -> dict[str, Any]:
             families = pattern["families"]
             if not set(families).issubset(rules["allowed_families"]):
                 raise ValueError(f"Invalid family in config for {operation!r}")
-            return {"families": families, "reason": f"Matched {pattern['regex']}"}
+            return {"families": list(families), "reason": f"Matched {pattern['regex']}"}
     return {"families": [], "flag": "UNMAPPED", "reason": "No proposal pattern fits; human review required"}
 
 
@@ -152,13 +165,16 @@ def _schema_report(
     return "\n".join(lines) + "\n"
 
 
-def _manifest(question_paths: dict[str, Path], seed: int) -> dict[str, Any]:
+def _git_commit() -> str | None:
     try:
-        commit = subprocess.check_output(
+        return subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
         ).strip()
     except (subprocess.CalledProcessError, FileNotFoundError):
-        commit = None
+        return None
+
+
+def _manifest(question_paths: dict[str, Path], seed: int) -> dict[str, Any]:
     packages: dict[str, str | None] = {}
     for package in ("ijson", "pandas", "matplotlib", "PyYAML", "pytest", "numpy"):
         try:
@@ -168,7 +184,7 @@ def _manifest(question_paths: dict[str, Path], seed: int) -> dict[str, Any]:
     return {
         "stage": 1,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "git_commit": commit,
+        "git_commit": _git_commit(),
         "seed": seed,
         "python": sys.version.split()[0],
         "packages": packages,
@@ -195,10 +211,14 @@ def run_stage1(questions_dir: Path) -> int:
         task_rules = yaml.safe_load(stream)
     with op_path.open(encoding="utf-8") as stream:
         op_rules = yaml.safe_load(stream)
-    if task_rules.get("status") != "PROPOSED" or op_rules.get("status") != "PROPOSED":
-        raise ValueError("Stage 1 requires PROPOSED config files")
+    family_path = CONFIG / "answer_families.PROPOSED.yaml"
+    with family_path.open(encoding="utf-8") as stream:
+        family_rules = yaml.safe_load(stream)
+    validate_configs(task_rules, op_rules, family_rules)
+    config_input_hashes = {path.name: _hash_file(path) for path in (task_path, op_path, family_path)}
     unbalanced_files = sorted(path for path in questions_dir.rglob("*all*questions*.json") if path.is_file())
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    (OUTPUT / "independent_verification.json").unlink(missing_ok=True)
 
     split_sizes: Counter = Counter()
     key_counts: Counter = Counter()
@@ -213,6 +233,12 @@ def run_stage1(questions_dir: Path) -> int:
     heads: Counter = Counter()
     arguments: dict[tuple[str, str], list[str]] = defaultdict(list)
     candidate: dict[tuple[str, str], Counter] = defaultdict(Counter)
+    signatures: dict[tuple[str, str], Counter] = defaultdict(Counter)
+    samples: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    sample_seen: Counter = Counter()
+    sample_rng: dict[str, random.Random] = {}
+    type_proposals: dict[str, dict] = {}
+    taxonomy_errors: Counter = Counter()
 
     relation_path = OUTPUT / "relation_matches.csv"
     with relation_path.open("w", newline="", encoding="utf-8") as relation_stream:
@@ -245,11 +271,23 @@ def run_stage1(questions_dir: Path) -> int:
                         if not isinstance(types.get(field), str):
                             _record_issue(issues, issue_examples, "missing_type_subfield", f"{split}/{question_id}: invalid types.{field}")
                     detailed = types.get("detailed") if isinstance(types.get("detailed"), str) else "__MISSING__"
+                    if detailed not in type_proposals:
+                        type_proposals[detailed] = propose_type_mapping(detailed, task_rules)
+                    assigned = type_proposals[detailed]["task"]
+                    for field, expected in task_rules["diagnostics"]["taxonomy_checks"].get(assigned, {}).items():
+                        if types.get(field) != expected:
+                            taxonomy_errors[f"{split}/{detailed}: expected types.{field}={expected}"] += 1
+                    for expected_task in task_rules["diagnostics"]["exhaustive_taxonomy_tasks"]:
+                        expected_labels = task_rules["diagnostics"]["taxonomy_checks"][expected_task]
+                        if all(types.get(field) == value for field, value in expected_labels.items()) and assigned != expected_task:
+                            taxonomy_errors[f"{split}/{detailed}: labels imply {expected_task}, mapped to {assigned}"] += 1
                     item = inventory[(split, detailed)]
                     item["count"] += 1
                     item["structural"][str(types.get("structural", "__MISSING__"))] += 1
                     item["semantic"][str(types.get("semantic", "__MISSING__"))] += 1
                     answer = record.get("answer")
+                    if not isinstance(answer, str):
+                        _record_issue(issues, issue_examples, "invalid_answer", f"{split}/{question_id}: answer is not a string")
                     normalized = answer.strip().lower() if isinstance(answer, str) else ""
                     answer_class = normalized if normalized in {"yes", "no"} else "other"
                     item["answers"][answer_class] += 1
@@ -258,6 +296,23 @@ def run_stage1(questions_dir: Path) -> int:
                     if not isinstance(semantic, list):
                         _record_issue(issues, issue_examples, "invalid_semantic", f"{split}/{question_id}: semantic is not a list")
                         semantic = []
+                    if split == "train":
+                        sample_seen[detailed] += 1
+                        if detailed not in sample_rng:
+                            sample_rng[detailed] = random.Random(
+                                int(hashlib.sha256(f"{task_rules['seed']}:{detailed}".encode()).hexdigest(), 16)
+                            )
+                        sample_record = {
+                            "question_id": question_id, "question": record.get("question"),
+                            "answer": answer, "semantic": semantic,
+                        }
+                        capacity = task_rules["diagnostics"]["samples_per_type"]
+                        if len(samples[detailed]) < capacity:
+                            samples[detailed].append(sample_record)
+                        else:
+                            slot = sample_rng[detailed].randrange(sample_seen[detailed])
+                            if slot < capacity:
+                                samples[detailed][slot] = sample_record
                     question_strict = question_broad = False
                     for index, step in enumerate(semantic):
                         if not isinstance(step, dict):
@@ -288,13 +343,23 @@ def run_stage1(questions_dir: Path) -> int:
                             relation_writer.writerow([split, question_id, index, operation, argument, int(strict), int(broad)])
                     count = candidate[(split, detailed)]
                     count["raw"] += 1
-                    if normalized in task_rules["eligibility"]["binary_answers"] and (
-                        semantic or not task_rules["eligibility"]["require_nonempty_semantic"]
-                    ):
+                    count[answer_class] += 1
+                    count["empty"] += int(not semantic)
+                    count["binary_empty"] += int(not semantic and answer_class in {"yes", "no"})
+                    if is_eligible(answer, semantic, task_rules["eligibility"]):
                         count["eligible"] += 1
+                        count[f"eligible_{answer_class}"] += 1
                         count["strict_removed"] += int(question_strict)
                         count["broad_removed"] += int(question_broad)
-            except Exception as exc:
+                        semantic_label = str(types.get("semantic", "__MISSING__"))
+                        signatures[(split, detailed)][(
+                            answer_class, question_strict, question_broad, semantic_label
+                        )] += 1
+                        if assigned == task_rules["diagnostics"]["semantic_filter_task"]:
+                            count["semantic_removed"] += int(
+                                semantic_label != task_rules["diagnostics"]["semantic_filter_value"]
+                            )
+            except (ijson.JSONError, UnicodeDecodeError, OSError) as exc:
                 _record_issue(issues, issue_examples, "parse_error", f"{split}: {type(exc).__name__}: {exc}")
                 print(f"ERROR parsing {split}: {exc}", file=sys.stderr, flush=True)
 
@@ -306,10 +371,17 @@ def run_stage1(questions_dir: Path) -> int:
     op_rules["operations"] = {
         operation: propose_op_mapping(operation, op_rules) for operation in op_values
     }
+    family_rules["families"] = propose_families(
+        task_rules["type_mappings"], family_rules, task_rules["unmatched_task"]
+    )
     with task_path.open("w", encoding="utf-8") as stream:
         yaml.safe_dump(task_rules, stream, sort_keys=False, allow_unicode=True, width=120)
     with op_path.open("w", encoding="utf-8") as stream:
         yaml.safe_dump(op_rules, stream, sort_keys=False, allow_unicode=True, width=120)
+    with family_path.open("w", encoding="utf-8") as stream:
+        yaml.safe_dump(family_rules, stream, sort_keys=False, allow_unicode=True, width=120)
+    for path in (task_path, op_path, family_path):
+        shutil.copyfile(path, OUTPUT / path.name)
 
     inventory_rows = []
     for (split, detailed), item in sorted(inventory.items()):
@@ -339,20 +411,54 @@ def run_stage1(questions_dir: Path) -> int:
     ], operation_rows)
 
     candidate_rows = []
-    for (split, detailed), counts in sorted(candidate.items()):
+    for split, detailed in (
+        (split, detailed) for split in SPLITS for detailed in type_values
+    ):
+        counts = candidate.get((split, detailed), Counter())
         mapping = task_rules["type_mappings"][detailed]
         if mapping["task"] == task_rules["unmatched_task"]:
             continue
         candidate_rows.append({
             "split": split, "task": mapping["task"], "types_detailed": detailed,
             "raw_count": counts["raw"], "eligible_yesno_nonempty": counts["eligible"],
+            "eligible": counts["eligible"], "n_empty_program": counts["empty"],
+            "n_binary_empty_program": counts["binary_empty"],
+            "yes": counts["yes"], "no": counts["no"], "nonbinary": counts["other"],
+            "eligible_yes": counts["eligible_yes"], "eligible_no": counts["eligible_no"],
+            "R_strict_detected": counts["strict_removed"],
+            "R_broad_detected": counts["broad_removed"],
+            "semantic_filter_removed": counts["semantic_removed"],
             "R_strict_removed": counts["strict_removed"] if task_rules["pilot_tasks"][mapping["task"]]["exclude_relation"] else 0,
             "R_broad_removed": counts["broad_removed"] if task_rules["pilot_tasks"][mapping["task"]]["exclude_relation"] else 0,
         })
     _write_csv(OUTPUT / "candidate_counts.csv", [
         "split", "task", "types_detailed", "raw_count", "eligible_yesno_nonempty",
-        "R_strict_removed", "R_broad_removed",
+        "eligible", "n_empty_program", "n_binary_empty_program", "yes", "no", "nonbinary",
+        "eligible_yes", "eligible_no", "R_strict_detected", "R_broad_detected",
+        "R_strict_removed", "R_broad_removed", "semantic_filter_removed",
     ], candidate_rows)
+    variants, equivalence = build_variant_rows(
+        signatures, task_rules["type_mappings"], task_rules, family_rules["families"], SPLITS
+    )
+    _write_csv(OUTPUT / "variant_counts.csv", [
+        "level", "variant", "split", "task", "family", "eligible_before_filter",
+        "questions", "yes", "no", "yes_ratio", "excluded", "exclusion_rate", "flag",
+    ], variants)
+    _write_csv(OUTPUT / "variant_equivalence.csv", [
+        "left_variant", "right_variant", "split", "task", "different_questions", "identical_membership",
+    ], equivalence)
+    checks = check_aggregates(
+        inventory_rows, candidate_rows, operation_rows, split_sizes, task_rules["type_mappings"],
+        task_rules, family_rules["families"], variants, taxonomy_errors,
+    )
+    _write_csv(OUTPUT / "validation_checks.csv", ["check", "scope", "status", "detail"], checks)
+    (OUTPUT / "suffix_examples.md").write_text(
+        suffix_report(
+            samples, inventory_rows, task_rules["type_mappings"],
+            task_rules["unmatched_task"], task_rules["diagnostics"]["samples_per_type"],
+            task_rules["seed"],
+        ), encoding="utf-8",
+    )
 
     (OUTPUT / "schema_report.md").write_text(
         _schema_report(
@@ -363,7 +469,7 @@ def run_stage1(questions_dir: Path) -> int:
     )
     summary = [
         "# Stage 1 summary — proposal only", "",
-        "No task rules have been frozen. Review both `.PROPOSED.yaml` files before Stage 2.", "",
+        "No task rules have been frozen. Review all three `.PROPOSED.yaml` files before Stage 2.", "",
         "## Intended detailed-type families", "",
         "| Task | Detailed type | Train | Val | Testdev | Total | Flag |",
         "|---|---|---:|---:|---:|---:|---|",
@@ -396,10 +502,25 @@ def run_stage1(questions_dir: Path) -> int:
             values = [sum(row[field] for row in rows) for field in ("eligible_yesno_nonempty", "R_strict_removed", "R_broad_removed")]
             summary.append(f"| {task} | {split} | {values[0]:,} | {values[1]:,} | {values[2]:,} |")
     summary += ["", "Exact matching operation and argument strings are in `relation_matches.csv`.", ""]
+    summary.append(diagnostics_summary(variants, equivalence, checks, family_rules["families"]))
     (OUTPUT / "STAGE1_SUMMARY.md").write_text("\n".join(summary), encoding="utf-8")
     manifest = _manifest(question_paths, task_rules["seed"])
     manifest["schema_issue_counts"] = dict(issues)
     manifest["unmapped_operations"] = unmapped
+    manifest["config_input_sha256"] = config_input_hashes
+    manifest["configs"] = {
+        path.name: {"path": str(path), "snapshot": str(OUTPUT / path.name), "sha256": _hash_file(path)}
+        for path in (task_path, op_path, family_path)
+    }
+    manifest["source_sha256"] = {
+        str(path.relative_to(ROOT)): _hash_file(path)
+        for path in sorted((ROOT / "gqa_audit").glob("*.py"))
+    }
+    manifest["validation"] = {
+        "pass": sum(check["status"] == "PASS" for check in checks),
+        "fail": sum(check["status"] == "FAIL" for check in checks),
+    }
+    manifest["eligibility_bug"] = "PyYAML converted unquoted yes/no to booleans; string comparisons rejected all answers"
     (OUTPUT / "run_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
@@ -407,11 +528,10 @@ def run_stage1(questions_dir: Path) -> int:
     from .notebook import create_stage1_notebook
     create_stage1_notebook(OUTPUT, ROOT / "notebooks" / "gqa_stage1_audit.ipynb")
 
-    assert sum(split_sizes.values()) == sum(row["count"] for row in inventory_rows), "Inventory total mismatch"
-    assert set(op_values) == set(op_rules["operations"]), "Operation proposal coverage mismatch"
     print(f"Stage 1 artifacts: {OUTPUT}")
-    if issues or unmapped or manifest["git_commit"] is None:
-        print(f"Stage 1 needs review: {sum(issues.values())} schema issues, {len(unmapped)} unmapped operations, git commit={manifest['git_commit']}", file=sys.stderr)
+    if issues or unmapped or manifest["git_commit"] is None or manifest["validation"]["fail"]:
+        print(f"Stage 1 needs review: {sum(issues.values())} schema issues, {len(unmapped)} unmapped operations, "
+              f"{manifest['validation']['fail']} failed checks, git commit={manifest['git_commit']}", file=sys.stderr)
         return 1
     print("Stage 1 inspection complete. STOP for human review; do not run Stage 2.")
     return 0

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import contextlib
 import io
 import json
 from pathlib import Path
@@ -43,6 +44,35 @@ def _image_output(fig: plt.Figure, count: int) -> dict:
                      "text/plain": ["<Stage 1 chart>"]}}
 
 
+def _cache_execution(cells: list, root: Path) -> None:
+    """Save outputs from executing the exact visible cell code."""
+    namespace = {"__name__": "__main__", "_AUDIT_ROOT": root}
+    count = 0
+    for cell in cells:
+        if cell["cell_type"] != "code":
+            continue
+        count += 1
+        cell["execution_count"] = count
+        stdout = io.StringIO()
+        original_show = plt.show
+        plt.close("all")
+        plt.show = lambda *args, **kwargs: None
+        try:
+            with contextlib.redirect_stdout(stdout):
+                exec(compile("".join(cell["source"]), f"<notebook:{cell['id']}>", "exec"), namespace)
+            cell["outputs"] = []
+            if stdout.getvalue():
+                cell["outputs"].append({
+                    "output_type": "stream", "name": "stdout",
+                    "text": stdout.getvalue().splitlines(keepends=True),
+                })
+            for number in plt.get_fignums():
+                cell["outputs"].append(_image_output(plt.figure(number), count))
+        finally:
+            plt.show = original_show
+            plt.close("all")
+
+
 def create_stage1_notebook(output_dir: Path, notebook_path: Path) -> None:
     """Create a valid ipynb from saved Stage 1 artifacts; no Jupyter dependency."""
     inventory = pd.read_csv(output_dir / "detailed_type_inventory.csv")
@@ -54,7 +84,7 @@ def create_stage1_notebook(output_dir: Path, notebook_path: Path) -> None:
         _markdown(
             "# GQA Stage 1 — dữ liệu và đề xuất quy tắc\n\n"
             "Notebook này là ảnh chụp kết quả Stage 1. Bảng và biểu đồ đã được lưu sẵn để xem mà không cần chạy lại. "
-            "Hai tệp cấu hình vẫn ở trạng thái **PROPOSED**; chưa có tác vụ nào được cố định.\n\n"
+            "Ba tệp cấu hình vẫn ở trạng thái **PROPOSED**; chưa có tác vụ nào được cố định.\n\n"
             f"Source commit: `{manifest['git_commit']}`. Đầu vào và phiên bản thư viện nằm trong "
             "`gqa_audit/outputs/stage1/run_manifest.json`.",
             "intro",
@@ -63,7 +93,7 @@ def create_stage1_notebook(output_dir: Path, notebook_path: Path) -> None:
             "from pathlib import Path\n"
             "import pandas as pd\n"
             "import matplotlib.pyplot as plt\n"
-            "ROOT = Path.cwd()\n"
+            "ROOT = Path(globals().get('_AUDIT_ROOT', Path.cwd()))\n"
             "if not (ROOT / 'gqa_audit').exists(): ROOT = ROOT.parent\n"
             "OUT = ROOT / 'gqa_audit' / 'outputs' / 'stage1'\n"
             "inventory = pd.read_csv(OUT / 'detailed_type_inventory.csv')\n"
@@ -187,6 +217,43 @@ def create_stage1_notebook(output_dir: Path, notebook_path: Path) -> None:
             "review-links",
         ),
     ]
+    cells[-1:-1] = [
+        _markdown(
+            "## Kiểm tra eligibility sau khi sửa lỗi YAML\n\n"
+            "PyYAML từng đọc yes/no không có dấu nháy thành boolean. Lần chạy này dùng chuỗi đã kiểm tra kiểu; "
+            "số eligible được đối chiếu với bộ đếm đáp án và chương trình rỗng theo từng detailed type.",
+            "validation-title",
+        ),
+        _code(
+            "checks = pd.read_csv(OUT / 'validation_checks.csv')\n"
+            "print(checks.groupby('status').size().to_string())\n"
+            "print(candidates.groupby(['task', 'split'])[['raw_count', 'eligible', 'n_empty_program']].sum().to_string())",
+            "validation-table",
+        ),
+        _markdown("## Quy mô tác vụ theo biến thể đề xuất (train)", "variants-title"),
+        _code(
+            "variants = pd.read_csv(OUT / 'variant_counts.csv')\n"
+            "task_train = variants[(variants['level'] == 'task') & (variants['split'] == 'train')]\n"
+            "print(task_train[['variant', 'task', 'questions', 'yes_ratio', 'exclusion_rate']].to_string(index=False))\n"
+            "task_train.pivot(index='task', columns='variant', values='questions').plot.bar(figsize=(11, 5))\n"
+            "plt.ylabel('Questions'); plt.tight_layout(); plt.show()",
+            "variants-chart",
+        ),
+        _markdown(
+            "## Cân bằng đáp án theo family (train, unfiltered)\n\n"
+            "Family chỉ phục vụ kiểm toán. Các family một lớp được báo cờ; không có bước tái cân bằng tự động.",
+            "families-title",
+        ),
+        _code(
+            "family_rows = variants[(variants['level'] == 'family') & (variants['split'] == 'train') & (variants['variant'] == 'unfiltered')].set_index('family')\n"
+            "family_rows = family_rows[family_rows['questions'] > 0]\n"
+            "print(family_rows[['task', 'questions', 'yes', 'no', 'flag']].to_string())\n"
+            "family_rows[['yes', 'no']].div(family_rows['questions'], axis=0).plot.barh(stacked=True, figsize=(10, 8))\n"
+            "plt.xlabel('Fraction'); plt.tight_layout(); plt.show()",
+            "families-chart",
+        ),
+    ]
+    _cache_execution(cells, output_dir.parents[2])
     notebook = {
         "cells": cells,
         "metadata": {

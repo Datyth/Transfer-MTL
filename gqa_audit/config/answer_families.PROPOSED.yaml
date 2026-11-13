@@ -1,0 +1,9 @@
+schema_version: 1
+status: PROPOSED
+reason: 'Diagnostic pairing of detailed types; suffix meanings remain unconfirmed. No rebalancing.'
+pairing_suffixes: ['C']
+overrides:
+  existRelS: [existRelS, existRelSC, existRelSRC]
+  relVerify: [relVerify, relVerifyCo, relVerifyCr, relVerifyCop]
+  verifyAttrThis: [verifyAttrThis, verifyAttrCThis]
+families: {}
