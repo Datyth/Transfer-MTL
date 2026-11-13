@@ -26,6 +26,17 @@ ANALYSIS_SPLITS = ("train_core", "dev", "val")
 ALL_SPLITS = (*ANALYSIS_SPLITS, "testdev")
 
 
+def source_commit(root: Path) -> str:
+    """Artifact-only commits must not change the registry's source provenance."""
+    commit = subprocess.check_output(
+        ["git", "log", "-1", "--format=%H", "--", "gqa_audit/*.py", "gqa_audit/config"],
+        cwd=root, text=True,
+    ).strip()
+    if not commit:
+        raise ValueError("The audit source and configuration must have a Git commit")
+    return commit
+
+
 def write_csv(path: Path, rows, context: dict) -> pd.DataFrame:
     frame = rows.copy() if isinstance(rows, pd.DataFrame) else pd.DataFrame(rows)
     frame["config_bundle_sha256"] = context["bundle"]
@@ -363,10 +374,12 @@ def run_stage2(questions: Path) -> int:
         if not path.is_file() or file_hash(path) != expected:
             raise ValueError(f"{split}: input file hash differs from FROZEN_MANIFEST")
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    (OUTPUT / "independent_verification.json").unlink(missing_ok=True)
     for name in ("task_rules.yaml", "op_family_map.yaml", "answer_families.yaml", "audit_runtime.yaml", "FROZEN_MANIFEST.json"):
         shutil.copyfile(CONFIG / name, OUTPUT / name)
     metadata = {
-        "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+        "git_commit": source_commit(ROOT),
+        "git_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "package_versions": {p: version(p) for p in ("ijson", "numpy", "pandas", "pyarrow", "scikit-learn", "matplotlib", "PyYAML", "pytest")},
         "config_hashes": context["hashes"], "config_bundle_sha256": context["bundle"],
         "input_hashes": context["manifest"]["input_sha256"],

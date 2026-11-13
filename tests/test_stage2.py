@@ -1,6 +1,7 @@
 import copy
 import json
 import math
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -9,7 +10,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 
-from gqa_audit.stage2 import image_and_reference_checks, make_registry, majority_label, preregistered_checks, stratified_sample
+from gqa_audit.stage2 import image_and_reference_checks, make_registry, majority_label, preregistered_checks, source_commit, stratified_sample
 from gqa_audit.verify_stage2 import independent_depth
 from gqa_audit.stage2_core import (
     canonical_hash, choose_dev_images, decompose_logic, fit_question_baseline, graph_depth, load_frozen, trace_operand,
@@ -197,3 +198,22 @@ def test_frozen_waiver_and_sealed_threshold_logic(context):
     assert exclusion["status"] == "FLAG" and exclusion["waived"] is True
     assert next(r for r in checks if r["check"] == "blind_accuracy_gain")["status"] == "FLAG"
     assert next(r for r in checks if r["split"] == "testdev")["status"] == "INFO"
+
+
+def test_artifact_commit_does_not_change_registry_source_commit(tmp_path):
+    def git(*args):
+        return subprocess.check_output(["git", "-C", str(tmp_path), *args], text=True).strip()
+    git("init", "-q")
+    git("config", "user.name", "Audit test")
+    git("config", "user.email", "test@localhost")
+    (tmp_path / "gqa_audit").mkdir()
+    (tmp_path / "gqa_audit/source.py").write_text("source = 1\n")
+    git("add", ".")
+    git("commit", "-q", "-m", "source")
+    expected = source_commit(tmp_path)
+    (tmp_path / "gqa_audit/outputs").mkdir()
+    (tmp_path / "gqa_audit/outputs/result.json").write_text("{}\n")
+    git("add", ".")
+    git("commit", "-q", "-m", "artifacts")
+    assert git("rev-parse", "HEAD") != expected
+    assert source_commit(tmp_path) == expected

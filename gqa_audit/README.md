@@ -48,3 +48,7 @@ from Git. Plot exports have PNG at 200 dpi and PDF versions. Every derived table
 references a config-bundle hash, resolved to the complete hashes in the manifest.
 The independent verifier recounts raw registry membership, uses a separate Kahn
 traversal for DAG depths, rescores predictions and replays notebook cells.
+
+Registry provenance uses the latest commit affecting package Python files or
+configuration. A later commit containing only audit outputs does not alter this
+source commit or the registry hash. The repository HEAD is recorded separately.
