@@ -1,0 +1,4 @@
+split_a,split_b,overlap_images,images_a,images_b,config_bundle_sha256
+train,val,0,72140,10234,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+train,testdev,0,72140,398,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+val,testdev,0,10234,398,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10

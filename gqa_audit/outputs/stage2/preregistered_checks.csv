@@ -1,0 +1,264 @@
+check,variant,split,task,unit,observed,threshold,status,waived,config_bundle_sha256
+task_size,unfiltered,train_core,exist,,67298,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,train_core,exist,,0.49625546078635324,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,train_core,exist,,0.0,<= 0.5,PASS,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,train_core,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,train_core,verifyAttr,,31396,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,train_core,verifyAttr,,0.4945534462988916,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,train_core,verifyAttr,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,train_core,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,train_core,verifyRel,,50947,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,train_core,verifyRel,,0.4899994111527666,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,train_core,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,train_core,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,train_core,compare,,15994,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,train_core,compare,,0.5017506564961861,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,train_core,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,train_core,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,train_core,logic,,101611,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,train_core,logic,,0.5005068348899233,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,train_core,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,train_core,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,unfiltered,train_core,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,exist,4987.0/5161.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,logic,existAnd,9637.0/9610.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existAttr,1278.0/1275.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existAttrNot,1371.0/1303.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,logic,existAttrOr,7518.0/7185.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existMaterial,159.0/150.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existMaterialNot,183.0/179.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,logic,existOr,19259.0/19443.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existRelS,23978.0/24399.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existThat,1328.0/1303.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,exist,existThatNot,113.0/131.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,logic,existThatOr,3816.0/3643.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,verifyRel,relVerify,24964.0/25983.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,compare,twoDifferent,4060.0/3928.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,compare,twoSame,3965.0/4041.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,verifyAttr,verifyAttr,5955.0/6134.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,verifyAttr,verifyAttrThis,543.0/554.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,verifyAttr,verifyAttrK,9029.0/9181.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,train_core,logic,verifyAttrs,10627.0/10873.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,dev,exist,,7528,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,dev,exist,,0.5047821466524973,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,dev,exist,,0.0,<= 0.5,PASS,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,dev,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,dev,verifyAttr,,3583,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,dev,verifyAttr,,0.493720346078705,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,dev,verifyAttr,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,dev,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,dev,verifyRel,,5576,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,dev,verifyRel,,0.5044835007173601,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,dev,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,dev,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,dev,compare,,1705,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,dev,compare,,0.4979472140762463,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,dev,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,dev,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,dev,logic,,11117,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,dev,logic,,0.5041827831249438,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,dev,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,dev,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,unfiltered,dev,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,exist,577.0/560.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,logic,existAnd,1046.0/1143.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existAttr,132.0/143.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existAttrNot,142.0/137.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,logic,existAttrOr,860.0/773.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existMaterial,20.0/15.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existMaterialNot,27.0/10.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,logic,existOr,2146.0/2068.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existRelS,2733.0/2712.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existThat,154.0/137.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,exist,existThatNot,15.0/14.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,logic,existThatOr,438.0/402.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,verifyRel,relVerify,2813.0/2763.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,compare,twoDifferent,416.0/433.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,compare,twoSame,433.0/423.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,verifyAttr,verifyAttr,695.0/699.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,verifyAttr,verifyAttrThis,75.0/87.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,verifyAttr,verifyAttrK,999.0/1028.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,dev,logic,verifyAttrs,1115.0/1126.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,val,exist,,10548,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,val,exist,,0.4998103905953735,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,val,exist,,0.0,<= 0.5,PASS,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,val,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,val,verifyAttr,,4914,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,val,verifyAttr,,0.4943019943019943,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,val,verifyAttr,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,val,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,val,verifyRel,,7933,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,val,verifyRel,,0.48972645909491996,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,val,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,val,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,val,compare,,2504,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,val,compare,,0.481629392971246,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,val,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,val,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,unfiltered,val,logic,,15926,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,unfiltered,val,logic,,0.5136883084264724,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,unfiltered,val,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,unfiltered,val,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,unfiltered,val,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,exist,791.0/791.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,logic,existAnd,1551.0/1395.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existAttr,199.0/183.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existAttrNot,210.0/175.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,logic,existAttrOr,1189.0/1125.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existMaterial,19.0/21.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existMaterialNot,28.0/31.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,logic,existOr,3109.0/3026.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existRelS,3809.0/3860.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existThat,201.0/202.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,exist,existThatNot,15.0/13.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,logic,existThatOr,591.0/529.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,verifyRel,relVerify,3885.0/4048.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,compare,twoDifferent,622.0/632.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,compare,twoSame,584.0/666.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,verifyAttr,verifyAttr,901.0/933.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,verifyAttr,verifyAttrThis,101.0/92.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,verifyAttr,verifyAttrK,1427.0/1460.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,unfiltered,val,logic,verifyAttrs,1741.0/1670.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,unfiltered,testdev,exist,,556,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,unfiltered,testdev,verifyAttr,,712,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,unfiltered,testdev,verifyRel,,769,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,unfiltered,testdev,compare,,291,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,unfiltered,testdev,logic,,1755,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,train_core,exist,,18921,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,train_core,exist,,0.4978066698377464,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,train_core,exist,,0.7188475140420221,<= 0.5,FLAG,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,train_core,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,train_core,verifyAttr,,23462,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,train_core,verifyAttr,,0.4942033927201432,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,train_core,verifyAttr,,0.25270735125493693,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,train_core,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,train_core,verifyRel,,50947,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,train_core,verifyRel,,0.4899994111527666,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,train_core,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,train_core,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,train_core,compare,,15994,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,train_core,compare,,0.5017506564961861,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,train_core,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,train_core,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,train_core,logic,,101611,>= 10000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,train_core,logic,,0.5005068348899233,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,train_core,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,train_core,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,program_strict,train_core,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,exist,4987.0/5161.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,logic,existAnd,9637.0/9610.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existAttr,1278.0/1275.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existAttrNot,1371.0/1303.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,logic,existAttrOr,7518.0/7185.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existMaterial,159.0/150.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existMaterialNot,183.0/179.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,logic,existOr,19259.0/19443.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existRelS,0.0/0.0,both > 0,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existThat,1328.0/1303.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,exist,existThatNot,113.0/131.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,logic,existThatOr,3816.0/3643.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,verifyRel,relVerify,24964.0/25983.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,compare,twoDifferent,4060.0/3928.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,compare,twoSame,3965.0/4041.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,verifyAttr,verifyAttr,5575.0/5683.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,verifyAttr,verifyAttrThis,543.0/554.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,verifyAttr,verifyAttrK,5477.0/5630.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,train_core,logic,verifyAttrs,10627.0/10873.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,dev,exist,,2083,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,dev,exist,,0.5122419587133942,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,dev,exist,,0.7232996811902231,<= 0.5,FLAG,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,dev,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,dev,verifyAttr,,2721,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,dev,verifyAttr,,0.4928335170893054,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,dev,verifyAttr,,0.2405805191180575,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,dev,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,dev,verifyRel,,5576,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,dev,verifyRel,,0.5044835007173601,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,dev,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,dev,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,dev,compare,,1705,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,dev,compare,,0.4979472140762463,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,dev,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,dev,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,dev,logic,,11117,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,dev,logic,,0.5041827831249438,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,dev,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,dev,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,program_strict,dev,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,exist,577.0/560.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,logic,existAnd,1046.0/1143.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existAttr,132.0/143.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existAttrNot,142.0/137.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,logic,existAttrOr,860.0/773.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existMaterial,20.0/15.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existMaterialNot,27.0/10.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,logic,existOr,2146.0/2068.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existRelS,0.0/0.0,both > 0,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existThat,154.0/137.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,exist,existThatNot,15.0/14.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,logic,existThatOr,438.0/402.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,verifyRel,relVerify,2813.0/2763.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,compare,twoDifferent,416.0/433.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,compare,twoSame,433.0/423.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,verifyAttr,verifyAttr,641.0/649.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,verifyAttr,verifyAttrThis,75.0/87.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,verifyAttr,verifyAttrK,625.0/644.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,dev,logic,verifyAttrs,1115.0/1126.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,val,exist,,2879,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,val,exist,,0.5081625564432094,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,val,exist,,0.7270572620401972,<= 0.5,FLAG,True,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,val,exist,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,val,verifyAttr,,3633,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,val,verifyAttr,,0.4929810074318745,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,val,verifyAttr,,0.2606837606837607,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,val,verifyAttr,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,val,verifyRel,,7933,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,val,verifyRel,,0.48972645909491996,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,val,verifyRel,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,val,verifyRel,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,val,compare,,2504,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,val,compare,,0.481629392971246,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,val,compare,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,val,compare,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_size,program_strict,val,logic,,15926,>= 1000,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+task_yes_ratio,program_strict,val,logic,,0.5136883084264724,"[0.4, 0.6]",PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+filter_exclusion_rate,program_strict,val,logic,,0.0,<= 0.5,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+depth_nan_rate,program_strict,val,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+unparseable_logic_rate,program_strict,val,logic,,0.0,<= 0.05,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,exist,791.0/791.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,logic,existAnd,1551.0/1395.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existAttr,199.0/183.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existAttrNot,210.0/175.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,logic,existAttrOr,1189.0/1125.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existMaterial,19.0/21.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existMaterialNot,28.0/31.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,logic,existOr,3109.0/3026.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existRelS,0.0/0.0,both > 0,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existThat,201.0/202.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,exist,existThatNot,15.0/13.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,logic,existThatOr,591.0/529.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,verifyRel,relVerify,3885.0/4048.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,compare,twoDifferent,622.0/632.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,compare,twoSame,584.0/666.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,verifyAttr,verifyAttr,847.0/866.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,verifyAttr,verifyAttrThis,101.0/92.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,verifyAttr,verifyAttrK,843.0/884.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+family_has_both_answers,program_strict,val,logic,verifyAttrs,1741.0/1670.0,both > 0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,program_strict,testdev,exist,,162,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,program_strict,testdev,verifyAttr,,573,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,program_strict,testdev,verifyRel,,769,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,program_strict,testdev,compare,,291,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+testdev_size_info_only,program_strict,testdev,logic,,1755,300,INFO,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,unfiltered,val,exist,,0.06399317406143346,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,unfiltered,val,verifyAttr,,0.04843304843304841,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,unfiltered,val,verifyRel,,0.20332787091894622,<= 0.15,FLAG,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,unfiltered,val,compare,,0.016773162939297093,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,unfiltered,val,logic,,0.15992716312947386,<= 0.15,FLAG,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,program_strict,val,exist,,0.0732893365751997,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,program_strict,val,verifyAttr,,0.04514175612441507,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,program_strict,val,verifyRel,,0.20332787091894622,<= 0.15,FLAG,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,program_strict,val,compare,,0.016773162939297093,<= 0.15,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+blind_accuracy_gain,program_strict,val,logic,,0.15992716312947386,<= 0.15,FLAG,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+original_split_image_disjointness,,train/val,,,0,0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+original_split_image_disjointness,,train/testdev,,,0,0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10
+original_split_image_disjointness,,val/testdev,,,0,0,PASS,False,209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10

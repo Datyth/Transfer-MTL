@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "config_bundle_sha256": "209ae83ecde8b0ad7d8b3ff757a893db9d0b1eb5ddd9f28ac53edfca5bc51b10",
+  "raw_question_counts": {
+    "train": 943000,
+    "val": 132062,
+    "testdev": 12578
+  },
+  "program_feature_rows_checked": 338580,
+  "baseline_metrics_rescored": 120,
+  "prediction_rows_checked": 127411,
+  "notebook_plots_replayed": 7,
+  "registry_sha256": "c122aac0bbb9ed8ad6eaa93843d95df664ba75c767946003e90ff2469c27b451",
+  "errors": [],
+  "method": "Fresh raw-data recount, exact registry membership, independent Kahn DAG depths, prediction rescoring, source/artifact hashes and notebook replay"
+}

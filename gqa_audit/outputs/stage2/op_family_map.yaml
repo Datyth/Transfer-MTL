@@ -1,0 +1,599 @@
+schema_version: 2
+status: FROZEN
+frozen_from:
+  op_family_map.PROPOSED.yaml: 8899b3622bc5029e96de87bd69df644e3c61fb2a884ec2358d217fb85c18f8fa
+allowed_families:
+- select
+- filter_attribute
+- query_attribute
+- verify_attribute
+- relation
+- exist
+- compare
+- choose
+- logic
+proposal_patterns:
+- regex: ^select(\s|$)
+  families:
+  - select
+- regex: ^filter(\s|$)
+  families:
+  - filter_attribute
+- regex: ^query(\s|$)
+  families:
+  - query_attribute
+- regex: ^verify rel(\s|$)
+  families:
+  - relation
+- regex: ^verify(\s|$)
+  families:
+  - verify_attribute
+- regex: ^relate(\s|$)
+  families:
+  - relation
+- regex: ^exist(\s|$)
+  families:
+  - exist
+- regex: ^(same|different|common|compare)(\s|$)
+  families:
+  - compare
+- regex: ^choose rel(\s|$)
+  families:
+  - choose
+  - relation
+- regex: ^choose(\s|$)
+  families:
+  - choose
+- regex: ^(and|or)(\s|$)
+  families:
+  - logic
+operations:
+  and:
+    families:
+    - logic
+    reason: Matched ^(and|or)(\s|$)
+  choose:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose activity:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose age:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose bigger:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose brightness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose cleanliness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose color:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose company:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose depth:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose face expression:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose fatness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose flavor:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose gender:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose hardness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose healthier:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose height:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose higher:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose hposition:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose larger:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose length:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose less healthy:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose location:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose lower:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose material:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose name:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose older:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose opaqness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose pattern:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose place:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose pose:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose race:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose realism:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose rel:
+    families:
+    - choose
+    - relation
+    reason: Matched ^choose rel(\s|$)
+  choose shape:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose shorter:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose size:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose smaller:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose sportActivity:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose state:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose taller:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose thickness:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose tone:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose vposition:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose weather:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose weight:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose width:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  choose younger:
+    families:
+    - choose
+    reason: Matched ^choose(\s|$)
+  common:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  different:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  different color:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  different shape:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  exist:
+    families:
+    - exist
+    reason: Matched ^exist(\s|$)
+  filter:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter activity:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter age:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter brightness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter cleanliness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter color:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter company:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter depth:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter event:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter face expression:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter fatness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter flavor:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter gender:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter hardness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter height:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter hposition:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter length:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter liquid:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter material:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter opaqness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter orientation:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter pattern:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter pose:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter race:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter realism:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter room:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter shape:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter size:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter sport:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter sportActivity:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter state:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter texture:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter thickness:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter tone:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter vposition:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter weather:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter weight:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  filter width:
+    families:
+    - filter_attribute
+    reason: Matched ^filter(\s|$)
+  or:
+    families:
+    - logic
+    reason: Matched ^(and|or)(\s|$)
+  query:
+    families:
+    - query_attribute
+    reason: Matched ^query(\s|$)
+  relate:
+    families:
+    - relation
+    reason: Matched ^relate(\s|$)
+  same:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  same color:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  same material:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  same shape:
+    families:
+    - compare
+    reason: Matched ^(same|different|common|compare)(\s|$)
+  select:
+    families:
+    - select
+    reason: Matched ^select(\s|$)
+  verify:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify activity:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify age:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify brightness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify cleanliness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify color:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify company:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify depth:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify face expression:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify fatness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify flavor:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify gender:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify hardness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify height:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify hposition:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify length:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify location:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify material:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify opaqness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify pattern:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify place:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify pose:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify race:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify realism:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify rel:
+    families:
+    - relation
+    reason: Matched ^verify rel(\s|$)
+  verify room:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify shape:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify size:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify sportActivity:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify state:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify texture:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify thickness:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify tone:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify type:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify vposition:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify weather:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify weight:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)
+  verify width:
+    families:
+    - verify_attribute
+    reason: Matched ^verify(\s|$)

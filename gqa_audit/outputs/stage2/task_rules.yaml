@@ -1,0 +1,525 @@
+schema_version: 2
+status: FROZEN
+frozen_from:
+  task_rules.PROPOSED.yaml: 61cda0fd1e7163354db0a3ab00e95322778cd852311b7291aa9a71f369fa6eeb
+decisions:
+  A: Relation-free exist (types.semantic==obj, equal to program R_strict==0) is the primary exist task. The <=50% exclusion
+    cap is explicitly WAIVED for exist (observed 71.9% on train). Analyses are stratified bare vs attribute_conditioned. The
+    unfiltered variant is run side by side.
+  B: program_broad and semantic_sensitivity variants are dropped (identical membership to program_strict in Stage 1). program_strict
+    is the rule. types.semantic==obj is kept only as an exact-membership cross-check for exist.
+  C: verifyRel keeps all negative types. Co and Cr are reported as separate metric subsets. relVerifyCop (35 train) appears
+    only in pooled metrics.
+  D: 'Logic primary target excludes the single-class types verifyAttrAnd and verifyMaterialAnd (1,301 train). Logic is reported
+    in two strata: exist_composition and attribute_composition. No rebalancing.'
+  E: position/material/location/weather/place/animal/gender/type/company verify and compare types stay secondary (not in the
+    pilot). Sizes are reported only.
+  F: twoSameMaterial and twoSameMaterialC are excluded from compare (family yes ratio 0.379 is outside [0.40,0.60]).
+  G: Dev split = 10% of train images (seed 0), chosen so every pilot task has >=1,000 dev questions.
+seed: 0
+eligibility:
+  binary_answers:
+  - 'yes'
+  - 'no'
+  require_nonempty_semantic: true
+splits:
+  dev_fraction_of_train_images: 0.1
+  dev_seed: 0
+  val: held_out_analysis
+  testdev: sealed_counts_only
+diagnostics:
+  samples_per_type: 5
+  crosschecks:
+    exist_semantic_equals_program_strict:
+      task: exist
+      types_semantic: obj
+      variant: program_strict
+      expected_differing_questions: 0
+  taxonomy_checks:
+    logic:
+      structural: logical
+    verifyRel:
+      semantic: rel
+    verifyAttr:
+      semantic: attr
+    compare:
+      semantic: attr
+  exhaustive_taxonomy_tasks:
+  - logic
+  exhaustive_taxonomy_exceptions:
+    logic:
+    - verifyAttrAnd
+    - verifyMaterialAnd
+audit_variants:
+  unfiltered: {}
+  program_strict:
+    exist:
+      relation: R_strict
+    verifyAttr:
+      relation: R_strict
+    compare:
+      relation: R_strict
+primary_variant: program_strict
+pilot_tasks:
+  exist:
+    exclude_relation: true
+  verifyAttr:
+    exclude_relation: true
+  verifyRel:
+    exclude_relation: false
+  compare:
+    exclude_relation: true
+  logic:
+    exclude_relation: false
+strata:
+  exist:
+    bare:
+    - exist
+    - existC
+    attribute_conditioned:
+    - existAttr
+    - existAttrC
+    - existAttrNot
+    - existAttrNotC
+    - existMaterial
+    - existMaterialC
+    - existMaterialNot
+    - existMaterialNotC
+    - existThat
+    - existThatC
+    - existThatNot
+    - existThatNotC
+    relational_unfiltered_only:
+    - existRelS
+    - existRelSC
+    - existRelSRC
+  logic:
+    exist_composition:
+    - existAnd
+    - existAndC
+    - existOr
+    - existOrC
+    - existAttrOr
+    - existAttrOrC
+    - existThatOr
+    - existThatOrC
+    attribute_composition:
+    - verifyAttrs
+    - verifyAttrsC
+metric_subsets:
+  verifyRel_Cr:
+    'yes':
+    - relVerify
+    'no':
+    - relVerifyCr
+  verifyRel_Co:
+    'yes':
+    - relVerify
+    'no':
+    - relVerifyCo
+thresholds:
+  min_train_core_questions_per_task: 10000
+  min_dev_questions_per_task: 1000
+  min_val_questions_per_task: 1000
+  testdev_questions_per_task_info_only: 300
+  yes_ratio_band:
+  - 0.4
+  - 0.6
+  blind_baseline_margin_over_majority: 0.15
+  max_filter_exclusion_rate: 0.5
+  max_unparseable_logic_rate: 0.05
+  max_depth_nan_rate: 0.05
+waivers:
+  max_filter_exclusion_rate:
+    exist: 'Decision A: waived; still report the observed rate'
+relation_definitions:
+  R_strict:
+    operation_heads:
+    - relate
+  R_broad:
+    operation_regexes:
+    - (^relate(\s|$)|\brel\b|\brelation\b)
+    argument_regexes:
+    - ^[^,]+,[^,]+,[so](\s*\([^)]*\))?$
+unmatched_task: secondary
+unmatched_reason: Outside the intended pilot families; review before freezing
+type_mappings:
+  activity:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  activityChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  activityWho:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  category:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryAttr:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelO:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelOChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryRelS:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThat:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThatChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThis:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  categoryThisChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  chooseAttr:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  company:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  companyVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  comparativeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffAnimals:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffAnimalsC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  diffGender:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  dir:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  directOf:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  directWhich:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  exist:
+    task: exist
+    reason: Intended GQA exist family
+  existAnd:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existAndC:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existAttr:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrC:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrNot:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existAttrOr:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existAttrOrC:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existC:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterial:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialC:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialNot:
+    task: exist
+    reason: Intended GQA exist family
+  existMaterialNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existOr:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existOrC:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existRelS:
+    task: exist
+    reason: Intended GQA exist family
+  existRelSC:
+    task: exist
+    reason: Intended GQA exist family
+  existRelSRC:
+    task: exist
+    reason: Intended GQA exist family
+  existThat:
+    task: exist
+    reason: Intended GQA exist family
+  existThatC:
+    task: exist
+    reason: Intended GQA exist family
+  existThatNot:
+    task: exist
+    reason: Intended GQA exist family
+  existThatNotC:
+    task: exist
+    reason: Intended GQA exist family
+  existThatOr:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  existThatOrC:
+    task: logic
+    reason: 'Decision D: logic stratum exist_composition (and/or of existence propositions)'
+  how:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  locationVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  material:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  materialVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  objThisChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  place:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  placeVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionQuery:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  positionVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relChooser:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relO:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relS:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  relVerify:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCo:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCop:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  relVerifyCr:
+    task: verifyRel
+    reason: Observed GQA relation-verification family; programs contain verify rel
+  sameAnimals:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameAnimalsC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameGender:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameGenderC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameMaterialRelate:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  sameRelate:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  state:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  stateChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  twoCommon:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  twoDifferent:
+    task: compare
+    reason: 'Human decision: twoSame and twoDifferent are pooled in compare'
+  twoDifferentC:
+    task: compare
+    reason: 'Human decision: twoSame and twoDifferent are pooled in compare'
+  twoSame:
+    task: compare
+    reason: 'Human decision: twoSame and twoDifferent are pooled in compare'
+  twoSameC:
+    task: compare
+    reason: 'Human decision: twoSame and twoDifferent are pooled in compare'
+  twoSameMaterial:
+    task: secondary
+    reason: 'Decision F: family yes ratio 0.379 is outside [0.40,0.60]; excluded from compare'
+    flag: EXCLUDED_F
+  twoSameMaterialC:
+    task: secondary
+    reason: 'Decision F: family yes ratio 0.379 is outside [0.40,0.60]; excluded from compare'
+    flag: EXCLUDED_F
+  typeChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  typeVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  typeVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  verifyAttr:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrAnd:
+    task: secondary
+    reason: 'Decision D: yes-only single-class logic type (structural=logical); excluded from the primary logic target'
+    flag: EXCLUDED_D
+  verifyAttrC:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrCThis:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrK:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrKC:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrThis:
+    task: verifyAttr
+    reason: Intended GQA attribute verification family
+  verifyAttrs:
+    task: logic
+    reason: 'Decision D: logic stratum attribute_composition (conjunction of attribute verifications)'
+  verifyAttrsC:
+    task: logic
+    reason: 'Decision D: logic stratum attribute_composition (conjunction of attribute verifications)'
+  verifyMaterialAnd:
+    task: secondary
+    reason: 'Decision D: yes-only single-class logic type (structural=logical); excluded from the primary logic target'
+    flag: EXCLUDED_D
+  weather:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherChoose:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherVerify:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED
+  weatherVerifyC:
+    task: secondary
+    reason: Outside the intended pilot families; review before freezing
+    flag: UNMATCHED

@@ -1,0 +1,266 @@
+{
+  "decisions": {
+    "A": "Relation-free exist (types.semantic==obj, equal to program R_strict==0) is the primary exist task. The <=50% exclusion cap is explicitly WAIVED for exist (observed 71.9% on train). Analyses are stratified bare vs attribute_conditioned. The unfiltered variant is run side by side.",
+    "B": "program_broad and semantic_sensitivity variants are dropped (identical membership to program_strict in Stage 1). program_strict is the rule. types.semantic==obj is kept only as an exact-membership cross-check for exist.",
+    "C": "verifyRel keeps all negative types. Co and Cr are reported as separate metric subsets. relVerifyCop (35 train) appears only in pooled metrics.",
+    "D": "Logic primary target excludes the single-class types verifyAttrAnd and verifyMaterialAnd (1,301 train). Logic is reported in two strata: exist_composition and attribute_composition. No rebalancing.",
+    "E": "position/material/location/weather/place/animal/gender/type/company verify and compare types stay secondary (not in the pilot). Sizes are reported only.",
+    "F": "twoSameMaterial and twoSameMaterialC are excluded from compare (family yes ratio 0.379 is outside [0.40,0.60]).",
+    "G": "Dev split = 10% of train images (seed 0), chosen so every pilot task has >=1,000 dev questions."
+  },
+  "frozen_files_sha256": {
+    "answer_families.FROZEN.yaml": "c5458dcda98ebb63f1c2fb23e37c07baa50d460fe61991bde8857a7ff33bfb6c",
+    "op_family_map.FROZEN.yaml": "d49d3f0b71c8c9dbe3c147f066e0c8bd76a15eccdbd2c0363acfbc304eec7942",
+    "task_rules.FROZEN.yaml": "2f2ce20ebd8ee804f5180cd52280dfbf739ec392a70738552ce0cc6abe05285a"
+  },
+  "input_sha256": {
+    "testdev": "14039069c0b3c797c7aa9bcd5f4c2aa4b5976e02c0b6773e1a584d942a03a318",
+    "train": "c600b8301c67ee3eac1b4b9af8a35f776589f045f245fd5b15c50c97fa244d6b",
+    "val": "2f675643c0cfffe0485dbae0c0c0dfc16b547443309a98544502bc1ae87c0779"
+  },
+  "raw_question_counts": {
+    "testdev": 12578,
+    "train": 943000,
+    "val": 132062
+  },
+  "regression_targets": {
+    "description": "Expected eligible question counts from the accepted Stage 1 rerun, re-derived with the frozen mapping. Stage 2 must reproduce them exactly or STOP and report.",
+    "strata": [
+      {
+        "program_strict": 105,
+        "split": "testdev",
+        "stratum": "attribute_conditioned",
+        "task": "exist",
+        "unfiltered": 105
+      },
+      {
+        "program_strict": 57,
+        "split": "testdev",
+        "stratum": "bare",
+        "task": "exist",
+        "unfiltered": 57
+      },
+      {
+        "program_strict": 0,
+        "split": "testdev",
+        "stratum": "relational_unfiltered_only",
+        "task": "exist",
+        "unfiltered": 394
+      },
+      {
+        "program_strict": 1187,
+        "split": "testdev",
+        "stratum": "attribute_composition",
+        "task": "logic",
+        "unfiltered": 1187
+      },
+      {
+        "program_strict": 568,
+        "split": "testdev",
+        "stratum": "exist_composition",
+        "task": "logic",
+        "unfiltered": 568
+      },
+      {
+        "program_strict": 9719,
+        "split": "train",
+        "stratum": "attribute_conditioned",
+        "task": "exist",
+        "unfiltered": 9719
+      },
+      {
+        "program_strict": 11285,
+        "split": "train",
+        "stratum": "bare",
+        "task": "exist",
+        "unfiltered": 11285
+      },
+      {
+        "program_strict": 0,
+        "split": "train",
+        "stratum": "relational_unfiltered_only",
+        "task": "exist",
+        "unfiltered": 53822
+      },
+      {
+        "program_strict": 23741,
+        "split": "train",
+        "stratum": "attribute_composition",
+        "task": "logic",
+        "unfiltered": 23741
+      },
+      {
+        "program_strict": 88987,
+        "split": "train",
+        "stratum": "exist_composition",
+        "task": "logic",
+        "unfiltered": 88987
+      },
+      {
+        "program_strict": 1297,
+        "split": "val",
+        "stratum": "attribute_conditioned",
+        "task": "exist",
+        "unfiltered": 1297
+      },
+      {
+        "program_strict": 1582,
+        "split": "val",
+        "stratum": "bare",
+        "task": "exist",
+        "unfiltered": 1582
+      },
+      {
+        "program_strict": 0,
+        "split": "val",
+        "stratum": "relational_unfiltered_only",
+        "task": "exist",
+        "unfiltered": 7669
+      },
+      {
+        "program_strict": 3411,
+        "split": "val",
+        "stratum": "attribute_composition",
+        "task": "logic",
+        "unfiltered": 3411
+      },
+      {
+        "program_strict": 12515,
+        "split": "val",
+        "stratum": "exist_composition",
+        "task": "logic",
+        "unfiltered": 12515
+      }
+    ],
+    "unfiltered_and_program_strict_by_task": [
+      {
+        "program_strict": 291,
+        "program_strict_yes": 136,
+        "split": "testdev",
+        "task": "compare",
+        "unfiltered": 291,
+        "unfiltered_yes": 136
+      },
+      {
+        "program_strict": 162,
+        "program_strict_yes": 83,
+        "split": "testdev",
+        "task": "exist",
+        "unfiltered": 556,
+        "unfiltered_yes": 301
+      },
+      {
+        "program_strict": 1755,
+        "program_strict_yes": 833,
+        "split": "testdev",
+        "task": "logic",
+        "unfiltered": 1755,
+        "unfiltered_yes": 833
+      },
+      {
+        "program_strict": 573,
+        "program_strict_yes": 327,
+        "split": "testdev",
+        "task": "verifyAttr",
+        "unfiltered": 712,
+        "unfiltered_yes": 403
+      },
+      {
+        "program_strict": 769,
+        "program_strict_yes": 441,
+        "split": "testdev",
+        "task": "verifyRel",
+        "unfiltered": 769,
+        "unfiltered_yes": 441
+      },
+      {
+        "program_strict": 17699,
+        "program_strict_yes": 8874,
+        "split": "train",
+        "task": "compare",
+        "unfiltered": 17699,
+        "unfiltered_yes": 8874
+      },
+      {
+        "program_strict": 21004,
+        "program_strict_yes": 10486,
+        "split": "train",
+        "task": "exist",
+        "unfiltered": 74826,
+        "unfiltered_yes": 37197
+      },
+      {
+        "program_strict": 112728,
+        "program_strict_yes": 56462,
+        "split": "train",
+        "task": "logic",
+        "unfiltered": 112728,
+        "unfiltered_yes": 56462
+      },
+      {
+        "program_strict": 26183,
+        "program_strict_yes": 12936,
+        "split": "train",
+        "task": "verifyAttr",
+        "unfiltered": 34979,
+        "unfiltered_yes": 17296
+      },
+      {
+        "program_strict": 56523,
+        "program_strict_yes": 27777,
+        "split": "train",
+        "task": "verifyRel",
+        "unfiltered": 56523,
+        "unfiltered_yes": 27777
+      },
+      {
+        "program_strict": 2504,
+        "program_strict_yes": 1206,
+        "split": "val",
+        "task": "compare",
+        "unfiltered": 2504,
+        "unfiltered_yes": 1206
+      },
+      {
+        "program_strict": 2879,
+        "program_strict_yes": 1463,
+        "split": "val",
+        "task": "exist",
+        "unfiltered": 10548,
+        "unfiltered_yes": 5272
+      },
+      {
+        "program_strict": 15926,
+        "program_strict_yes": 8181,
+        "split": "val",
+        "task": "logic",
+        "unfiltered": 15926,
+        "unfiltered_yes": 8181
+      },
+      {
+        "program_strict": 3633,
+        "program_strict_yes": 1791,
+        "split": "val",
+        "task": "verifyAttr",
+        "unfiltered": 4914,
+        "unfiltered_yes": 2429
+      },
+      {
+        "program_strict": 7933,
+        "program_strict_yes": 3885,
+        "split": "val",
+        "task": "verifyRel",
+        "unfiltered": 7933,
+        "unfiltered_yes": 3885
+      }
+    ]
+  },
+  "schema_version": 1,
+  "source_proposed_sha256": {
+    "answer_families.PROPOSED.yaml": "f7ca6306e505e63fdf2e7219cef730afd145bbf3ae0b027ac3c90b1d9092394f",
+    "op_family_map.PROPOSED.yaml": "8899b3622bc5029e96de87bd69df644e3c61fb2a884ec2358d217fb85c18f8fa",
+    "task_rules.PROPOSED.yaml": "61cda0fd1e7163354db0a3ab00e95322778cd852311b7291aa9a71f369fa6eeb"
+  },
+  "stage1_git_commit": "c091fd75c7125ea98475fd5592170e8b391cf7e4",
+  "status": "FROZEN"
+}
