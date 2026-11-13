@@ -11,13 +11,17 @@ def main() -> int:
     subparsers = parser.add_subparsers(dest="stage", required=True)
     stage1 = subparsers.add_parser("stage1", help="Inspect GQA and propose task rules")
     stage1.add_argument("--questions", required=True, type=Path)
+    stage2 = subparsers.add_parser("stage2", help="Run the frozen task audit and question-only baselines")
+    stage2.add_argument("--questions", required=True, type=Path)
     args = parser.parse_args()
     if args.stage == "stage1":
         return run_stage1(args.questions)
+    if args.stage == "stage2":
+        from .stage2 import run_stage2
+        return run_stage2(args.questions)
     parser.error(f"Unsupported stage: {args.stage}")
     return 2
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

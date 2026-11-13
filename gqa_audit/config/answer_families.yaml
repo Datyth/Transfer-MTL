@@ -1,0 +1,155 @@
+schema_version: 2
+status: FROZEN
+frozen_from:
+  answer_families.PROPOSED.yaml: f7ca6306e505e63fdf2e7219cef730afd145bbf3ae0b027ac3c90b1d9092394f
+reason: Unit of analysis is the family (yes type pooled with its no partners). Never report accuracy per detailed type. Co/Cr/Cop
+  meanings are confirmed or refuted by Stage 2 dash-rate counts, not assumed.
+pairing_suffixes:
+- C
+overrides:
+  existRelS:
+  - existRelS
+  - existRelSC
+  - existRelSRC
+  relVerify:
+  - relVerify
+  - relVerifyCo
+  - relVerifyCr
+  - relVerifyCop
+  verifyAttrThis:
+  - verifyAttrThis
+  - verifyAttrCThis
+families:
+  exist:
+    task: exist
+    detailed_types:
+    - exist
+    - existC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existAnd:
+    task: logic
+    detailed_types:
+    - existAnd
+    - existAndC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existAttr:
+    task: exist
+    detailed_types:
+    - existAttr
+    - existAttrC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existAttrNot:
+    task: exist
+    detailed_types:
+    - existAttrNot
+    - existAttrNotC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existAttrOr:
+    task: logic
+    detailed_types:
+    - existAttrOr
+    - existAttrOrC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existMaterial:
+    task: exist
+    detailed_types:
+    - existMaterial
+    - existMaterialC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existMaterialNot:
+    task: exist
+    detailed_types:
+    - existMaterialNot
+    - existMaterialNotC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existOr:
+    task: logic
+    detailed_types:
+    - existOr
+    - existOrC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existRelS:
+    task: exist
+    detailed_types:
+    - existRelS
+    - existRelSC
+    - existRelSRC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existThat:
+    task: exist
+    detailed_types:
+    - existThat
+    - existThatC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existThatNot:
+    task: exist
+    detailed_types:
+    - existThatNot
+    - existThatNotC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  existThatOr:
+    task: logic
+    detailed_types:
+    - existThatOr
+    - existThatOrC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  relVerify:
+    task: verifyRel
+    detailed_types:
+    - relVerify
+    - relVerifyCo
+    - relVerifyCop
+    - relVerifyCr
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  twoDifferent:
+    task: compare
+    detailed_types:
+    - twoDifferent
+    - twoDifferentC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  twoSame:
+    task: compare
+    detailed_types:
+    - twoSame
+    - twoSameC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  twoSameMaterial:
+    task: secondary
+    detailed_types:
+    - twoSameMaterial
+    - twoSameMaterialC
+    reason: 'Decision F: excluded from compare'
+  verifyAttr:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttr
+    - verifyAttrC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  verifyAttrAnd:
+    task: secondary
+    detailed_types:
+    - verifyAttrAnd
+    reason: 'Decision D: yes-only single-class logic type; excluded from primary logic target'
+  verifyAttrThis:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttrCThis
+    - verifyAttrThis
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  verifyAttrK:
+    task: verifyAttr
+    detailed_types:
+    - verifyAttrK
+    - verifyAttrKC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  verifyAttrs:
+    task: logic
+    detailed_types:
+    - verifyAttrs
+    - verifyAttrsC
+    reason: 'Suffix pairing frozen: each yes type is pooled with its no partners'
+  verifyMaterialAnd:
+    task: secondary
+    detailed_types:
+    - verifyMaterialAnd
+    reason: 'Decision D: yes-only single-class logic type; excluded from primary logic target'

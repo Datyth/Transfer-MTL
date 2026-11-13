@@ -1,0 +1,16 @@
+schema_version: 1
+cache_batch_size: 5000
+manual_samples_per_group: 25
+plot_dpi: 200
+baseline:
+  ngram_range: [1, 2]
+  min_df: 2
+  C: 1.0
+  max_iter: 2000
+  solver: lbfgs
+operand_rules:
+  - {regex: '^exist$', label: exist}
+  - {regex: '^verify rel$', label: verifyRel}
+  - {regex: '^verify($| )', label: verifyAttr}
+  - {regex: '^(same|different|common)($| )', label: compare}
+operand_default: other
