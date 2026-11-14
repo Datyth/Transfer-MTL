@@ -1,0 +1,16 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.26it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.67it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.60it/s]
+official A_image: 256 questions, 7.31/s
+official A_no_image: 256 questions, 57.91/s
+official B_image: 64 questions, 6.86/s
+official B_no_image: 64 questions, 58.25/s
+grouped A_image: 256 questions, 7.63/s
+grouped A_no_image: 256 questions, 54.70/s
+grouped B_image: 64 questions, 6.37/s
+grouped B_no_image: 64 questions, 52.41/s
+equivalence {'template': 'A', 'condition': 'image', 'n': 256, 'max_score_difference': 0.0, 'prediction_agreement': 1.0}
+equivalence {'template': 'A', 'condition': 'no_image', 'n': 256, 'max_score_difference': 0.0, 'prediction_agreement': 1.0}
+equivalence {'template': 'B', 'condition': 'image', 'n': 64, 'max_score_difference': 0.0, 'prediction_agreement': 1.0}
+equivalence {'template': 'B', 'condition': 'no_image', 'n': 64, 'max_score_difference': 0.0, 'prediction_agreement': 1.0}
+batch invariance {'condition': 'image', 'n': 256, 'max_score_difference': 0.0, 'status': 'PASS'}
+batch invariance {'condition': 'no_image', 'n': 256, 'max_score_difference': 0.0, 'status': 'PASS'}

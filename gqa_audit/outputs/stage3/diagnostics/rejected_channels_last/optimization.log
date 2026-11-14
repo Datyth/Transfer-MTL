@@ -1,0 +1,22 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  2.30it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.71it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  2.64it/s]
+official A_image: 256 questions, 4.79/s
+official A_no_image: 256 questions, 234.86/s
+official B_image: 64 questions, 4.52/s
+official B_no_image: 64 questions, 242.70/s
+grouped A_image: 256 questions, 5.00/s
+grouped A_no_image: 256 questions, 231.56/s
+grouped B_image: 64 questions, 4.79/s
+grouped B_no_image: 64 questions, 239.64/s
+optimized A_image: 256 questions, 6.77/s
+optimized A_no_image: 256 questions, 228.16/s
+optimized B_image: 64 questions, 6.53/s
+optimized B_no_image: 64 questions, 236.96/s
+equivalence {'template': 'A', 'condition': 'image', 'n': 256, 'max_score_difference': 0.25005149841308594, 'prediction_agreement': 0.99609375}
+Traceback (most recent call last):
+  File "/home/dat/projects/vqa-mtl/scripts/check_inference.py", line 12, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/dat/projects/vqa-mtl/src/vqa_research/validation.py", line 80, in main
+    raise ValueError("Grouped SDPA did not preserve the reference scores/predictions")
+ValueError: Grouped SDPA did not preserve the reference scores/predictions

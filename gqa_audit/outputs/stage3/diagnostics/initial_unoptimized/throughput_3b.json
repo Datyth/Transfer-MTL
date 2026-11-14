@@ -1,0 +1,10 @@
+{
+  "image": {
+    "questions_per_second": 6.450776922842866,
+    "estimated_full_seconds": 11058.202888306205
+  },
+  "no_image": {
+    "questions_per_second": 241.7439711941502,
+    "estimated_full_seconds": 295.0807817362693
+  }
+}

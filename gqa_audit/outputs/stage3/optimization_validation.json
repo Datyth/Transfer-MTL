@@ -1,0 +1,75 @@
+{
+  "validated_at_utc": "2026-11-14T06:34:57.432400+00:00",
+  "status": "PASS",
+  "model_revision": "66285546d2b821cf421d4f5eb2576359d3770cd3",
+  "batch_size": 1,
+  "equivalence": [
+    {
+      "template": "A",
+      "condition": "image",
+      "n": 256,
+      "max_score_difference": 0.0,
+      "prediction_agreement": 1.0
+    },
+    {
+      "template": "A",
+      "condition": "no_image",
+      "n": 256,
+      "max_score_difference": 0.0,
+      "prediction_agreement": 1.0
+    },
+    {
+      "template": "B",
+      "condition": "image",
+      "n": 64,
+      "max_score_difference": 0.0,
+      "prediction_agreement": 1.0
+    },
+    {
+      "template": "B",
+      "condition": "no_image",
+      "n": 64,
+      "max_score_difference": 0.0,
+      "prediction_agreement": 1.0
+    }
+  ],
+  "batch_invariance": [
+    {
+      "condition": "image",
+      "n": 256,
+      "max_score_difference": 0.0,
+      "status": "PASS"
+    },
+    {
+      "condition": "no_image",
+      "n": 256,
+      "max_score_difference": 0.0,
+      "status": "PASS"
+    }
+  ],
+  "questions_per_second": {
+    "official_A_image": 7.309630169692109,
+    "official_A_no_image": 57.90565837281057,
+    "official_B_image": 6.859352541010451,
+    "official_B_no_image": 58.248402723391536,
+    "grouped_A_image": 7.628788255717698,
+    "grouped_A_no_image": 54.69755607556974,
+    "grouped_B_image": 6.3717667512071285,
+    "grouped_B_no_image": 52.4086906909781,
+    "grouped_A_image_batch1": 7.699007280537313,
+    "grouped_A_no_image_batch1": 54.430377998495835
+  },
+  "sdpa_call_counts_per_batch": {
+    "official": {
+      "aten::scaled_dot_product_attention": 600
+    },
+    "grouped": {
+      "aten::scaled_dot_product_attention": 96
+    }
+  },
+  "generation_smoke_agreement": 1.0,
+  "generation_smoke_n": 8,
+  "attention_source_sha256": "67fd724c123f628896d50c27e7b77216866725c16ce2289ef2b0b3e208f53b07",
+  "model_source_sha256": "2baff980313539d8ec7b7db64a0b5a3fb694d639e98d8e0d1551de750034d54c",
+  "environment_sha256": "ff82f0c719d43fb6651ab5aefdf9ad84766df0f47ac9c466775614cdb9fc2896"
+}

@@ -1,0 +1,30 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                        cudaMemcpyAsync        35.48%     896.421ms        35.48%     896.421ms       1.621ms           553  
+                                  cudaStreamSynchronize        31.63%     799.018ms        31.63%     799.018ms       1.450ms           551  
+                                       cudaLaunchKernel        29.22%     738.196ms        29.22%     738.196ms     103.042us          7164  
+                                         cuLaunchKernel         0.93%      23.586ms         0.93%      23.586ms      56.696us           416  
+                                            aten::addmm         0.40%      10.045ms         1.11%      28.089ms     104.034us           270  
+                                       aten::as_strided         0.37%       9.246ms         0.37%       9.246ms       0.163us         56559  
+                                 aten::split_with_sizes         0.31%       7.897ms         0.56%      14.256ms      84.355us           169  
+                                              aten::cat         0.21%       5.289ms         5.91%     149.249ms     171.748us           869  
+                                           aten::select         0.18%       4.649ms         0.27%       6.747ms       0.486us         13879  
+                                               aten::mm         0.12%       3.100ms         0.35%       8.725ms      60.175us           145  
+                                            aten::fill_         0.12%       3.091ms         6.21%     156.846ms      46.653us          3362  
+                                            aten::empty         0.11%       2.863ms         1.95%      49.248ms      22.611us          2178  
+                                           aten::unbind         0.08%       1.996ms         0.33%       8.268ms      31.925us           259  
+                                              aten::mul         0.08%       1.895ms         7.59%     191.713ms     250.606us           765  
+                                            aten::copy_         0.07%       1.748ms        68.06%        1.719s       1.721ms           999  
+                                    aten::empty_strided         0.06%       1.538ms         3.68%      92.986ms     126.683us           734  
+                                              aten::add         0.05%       1.383ms         5.89%     148.870ms     247.293us           602  
+                                        aten::transpose         0.03%     716.806us         0.05%       1.149ms       0.635us          1809  
+                         aten::_flash_attention_forward         0.03%     705.868us         0.19%       4.835ms      25.180us           192  
+                     aten::scaled_dot_product_attention         0.03%     681.214us         2.63%      66.334ms     290.938us           228  
+                   VmappedVmappedVmappedVmappedModIndex         0.02%     590.275us         0.03%     668.040us     668.040us             1  
+                                             aten::mean         0.02%     567.519us         0.07%       1.877ms      13.599us           138  
+                              aten::_local_scalar_dense         0.02%     520.685us         0.88%      22.301ms      49.013us           455  
+                                              aten::pow         0.02%     492.135us         0.35%       8.717ms      63.164us           138  
+                                          aten::nonzero         0.02%     474.926us         0.24%       6.069ms      93.376us            65  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 2.526s

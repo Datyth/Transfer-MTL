@@ -6,3 +6,4 @@ __pycache__/
 .ipynb_checkpoints/
 gqa_audit/outputs/stage2/cache/
 *.parquet.tmp
+gqa_audit/outputs/stage3/run.lock

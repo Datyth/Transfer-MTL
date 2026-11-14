@@ -1,0 +1,43 @@
+{
+  "archive_sha256": "02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62",
+  "archive_crc_verified": true,
+  "archive_size_bytes": 21817965542,
+  "archive_image_count": 148854,
+  "extracted_image_count": 148854,
+  "required_images_verified": 74573,
+  "testdev_registry_images": 395,
+  "testdev_images_with_file": 395,
+  "testdev_policy": "image existence counts only",
+  "distribution": {
+    "width": {
+      "count": 74573.0,
+      "mean": 496.7771981816475,
+      "std": 129.01561640244896,
+      "min": 72.0,
+      "25%": 500.0,
+      "50%": 500.0,
+      "75%": 500.0,
+      "max": 1280.0
+    },
+    "height": {
+      "count": 74573.0,
+      "mean": 411.33734729727917,
+      "std": 114.43590526632728,
+      "min": 51.0,
+      "25%": 333.0,
+      "50%": 375.0,
+      "75%": 500.0,
+      "max": 1280.0
+    },
+    "bytes": {
+      "count": 74573.0,
+      "mean": 141649.7899373768,
+      "std": 75365.54349287854,
+      "min": 5436.0,
+      "25%": 102560.0,
+      "50%": 129592.0,
+      "75%": 160710.0,
+      "max": 1609511.0
+    }
+  }
+}
