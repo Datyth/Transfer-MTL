@@ -52,3 +52,43 @@ traversal for DAG depths, rescores predictions and replays notebook cells.
 Registry provenance uses the latest commit affecting package Python files or
 configuration. A later commit containing only audit outputs does not alter this
 source commit or the registry hash. The repository HEAD is recorded separately.
+
+## Frozen Stage 2b (decisions H–L)
+
+The supplied `analysis_plan.FROZEN.yaml` is copied byte-for-byte to `config/`.
+This addendum uses the existing validated caches. It creates fixed evaluation
+subsets, operation-subtype descriptors, question-level overlap controls, missing
+diagnostic baselines, and the shared `gqa_audit.evaluation` library. Operational
+details explicitly stated in the prompt are recorded in `stage2b_runtime.yaml`;
+they do not rewrite the frozen H–L plan. Stage 1/2 outputs are hashed before and
+after the run and never regenerated.
+
+```bash
+conda activate datpt_mtl
+OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python -m gqa_audit stage2b --questions data/gqa/questions
+python -m gqa_audit.verify_stage2b --questions data/gqa/questions
+```
+
+Outputs are in `gqa_audit/outputs/stage2b/`, with the executed overview notebook
+`notebooks/gqa_stage2b_analysis.ipynb`. The complete test output is saved as
+`pytest_report.txt`. Every artifact's SHA-256 is recorded in `run_manifest.json`;
+the manifest excludes itself and the subsequent independent verifier result.
+
+`evaluate(predictions, variant, parts, final=False)` requires exactly one yes/no
+prediction for every registered ID in the requested parts. It reports pooled
+metrics and explicit primary scopes: verifyRel uses balanced accuracy on the
+relation subset (also intersected with text-hard when applicable). Confidence
+intervals sample whole images 1,000 times. Single-class balanced accuracy is
+undefined rather than silently replaced by ordinary accuracy.
+
+Testdev processing is refused unless final mode is explicitly requested. Stage
+2b never requests it. At final evaluation only, the library reads testdev labels,
+image IDs and question text, refits the frozen blind baseline and first checks
+that it reproduces dev/val predictions exactly. Final testdev output contains
+family/stratum units only. No VLM or transfer model is run in this addendum.
+
+Text-hard is conditional on the frozen blind baseline; its baseline accuracy is
+zero by construction. Descriptor tables contain task/family/answer audit columns,
+but only approved operation tokens may be used as operation features. Raw source
+document-frequency overlap counts are not normalized across differently sized
+source tasks. Human review and the Stage 3 model/protocol decision remain open.

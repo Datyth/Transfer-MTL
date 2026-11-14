@@ -13,12 +13,17 @@ def main() -> int:
     stage1.add_argument("--questions", required=True, type=Path)
     stage2 = subparsers.add_parser("stage2", help="Run the frozen task audit and question-only baselines")
     stage2.add_argument("--questions", required=True, type=Path)
+    stage2b = subparsers.add_parser("stage2b", help="Run frozen H-L analysis addendum and evaluation demonstrations")
+    stage2b.add_argument("--questions", required=True, type=Path)
     args = parser.parse_args()
     if args.stage == "stage1":
         return run_stage1(args.questions)
     if args.stage == "stage2":
         from .stage2 import run_stage2
         return run_stage2(args.questions)
+    if args.stage == "stage2b":
+        from .stage2b import run_stage2b
+        return run_stage2b(args.questions)
     parser.error(f"Unsupported stage: {args.stage}")
     return 2
 
