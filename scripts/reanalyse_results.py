@@ -55,6 +55,7 @@ def main():
             changed.to_csv(correction_path, index=False)
         elif not correction_path.exists():
             raise ValueError("No changed rows and no existing correction record")
+        correction_count = len(pd.read_csv(correction_path))
 
         checks = checks_from_files(questions, predictions, metrics, "3b", output)
         checks.to_csv(output / "checks.csv", index=False)
@@ -79,7 +80,7 @@ def main():
             "source_hashes": {str(path.relative_to(root)): file_hash(path) for path in (
                 root / "src/vqa_research/analysis.py", root / "src/vqa_research/report.py", Path(__file__))},
             "saved_prediction_hashes": prediction_hashes,
-            "changed_paired_rows": int(len(changed)),
+            "changed_paired_rows": int(correction_count),
             "no_model_inference_or_training": True,
         }
         save_json(manifest_path, manifest)
