@@ -1,0 +1,64 @@
+model,check,unit,condition,variant,value,status,rule
+3b,headroom_ceiling,compare,image,program_strict,0.7172523961661342,PASS,>= 0.90
+3b,yes_bias,compare,image,program_strict,0.08626198083067088,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,exist,image,program_strict,0.8791246960750261,PASS,>= 0.90
+3b,yes_bias,exist,image,program_strict,0.005557485237929871,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,logic,image,program_strict,0.8648122566871782,PASS,>= 0.90
+3b,yes_bias,logic,image,program_strict,0.023420821298505534,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,verifyAttr,image,program_strict,0.8342967244701349,PASS,>= 0.90
+3b,yes_bias,verifyAttr,image,program_strict,0.012111202862647996,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,verifyRel,image,program_strict,0.8473116403839296,PASS,>= 0.90
+3b,yes_bias,verifyRel,image,program_strict,0.030001260557166287,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,compare,image,unfiltered,0.7172523961661342,PASS,>= 0.90
+3b,yes_bias,compare,image,unfiltered,0.08626198083067088,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,exist,image,unfiltered,0.8683162684869169,PASS,>= 0.90
+3b,yes_bias,exist,image,unfiltered,0.02303754266211605,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,logic,image,unfiltered,0.8648122566871782,PASS,>= 0.90
+3b,yes_bias,logic,image,unfiltered,0.023420821298505534,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,verifyAttr,image,unfiltered,0.8256003256003256,PASS,>= 0.90
+3b,yes_bias,verifyAttr,image,unfiltered,0.004273504273504258,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,headroom_ceiling,verifyRel,image,unfiltered,0.8473116403839296,PASS,>= 0.90
+3b,yes_bias,verifyRel,image,unfiltered,0.030001260557166287,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,compare,no_image,program_strict,0.024361022364217277,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,compare,no_image,program_strict,0.39896166134185307,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,exist,no_image,program_strict,0.0010420284821118786,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,exist,no_image,program_strict,0.09864536297325455,PASS,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,logic,no_image,program_strict,0.020218510611578644,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,logic,no_image,program_strict,0.16608062288082376,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,verifyAttr,no_image,program_strict,0.006330856041838695,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,verifyAttr,no_image,program_strict,0.2345169281585467,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,verifyRel,no_image,program_strict,0.06756950582251786,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,verifyRel,no_image,program_strict,0.2625740577335182,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,compare,no_image,unfiltered,0.024361022364217277,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,compare,no_image,unfiltered,0.39896166134185307,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,exist,no_image,unfiltered,0.01346226772847936,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,exist,no_image,unfiltered,0.22392870686386046,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,logic,no_image,unfiltered,0.020218510611578644,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,logic,no_image,unfiltered,0.16608062288082376,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,verifyAttr,no_image,unfiltered,0.008954008954008885,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,verifyAttr,no_image,unfiltered,0.2452177452177452,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,no_image_reliance,verifyRel,no_image,unfiltered,0.06756950582251786,PASS,primary minus train_core-majority primary > 0.15
+3b,yes_bias,verifyRel,no_image,unfiltered,0.2625740577335182,FLAG,absolute predicted-minus-true yes rate > 0.15
+3b,template_sensitivity,compare,image,all,0.015000000000000013,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,exist,image,all,0.0,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,logic,image,all,0.0,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,verifyAttr,image,all,0.022499999999999964,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,verifyRel,image,all,0.015000000000000013,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,compare,no_image,all,0.027500000000000024,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,exist,no_image,all,0.0050000000000000044,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,logic,no_image,all,0.0024999999999999467,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,verifyAttr,no_image,all,0.03250000000000003,FLAG,absolute accuracy(A)-accuracy(B) > 0.03
+3b,template_sensitivity,verifyRel,no_image,all,0.020000000000000018,PASS,absolute accuracy(A)-accuracy(B) > 0.03
+3b,generation_starts_yes_no,500 dev questions,image,all,1.0,PASS,share < 0.95
+3b,generation_logit_agreement,500 dev questions,image,all,0.984,PASS,agreement < 0.95
+3b,batch1_repeatability,256 dev questions; batch 1 repeated,image,all,0.0,PASS,max absolute score difference > 0.05
+3b,batch1_repeatability,256 dev questions; batch 1 repeated,no_image,all,0.0,PASS,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 2 vs 1,image,all,0.32218360900878906,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 2 vs 1,no_image,all,0.13576889038085938,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 4 vs 1,image,all,0.3750267028808594,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 4 vs 1,no_image,all,0.13576889038085938,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 8 vs 1,image,all,0.3750476837158203,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 8 vs 1,no_image,all,0.12947845458984375,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 16 vs 1,image,all,0.3750267028808594,FLAG,max absolute score difference > 0.05
+3b,cross_batch_invariance,256 dev questions; batch 16 vs 1,no_image,all,0.129180908203125,FLAG,max absolute score difference > 0.05
+3b,image_coverage,train/dev/val registry images,image,all,1.0,PASS,all required images verified
