@@ -1,0 +1,16 @@
+schema_version: 1
+source: codex_prompt_gqa_stage2b_analysis.md
+# Execution details and diagnostic expectations stated in the supplied prompt.
+# The immutable H-L analysis plan remains byte-for-byte unchanged.
+overlap_contrast_bounds: [0.05, 0.95]
+minimum_family_questions: 100
+baseline_reference_tolerance: 0.01
+manual_verifyrel_types: [relVerify, relVerifyCo, relVerifyCr]
+manual_samples_per_type: 25
+dash_expected_one: [existC, existRelSC, existAndC, existOrC, existAttrOrC, existThatOrC, relVerifyCo]
+dash_expected_zero: [existRelSRC, relVerifyCr, relVerifyCop, verifyAttrC, verifyAttrKC, verifyAttrCThis]
+structure_features: [program_length, depth, relation_steps]
+structure_reference_val:
+  structure: {exist: 0.508, verifyAttr: 0.508, verifyRel: 0.583, compare: 0.482, logic: 0.494}
+  structure_dash: {exist: 0.783, verifyRel: 0.872, logic: 0.620}
+pooled_recall_reference_val: {relVerify: 0.662, relVerifyCo: 0.868, relVerifyCr: 0.449}

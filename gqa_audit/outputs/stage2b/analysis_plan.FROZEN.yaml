@@ -1,0 +1,448 @@
+schema_version: 1
+status: FROZEN
+name: analysis_plan
+applies_to_registry_sha256: c122aac0bbb9ed8ad6eaa93843d95df664ba75c767946003e90ff2469c27b451
+pins:
+  blind_predictions.csv_sha256: 9cbd7f95fed1aa49301cdd6c86b4ff5cc35af26ccc3bf732554098dd66413c00
+  task_rules_sha256: 2f2ce20ebd8ee804f5180cd52280dfbf739ec392a70738552ce0cc6abe05285a
+decisions:
+  H: Primary verifyRel metric = balanced accuracy on the verifyRel_relation subset {relVerify, relVerifyCr}. Pooled verifyRel
+    accuracy and the verifyRel_Co subset are secondary.
+  I: 'Logic keeps its frozen target. Two analysis subsets are pre-registered before any model training: logic_no_not_cue and
+    text_hard (all tasks). Main logic results are also reported on both.'
+  J: Every transfer edge is reported next to its target blind-baseline gain, and on the target text_hard subset.
+  K: RQ2 is tested primarily at question level, with operation-subtype descriptors (operation strings without arguments).
+    Task-level overlap is descriptive only.
+  L: testdev results are reported only per stratum and per family, never pooled against val.
+metrics:
+  per_task_primary:
+    exist: accuracy
+    verifyAttr: accuracy
+    compare: accuracy
+    logic: accuracy
+    verifyRel: balanced_accuracy@verifyRel_relation
+  always_also_report:
+  - accuracy
+  - balanced_accuracy
+  - yes_prediction_rate
+  - n
+  balanced_accuracy: mean of recall(yes) and recall(no)
+  confidence_intervals:
+    method: cluster bootstrap over imageId
+    resamples: 1000
+    seed: 0
+    level: 0.95
+  unit_of_reporting: task, family, stratum, subset; never a single detailed type
+subsets:
+  verifyRel_relation:
+    task: verifyRel
+    detailed_types:
+    - relVerify
+    - relVerifyCr
+  verifyRel_Co:
+    task: verifyRel
+    detailed_types:
+    - relVerify
+    - relVerifyCo
+    role: secondary (object-absence/text-prior shortcut)
+  logic_no_not_cue:
+    task: logic
+    exclude_if:
+      family: existThatOr
+      question_regex: (?i)\bnot\b|n't\b
+    parts:
+    - train_core
+    - dev
+    - val
+    - testdev_at_final_eval_only
+  text_hard:
+    definition: questions whose frozen question-only baseline prediction is wrong, using the same variant and task model
+    source: outputs/stage2/blind_predictions.csv (sha256 pinned)
+    parts:
+    - dev
+    - val
+    testdev_rule: 'at final evaluation only: refit the frozen baseline on train_core, verify it reproduces blind_predictions.csv
+      for dev and val exactly, then apply to testdev'
+descriptors:
+  operation_token: the full step operation string, stripped (e.g. "verify color", "filter material", "relate", "exist", "and")
+  negation_token: if the step argument starts with "not(", also emit "<operation> [neg]"
+  excluded:
+  - select (present in every program; kept only in a separate with_select variant)
+  - all arguments
+  - object IDs
+  - the (-) marker
+  - types.detailed
+  - family
+  - task
+  vocabulary: frozen from program_strict train_core; tokens unseen there map to UNSEEN
+  question_level_overlap:
+    binary: question has >=1 non-select token in the source task train_core vocabulary
+    continuous: sum over the question non-select token set of the source task train_core document frequency
+  controls_for_instance_analysis:
+  - program_length
+  - depth
+  - family
+  - answer
+  - stratum
+shortcut_control_table_columns:
+- source
+- target
+- condition
+- metric
+- value
+- ci_low
+- ci_high
+- value_on_text_hard
+- target_blind_gain_val
+- target_no_image_gain (filled in Stage 3)
+testdev_policy: sealed; counts only until final evaluation; final results per stratum and family only
+regression_targets:
+  text_hard:
+  - variant: program_strict
+    part: dev
+    task: compare
+    n: 1705
+    text_hard: 815
+    text_hard_yes: 415
+  - variant: program_strict
+    part: dev
+    task: exist
+    n: 2083
+    text_hard: 901
+    text_hard_yes: 492
+  - variant: program_strict
+    part: dev
+    task: logic
+    n: 11117
+    text_hard: 3709
+    text_hard_yes: 1504
+  - variant: program_strict
+    part: dev
+    task: verifyAttr
+    n: 2721
+    text_hard: 1245
+    text_hard_yes: 650
+  - variant: program_strict
+    part: dev
+    task: verifyRel
+    n: 5576
+    text_hard: 1579
+    text_hard_yes: 931
+  - variant: program_strict
+    part: val
+    task: compare
+    n: 2504
+    text_hard: 1256
+    text_hard_yes: 575
+  - variant: program_strict
+    part: val
+    task: exist
+    n: 2879
+    text_hard: 1252
+    text_hard_yes: 672
+  - variant: program_strict
+    part: val
+    task: logic
+    n: 15926
+    text_hard: 5198
+    text_hard_yes: 2212
+  - variant: program_strict
+    part: val
+    task: verifyAttr
+    n: 3633
+    text_hard: 1627
+    text_hard_yes: 858
+  - variant: program_strict
+    part: val
+    task: verifyRel
+    n: 7933
+    text_hard: 2272
+    text_hard_yes: 1314
+  - variant: unfiltered
+    part: dev
+    task: compare
+    n: 1705
+    text_hard: 815
+    text_hard_yes: 415
+  - variant: unfiltered
+    part: dev
+    task: exist
+    n: 7528
+    text_hard: 3252
+    text_hard_yes: 1814
+  - variant: unfiltered
+    part: dev
+    task: logic
+    n: 11117
+    text_hard: 3709
+    text_hard_yes: 1504
+  - variant: unfiltered
+    part: dev
+    task: verifyAttr
+    n: 3583
+    text_hard: 1616
+    text_hard_yes: 839
+  - variant: unfiltered
+    part: dev
+    task: verifyRel
+    n: 5576
+    text_hard: 1579
+    text_hard_yes: 931
+  - variant: unfiltered
+    part: val
+    task: compare
+    n: 2504
+    text_hard: 1256
+    text_hard_yes: 575
+  - variant: unfiltered
+    part: val
+    task: exist
+    n: 10548
+    text_hard: 4597
+    text_hard_yes: 2545
+  - variant: unfiltered
+    part: val
+    task: logic
+    n: 15926
+    text_hard: 5198
+    text_hard_yes: 2212
+  - variant: unfiltered
+    part: val
+    task: verifyAttr
+    n: 4914
+    text_hard: 2191
+    text_hard_yes: 1150
+  - variant: unfiltered
+    part: val
+    task: verifyRel
+    n: 7933
+    text_hard: 2272
+    text_hard_yes: 1314
+  logic_no_not_cue:
+  - part: dev
+    logic: 11117
+    not_cue: 278
+    logic_no_not_cue: 10839
+  - part: train_core
+    logic: 101611
+    not_cue: 2594
+    logic_no_not_cue: 99017
+  - part: val
+    logic: 15926
+    not_cue: 383
+    logic_no_not_cue: 15543
+  verifyRel_subsets:
+  - part: train_core
+    relVerify: 24964
+    relVerifyCr: 6242
+    verifyRel_Co_subset: 44674
+  - part: dev
+    relVerify: 2813
+    relVerifyCr: 743
+    verifyRel_Co_subset: 4829
+  - part: val
+    relVerify: 3885
+    relVerifyCr: 996
+    verifyRel_Co_subset: 6931
+  descriptor_vocabulary_size_train_core_including_select_and_neg: 104
+  question_level_sharing_binary:
+  - part: dev
+    source: verifyAttr
+    target: exist
+    n_target: 2083
+    n_sharing: 946
+  - part: dev
+    source: verifyRel
+    target: exist
+    n_target: 2083
+    n_sharing: 946
+  - part: dev
+    source: compare
+    target: exist
+    n_target: 2083
+    n_sharing: 0
+  - part: dev
+    source: logic
+    target: exist
+    n_target: 2083
+    n_sharing: 2083
+  - part: val
+    source: verifyAttr
+    target: exist
+    n_target: 2879
+    n_sharing: 1296
+  - part: val
+    source: verifyRel
+    target: exist
+    n_target: 2879
+    n_sharing: 1297
+  - part: val
+    source: compare
+    target: exist
+    n_target: 2879
+    n_sharing: 0
+  - part: val
+    source: logic
+    target: exist
+    n_target: 2879
+    n_sharing: 2879
+  - part: dev
+    source: exist
+    target: verifyAttr
+    n_target: 2721
+    n_sharing: 376
+  - part: dev
+    source: verifyRel
+    target: verifyAttr
+    n_target: 2721
+    n_sharing: 385
+  - part: dev
+    source: compare
+    target: verifyAttr
+    n_target: 2721
+    n_sharing: 0
+  - part: dev
+    source: logic
+    target: verifyAttr
+    n_target: 2721
+    n_sharing: 2637
+  - part: val
+    source: exist
+    target: verifyAttr
+    n_target: 3633
+    n_sharing: 478
+  - part: val
+    source: verifyRel
+    target: verifyAttr
+    n_target: 3633
+    n_sharing: 489
+  - part: val
+    source: compare
+    target: verifyAttr
+    n_target: 3633
+    n_sharing: 0
+  - part: val
+    source: logic
+    target: verifyAttr
+    n_target: 3633
+    n_sharing: 3502
+  - part: dev
+    source: exist
+    target: verifyRel
+    n_target: 5576
+    n_sharing: 908
+  - part: dev
+    source: verifyAttr
+    target: verifyRel
+    n_target: 5576
+    n_sharing: 924
+  - part: dev
+    source: compare
+    target: verifyRel
+    n_target: 5576
+    n_sharing: 0
+  - part: dev
+    source: logic
+    target: verifyRel
+    n_target: 5576
+    n_sharing: 2049
+  - part: val
+    source: exist
+    target: verifyRel
+    n_target: 7933
+    n_sharing: 1279
+  - part: val
+    source: verifyAttr
+    target: verifyRel
+    n_target: 7933
+    n_sharing: 1295
+  - part: val
+    source: compare
+    target: verifyRel
+    n_target: 7933
+    n_sharing: 0
+  - part: val
+    source: logic
+    target: verifyRel
+    n_target: 7933
+    n_sharing: 2970
+  - part: dev
+    source: exist
+    target: compare
+    n_target: 1705
+    n_sharing: 0
+  - part: dev
+    source: verifyAttr
+    target: compare
+    n_target: 1705
+    n_sharing: 0
+  - part: dev
+    source: verifyRel
+    target: compare
+    n_target: 1705
+    n_sharing: 0
+  - part: dev
+    source: logic
+    target: compare
+    n_target: 1705
+    n_sharing: 0
+  - part: val
+    source: exist
+    target: compare
+    n_target: 2504
+    n_sharing: 0
+  - part: val
+    source: verifyAttr
+    target: compare
+    n_target: 2504
+    n_sharing: 0
+  - part: val
+    source: verifyRel
+    target: compare
+    n_target: 2504
+    n_sharing: 0
+  - part: val
+    source: logic
+    target: compare
+    n_target: 2504
+    n_sharing: 0
+  - part: dev
+    source: exist
+    target: logic
+    n_target: 11117
+    n_sharing: 9099
+  - part: dev
+    source: verifyAttr
+    target: logic
+    n_target: 11117
+    n_sharing: 4711
+  - part: dev
+    source: verifyRel
+    target: logic
+    n_target: 11117
+    n_sharing: 3449
+  - part: dev
+    source: compare
+    target: logic
+    n_target: 11117
+    n_sharing: 0
+  - part: val
+    source: exist
+    target: logic
+    n_target: 15926
+    n_sharing: 12838
+  - part: val
+    source: verifyAttr
+    target: logic
+    n_target: 15926
+    n_sharing: 6843
+  - part: val
+    source: verifyRel
+    target: logic
+    n_target: 15926
+    n_sharing: 4930
+  - part: val
+    source: compare
+    target: logic
+    n_target: 15926
+    n_sharing: 0

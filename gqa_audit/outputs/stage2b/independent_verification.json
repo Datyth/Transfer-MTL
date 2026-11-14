@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "errors": [],
+  "raw_train_val_descriptor_rows_checked": 338580,
+  "subset_lists_checked": 38,
+  "overlap_question_rows_checked": 224308,
+  "demo_metric_rows_rescored": 288,
+  "regression_checks": 169,
+  "notebook_plots_replayed": 4,
+  "accepted_stage1_stage2_files_unchanged": 85,
+  "testdev_text_program_prediction_processing": 0,
+  "method": "Fresh train/val JSON tokens/subsets, independent document frequencies, registry membership, demo rescoring, hashes and notebook replay"
+}
