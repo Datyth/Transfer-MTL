@@ -1,0 +1,103 @@
+schema_version: 1
+status: FROZEN
+name: stage3_zero_shot_protocol
+applies_to:
+  registry_sha256: c122aac0bbb9ed8ad6eaa93843d95df664ba75c767946003e90ff2469c27b451
+  analysis_plan_sha256: 0d23283638bbfa254994156fe30650ef5db6254f50c943f27c7233452b99520b
+purpose: Measure zero-shot headroom and text-only (no-image) reliance of candidate VLMs per task, family, stratum and analysis
+  subset, before any fine-tuning. No training.
+models:
+- id: Qwen/Qwen2.5-VL-3B-Instruct
+  phase: A
+  required: true
+- id: Qwen/Qwen2.5-VL-7B-Instruct
+  phase: B
+  required: false
+  note: run only if the human enables phase B
+model_loading:
+  dtype: bfloat16
+  attn_implementation: sdpa
+  pin_revision: record the resolved commit hash of each model; never use a floating revision after the first download
+  min_pixels: 200704
+  max_pixels: 802816
+  note: min 256*28*28, max 1024*28*28; GQA images are mostly below max and are not upscaled beyond min
+parts:
+- dev
+- val
+question_set: union of program_strict and unfiltered membership for the 5 pilot tasks (unfiltered is a superset); testdev
+  sealed
+conditions:
+  image: one user turn with the image followed by the prompt text
+  no_image: the same prompt text without any image (text-only chat)
+templates:
+  A: '{question}
+
+    Answer the question using a single word: yes or no.'
+  B: 'Question: {question} Reply with yes or no.'
+primary_template: A
+template_sensitivity:
+  template: B
+  sample: 2,000 dev questions, stratified by task with 400 per task, seed 0, both conditions, every phase-A model
+scoring:
+  method: single forward pass after the chat template with add_generation_prompt=True; read the next-token logits
+  yes_tokens:
+  - 'yes'
+  - 'Yes'
+  no_tokens:
+  - 'no'
+  - 'No'
+  token_rule: each string must encode to exactly one token id; otherwise STOP and report
+  score: logsumexp(logits[yes ids]) - logsumexp(logits[no ids])
+  prediction: yes if score > 0 else no (primary, threshold 0)
+  secondary_threshold: per model x condition x task, choose the threshold maximizing balanced accuracy on dev; apply unchanged
+    to val; report as calibrated
+generation_sanity:
+  sample: 500 dev questions (100 per task, seed 0), image condition, greedy, max_new_tokens 5
+  report:
+  - share of outputs whose first word is yes/no (case-insensitive)
+  - agreement with the logit prediction
+determinism:
+  seed: 0
+  torch_deterministic: set where supported; record any nondeterministic kernels
+  batching: 'batch size may vary; predictions must not depend on batch composition (check: re-score 256 dev questions at batch
+    size 1 and compare scores, max abs diff <= 0.05)'
+checks:
+  headroom_ceiling:
+    rule: FLAG if zero-shot val primary metric >= 0.90 for a task (image, template A, threshold 0)
+  no_image_reliance:
+    rule: FLAG if no-image val primary metric minus train_core-majority baseline > 0.15
+  yes_bias:
+    rule: FLAG if |yes_prediction_rate - true yes rate| > 0.15 (val, per task)
+  template_sensitivity:
+    rule: FLAG if |accuracy(A) - accuracy(B)| > 0.03 on the stratified dev sample, per task
+  generation_sanity:
+    rule: FLAG if < 0.95 of generations start with yes/no or agreement with logit prediction < 0.95
+  image_coverage:
+    rule: STOP if any dev/val registry imageId has no decodable image file
+text_floor:
+  definition: 'per task, the highest question-only baseline on the primary metric among: the Stage 2 pooled blind model and,
+    for verifyRel, the Stage 2b within-subset model'
+  known_values_val:
+    verifyRel_relation_balanced_accuracy_pooled: 0.5553
+    verifyRel_relation_balanced_accuracy_within_subset: 0.6463
+reporting:
+  library: gqa_audit.evaluation (Stage 2b); never re-implement metrics
+  units:
+  - task
+  - family
+  - stratum
+  - verifyRel_relation
+  - verifyRel_Co
+  - logic_no_not_cue
+  - text_hard
+  per_unit:
+  - primary metric with 95% cluster-bootstrap CI
+  - accuracy
+  - balanced_accuracy
+  - yes_prediction_rate
+  - n
+  - image minus no-image difference
+  - gain over text floor
+  shortcut_control: fill target_no_image_gain in the Stage 2b shortcut-control table
+interpretation_note: Qwen2.5-VL was likely trained on GQA or Visual Genome derived data; zero-shot scores measure available
+  headroom, not generalization.

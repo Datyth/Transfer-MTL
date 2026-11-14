@@ -44,12 +44,13 @@ def point_metrics(frame: pd.DataFrame) -> dict:
             "yes_recall": yes_recall, "no_recall": no_recall}
 
 
-def cluster_intervals(frame: pd.DataFrame, settings: dict) -> dict:
+def cluster_intervals(frame: pd.DataFrame, settings: dict, *, return_samples=False):
     """Sample images with replacement, retaining every question of each image."""
     names = ("accuracy", "balanced_accuracy", "yes_prediction_rate")
     if not len(frame):
-        return {**{f"{name}_ci_{side}": np.nan for name in names for side in ("low", "high")},
-                "bootstrap_valid_balanced": 0, "images": 0}
+        result = {**{f"{name}_ci_{side}": np.nan for name in names for side in ("low", "high")},
+                  "bootstrap_valid_balanced": 0, "images": 0}
+        return (result, np.empty((0, 3))) if return_samples else result
     if frame.imageId.isna().any():
         raise ValueError("Image IDs are required for cluster-bootstrap confidence intervals")
     yes = frame.answer.eq("yes").to_numpy()
@@ -75,7 +76,10 @@ def cluster_intervals(frame: pd.DataFrame, settings: dict) -> dict:
         finite = values[np.isfinite(values[:, i]), i]
         low, high = np.quantile(finite, [tail, 1 - tail]) if len(finite) else (np.nan, np.nan)
         result.update({f"{name}_ci_low": float(low), f"{name}_ci_high": float(high)})
-    return result
+    # Identical paired image sets and seed produce the same bootstrap draws.
+    # Expose existing draws so later experiments can calculate paired differences
+    # without duplicating metric or resampling implementations.
+    return (result, values) if return_samples else result
 
 
 class Evaluator:
