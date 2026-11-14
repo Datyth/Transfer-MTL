@@ -88,8 +88,8 @@ def comparison_figure(all_metrics, models, variant, level, folder):
         for offset, (label, values, low, high) in zip([-.27, -.09, .09, .27], series):
             values, low, high = np.array(values), np.array(low), np.array(high)
             # Percentile CIs can rarely exclude the point estimate; draw endpoints directly.
-            axis.scatter(values, positions + offset, s=22, label=label)
-            axis.hlines(positions + offset, low, high, linewidth=1)
+            points = axis.scatter(values, positions + offset, s=22, label=label)
+            axis.hlines(positions + offset, low, high, linewidth=1, color=points.get_facecolor())
         axis.set_yticks(positions, labels)
         axis.set_xlim(0, 1)
         axis.set_xlabel("Primary metric (verifyRel: relation balanced accuracy)")
@@ -192,7 +192,8 @@ def write_report(output, models, images, checks):
             lines += [f"**{variant}**", "", markdown_table(table), ""]
         lines += ["verifyRel primary uses balanced accuracy on verifyRel_relation. Its val text floor is 0.6463072367 "
             "(the frozen within-subset baseline), rather than pooled accuracy or the pooled relation balanced accuracy 0.5553. "
-            "Family, stratum and subset baselines use corresponding scope and metric. verifyRel_Co remains secondary accuracy.", "",
+            "The reference model is selected per task and retained for each family/stratum/subset, using the corresponding "
+            "scope and metric; it is not selected anew per unit. verifyRel_Co remains secondary accuracy.", "",
             f"All dev/val units: metrics_{model}.csv. Paired image-minus-no-image CIs: paired_differences_{model}.csv. "
             f"Secondary calibration: calibrated_metrics_{model}.csv and thresholds_{model}.csv. "
             "Thresholds maximize balanced accuracy on each whole-task dev union, then apply to val and both variants. "
@@ -202,6 +203,10 @@ def write_report(output, models, images, checks):
     lines += ["## Registered checks", "", markdown_table(checks), "", "## Figures", ""]
     lines += [f"![{path.stem}](figures/{path.name})" for path in sorted((output / "figures").glob("*.png"))]
     lines += ["", "Each figure is also saved as PDF; PNG resolution is 200 dpi.", "", "## Open decisions for the human", ""]
+    lines += ["Preflight found score differences beyond 0.05 between bf16 batch 16 and batch 1 in the official model. "
+              "The experiment therefore fixes batch size 1. Grouped-window SDPA was checked against official attention "
+              "before the run; see optimization_validation.json and the retained diagnostics/batch16 report. "
+              "A faster channels-last convolution path was rejected after changing scores and one sampled prediction.", ""]
     for model in models:
         metrics = pd.read_csv(output / f"metrics_{model}.csv")
         for variant in ("program_strict", "unfiltered"):

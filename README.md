@@ -13,19 +13,23 @@ This runs the fixed 3B zero-shot experiment, writes resumable prediction shards,
 checks both prompt templates, tests greedy generation and batch invariance, then
 creates metric tables, PNG/PDF figures and `STAGE3_REPORT.md` under
 `gqa_audit/outputs/stage3/`. Repeating the command verifies completed shards and
-continues unfinished ones. The batch size defaults to 16; keep the same value on
+continues unfinished ones. The batch size defaults to 1; keep the same value on
 resume. A new batch size requires a separate prediction directory/run.
 
 Useful options:
 
 ```bash
 python scripts/run_experiment.py --prepare-only
+python scripts/check_inference.py
 python scripts/run_experiment.py --evaluate-only --models 3b
 python -m pytest -q
 ```
 
 `--prepare-only` checks images, model files, environment and tokenizer without
-inference. `--evaluate-only` rebuilds tables and reports from existing predictions.
+inference. `check_inference.py` runs a small official-versus-optimized comparison,
+profiles the bottleneck, and checks numerical batch invariance. The full 3B run
+requires a passing validation for its environment, source, checkpoint and batch
+size. `--evaluate-only` rebuilds tables and reports from existing predictions.
 Explicit `--models 3b 7b` enables the optional phase B download and evaluation.
 No testdev questions are scored; no training takes place.
 
@@ -34,3 +38,8 @@ scores yes/no; `inference.py` manages shards; `analysis.py` calls the accepted
 evaluation library; `report.py` writes checks, tables and figures;
 `experiment.py` runs these steps in order. The accepted evaluator exposes its
 existing bootstrap draws for paired image/no-image confidence intervals.
+
+The optimized vision path groups equal-length attention windows for SDPA.
+No weights or frozen scientific settings change. Larger bf16 batches
+failed the protocol's 0.05 numerical invariance bound in the preflight test;
+batch size 1 avoids dependence on other questions in the batch.

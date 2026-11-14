@@ -13,10 +13,11 @@ from transformers import AutoProcessor
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from gqa_audit.evaluation import Evaluator
-from vqa_research.analysis import calibrate_thresholds, paired_difference
+from vqa_research.analysis import calibrate_thresholds, paired_difference, reference_tables
 from vqa_research.data import ROOT, file_hash, load_protocol, load_questions, save_json
 from vqa_research.inference import run_predictions
 from vqa_research.model import build_messages, check_token_ids, yes_no_scores
+from vqa_research.attention import grouped_vision_attention
 
 
 @pytest.fixture(scope="module")
@@ -33,6 +34,27 @@ def test_toy_yes_no_logits_use_both_cases():
     ids = {"yes": 0, "Yes": 1, "no": 2, "No": 3}
     result = yes_no_scores(torch.tensor([[2., 1., 0., -1.], [0., 0., 0., 0.]]), ids)
     assert torch.allclose(result, torch.tensor([2., 0.]))
+
+
+def test_grouped_sdpa_matches_official_attention_and_isolates_windows():
+    from transformers.models.qwen2_5_vl.configuration_qwen2_5_vl import Qwen2_5_VLVisionConfig
+    from transformers.models.qwen2_5_vl.modeling_qwen2_5_vl import Qwen2_5_VLVisionAttention
+    config = Qwen2_5_VLVisionConfig(hidden_size=32, num_heads=4)
+    config._attn_implementation = "sdpa"
+    torch.manual_seed(0)
+    attention = Qwen2_5_VLVisionAttention(config).eval()
+    hidden = torch.randn(48, 32)
+    angle = torch.randn(48, 8)
+    position = (angle.cos(), angle.sin())
+    lengths = torch.tensor([0, 8, 24, 32, 48], dtype=torch.int32)
+    with torch.inference_mode():
+        expected = attention(hidden, lengths, position_embeddings=position)
+        actual = grouped_vision_attention(attention, hidden, lengths, position_embeddings=position)
+        torch.testing.assert_close(actual, expected, rtol=1e-6, atol=1e-6)
+        changed = hidden.clone()
+        changed[:8] += 10
+        other = grouped_vision_attention(attention, changed, lengths, position_embeddings=position)
+        torch.testing.assert_close(actual[8:], other[8:], rtol=0, atol=0)
 
 
 def test_fifty_rendered_prompts_have_only_question_and_optional_image(processor):
@@ -152,3 +174,15 @@ def test_blind_predictions_reproduce_accepted_demo(tmp_path):
     pd.testing.assert_frame_equal(actual[keys], expected[keys])
     for column in ("primary_value", "accuracy", "balanced_accuracy", "yes_prediction_rate", "ci_low", "ci_high"):
         assert np.allclose(actual[column], expected[column], atol=1e-12, equal_nan=True)
+
+
+def test_text_floor_model_is_selected_per_task_not_per_family():
+    references = reference_tables(Evaluator(ROOT))
+    task = references.query("variant == 'program_strict' and part == 'val' and level == 'task' and task == 'verifyRel'").iloc[0]
+    assert task.text_floor == pytest.approx(.6463072366686825)
+    assert task.text_floor_source == "within_subset_model_selected_per_task"
+    units = references.query("task == 'verifyRel' and part == 'val' and unit != 'verifyRel_Co'")
+    assert units.text_floor_source.eq("within_subset_model_selected_per_task").all()
+    co = references.query("task == 'verifyRel' and unit == 'verifyRel_Co'")
+    assert co.text_floor_source.eq("pooled_task_blind_model").all()
+    assert np.allclose(co.text_floor, co.pooled_blind_primary)

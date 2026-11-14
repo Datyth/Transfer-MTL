@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.metrics import roc_curve
 
 from gqa_audit.evaluation import cluster_intervals, point_metrics, shortcut_control_table
-from .data import ROOT
+from .data import ROOT, validate_predictions
 
 KEYS = ["variant", "part", "level", "task", "unit"]
 
@@ -64,11 +64,19 @@ def reference_tables(evaluator):
     relation = pd.concat(scores).set_index(KEYS)
     refs = blind[["primary_value", "primary_metric"]].rename(columns={"primary_value": "pooled_blind_primary"})
     refs["text_floor"] = refs.pooled_blind_primary
+    refs["text_floor_source"] = "pooled_task_blind_model"
     refs["text_floor_ci_low"], refs["text_floor_ci_high"] = blind.ci_low, blind.ci_high
     use_relation = (refs.index.get_level_values("task") == "verifyRel") & (refs.index.get_level_values("unit") != "verifyRel_Co")
-    refs.loc[use_relation, "text_floor"] = np.maximum(refs.loc[use_relation, "text_floor"].to_numpy(),
-        relation.reindex(refs.index).loc[use_relation, "primary_value"].to_numpy())
-    use_within = use_relation & (relation.primary_value.reindex(refs.index) > refs.pooled_blind_primary)
+    # Select the reference MODEL per task, then report that same model on each
+    # family/stratum/subset. Never select a new winner independently per unit.
+    selected_tasks = set()
+    for key, row in refs.iterrows():
+        variant, part, level, task, unit = key
+        if level == "task" and task == "verifyRel" and relation.loc[key, "primary_value"] > row.pooled_blind_primary:
+            selected_tasks.add((variant, part, task))
+    use_within = use_relation & np.array([(v, p, t) in selected_tasks for v, p, _, t, _ in refs.index])
+    refs.loc[use_within, "text_floor"] = relation.primary_value.reindex(refs.index)[use_within]
+    refs.loc[use_within, "text_floor_source"] = "within_subset_model_selected_per_task"
     refs.loc[use_within, "text_floor_ci_low"] = relation.ci_low.reindex(refs.index)[use_within]
     refs.loc[use_within, "text_floor_ci_high"] = relation.ci_high.reindex(refs.index)[use_within]
     refs["majority"] = majority.primary_value
@@ -100,6 +108,10 @@ def calibrate_thresholds(questions, predictions):
 
 
 def evaluate_model(evaluator, questions, image, no_image, model_name, output):
+    for predictions in (image, no_image):
+        validate_predictions(predictions, questions.question_id)
+        if predictions.part.tolist() != questions.part.tolist():
+            raise ValueError("Prediction part labels differ from frozen dev/val metadata")
     image_scores = evaluate_variants(evaluator, image)
     no_image_scores = evaluate_variants(evaluator, no_image)
     references = reference_tables(evaluator)

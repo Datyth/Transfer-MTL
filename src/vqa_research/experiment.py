@@ -2,6 +2,7 @@
 
 import argparse
 from datetime import datetime, timezone
+import fcntl
 from hashlib import sha256
 import importlib.metadata
 import json
@@ -91,12 +92,28 @@ def model_checkpoint(name):
 
 def run_model(name, path, manifest, questions, images, protocol, evaluator, output, batch_size):
     from .analysis import evaluate_model
+    from .attention import enable_grouped_attention
     from .report import diagnostic_checks
+    if name == "3b":
+        validation_path = output / "optimization_validation.json"
+        if not validation_path.exists():
+            raise ValueError("Run python scripts/check_inference.py before the full experiment")
+        validation = json.loads(validation_path.read_text())
+        if (validation["status"] != "PASS" or validation["model_revision"] != manifest["revision"]
+                or validation["batch_size"] != batch_size
+                or validation.get("environment_sha256") != file_hash(output / "environment.json")
+                or validation["attention_source_sha256"] != file_hash(ROOT / "src/vqa_research/attention.py")
+                or validation["model_source_sha256"] != file_hash(ROOT / "src/vqa_research/model.py")
+                or any(row["status"] != "PASS" for row in validation["batch_invariance"])):
+            raise ValueError("Runtime/batch validation differs or failed; run scripts/check_inference.py with the same batch size")
     model = YesNoModel(path, protocol)
+    if name == "3b":
+        enable_grouped_attention(model.model)
     save_json(output / f"tokens_{name}.json", model.token_ids)
     image_lookup = {row.imageId: ROOT / row.relative_path for row in images.itertuples()}
     inference_sources = {str(path.relative_to(ROOT)): file_hash(path) for path in (
-        ROOT / "src/vqa_research/model.py", ROOT / "src/vqa_research/data.py", ROOT / "src/vqa_research/inference.py")}
+        ROOT / "src/vqa_research/model.py", ROOT / "src/vqa_research/data.py", ROOT / "src/vqa_research/inference.py",
+        ROOT / "src/vqa_research/attention.py")}
     fingerprint = {"revision": manifest["revision"], "model_files": manifest["files"],
         "protocol": file_hash(ROOT / "configs/stage3_protocol.FROZEN.yaml"),
         "images": file_hash(output / "image_manifest.csv"), "inference_sources": inference_sources,
@@ -163,14 +180,21 @@ def run_model(name, path, manifest, questions, images, protocol, evaluator, outp
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Frozen GQA zero-shot experiment; no training")
     parser.add_argument("--models", nargs="+", choices=["3b", "7b"], default=["3b"])
-    parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--prepare-only", action="store_true")
     parser.add_argument("--evaluate-only", action="store_true")
     args = parser.parse_args(argv)
     if args.batch_size < 1 or len(args.models) != len(set(args.models)):
         parser.error("Positive batch size and unique models required")
+    if args.models not in (["3b"], ["3b", "7b"]):
+        parser.error("Run 3b first; use --models 3b 7b to explicitly enable phase B")
     output = ROOT / "gqa_audit/outputs/stage3"
     output.mkdir(parents=True, exist_ok=True)
+    run_lock = (output / "run.lock").open("a")
+    try:
+        fcntl.flock(run_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise RuntimeError("An experiment is already running in this output directory") from None
     protocol, evaluator = load_protocol(ROOT / "configs/stage3_protocol.FROZEN.yaml")
     snapshot_path = output / "accepted_outputs_snapshot.json"
     snapshot = accepted_snapshot()
@@ -221,6 +245,10 @@ def main(argv=None):
         if accepted_snapshot() != snapshot:
             raise ValueError("Accepted audit outputs changed during experiment")
         manifest["status"] = "PREPARED" if args.prepare_only else "COMPLETE"
+    except KeyboardInterrupt:
+        manifest["status"] = "INTERRUPTED"
+        manifest["error"] = "Interrupted; completed prediction shards can be resumed"
+        raise
     except BaseException as error:
         manifest["status"] = "FAILED"
         manifest["error"] = f"{type(error).__name__}: {error}"
@@ -233,8 +261,9 @@ def main(argv=None):
             ROOT / "gqa_audit/outputs/stage2/task_registry.json", ROOT / "gqa_audit/outputs/stage2b/analysis_subsets.json",
             ROOT / "gqa_audit/config/analysis_plan.FROZEN.yaml")}
         manifest["input_hashes"].update(snapshot)
-        manifest["input_hashes"]["data/gqa/images/images.zip"] = json.loads(
-            (output / "image_verification.json").read_text())["archive_sha256"]
+        image_report = output / "image_verification.json"
+        if image_report.exists():
+            manifest["input_hashes"]["data/gqa/images/images.zip"] = json.loads(image_report.read_text())["archive_sha256"]
         manifest["artifacts"] = {str(p.relative_to(output)): file_hash(p) for p in sorted(output.rglob("*"))
             if p.is_file() and p.name not in ("run_manifest.json", "run.log") and not p.name.endswith(".tmp")}
         save_json(output / "run_manifest.json", manifest)
