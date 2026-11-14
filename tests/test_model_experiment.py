@@ -13,7 +13,7 @@ from transformers import AutoProcessor
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from gqa_audit.evaluation import Evaluator
-from vqa_research.analysis import calibrate_thresholds, paired_difference, reference_tables
+from vqa_research.analysis import calibrate_thresholds, paired_difference, reference_tables, unit_frame
 from vqa_research.data import ROOT, file_hash, load_protocol, load_questions, save_json
 from vqa_research.inference import run_predictions
 from vqa_research.model import build_messages, check_token_ids, yes_no_scores
@@ -140,6 +140,21 @@ def test_identical_paired_predictions_have_exact_zero_difference_ci():
     for metric in ("accuracy", "balanced_accuracy"):
         value = paired_difference(frame, {"seed": 0, "resamples": 100, "level": .95}, metric)
         assert value["difference"] == value["ci_low"] == value["ci_high"] == 0
+
+
+def test_paired_unit_uses_frozen_variant_membership_for_task_and_family():
+    from types import SimpleNamespace
+
+    frame = pd.DataFrame({"question_id": ["strict", "extra", "other"],
+        "part": ["val"] * 3, "task": ["verifyAttr", "verifyAttr", "exist"],
+        "family": ["verifyAttrK", "verifyAttrK", "exist"],
+        "in_program_strict": [True, False, True], "in_unfiltered": [True, True, True]})
+    evaluator = SimpleNamespace(subsets={"subsets": {}})
+    for level, unit in (("task", "verifyAttr"), ("family", "verifyAttrK")):
+        strict = SimpleNamespace(variant="program_strict", part="val", task="verifyAttr", level=level, unit=unit)
+        broad = SimpleNamespace(variant="unfiltered", part="val", task="verifyAttr", level=level, unit=unit)
+        assert unit_frame(evaluator, frame, strict).question_id.tolist() == ["strict"]
+        assert unit_frame(evaluator, frame, broad).question_id.tolist() == ["strict", "extra"]
 
 
 def test_calibration_uses_dev_only_and_exact_greater_than_threshold():

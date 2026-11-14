@@ -27,6 +27,7 @@ def paired_difference(frame, settings, metric):
 
 def unit_frame(evaluator, frame, row, primary=True):
     chosen = frame[frame.part.eq(row.part) & frame.task.eq(row.task)]
+    chosen = chosen[chosen[f"in_{row.variant}"]]
     if row.level in ("family", "stratum"):
         chosen = chosen[chosen[row.level].eq(row.unit)]
     elif row.level == "subset":
@@ -129,6 +130,8 @@ def evaluate_model(evaluator, questions, image, no_image, model_name, output):
     differences = []
     for row in image_scores.itertuples(index=False):
         chosen = unit_frame(evaluator, paired, row)
+        if len(chosen) != row.primary_n:
+            raise ValueError(f"Paired unit size differs from primary metric: {row.variant}/{row.part}/{row.task}/{row.unit}")
         differences.append({**{key: getattr(row, key) for key in KEYS}, "primary_metric": row.primary_metric,
             "model": model_name, "n": len(chosen), **paired_difference(chosen,
                 evaluator.plan["metrics"]["confidence_intervals"], row.primary_metric)})

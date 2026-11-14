@@ -50,7 +50,19 @@ def diagnostic_checks(questions, predictions, sensitivity, generations, batch_di
     add("generation_logit_agreement", "500 dev questions", agreement, agreement < .95, "agreement < 0.95")
     for condition, group in batch_diffs.groupby("condition"):
         difference = float(group.abs_difference.max())
-        add("batch_invariance", "256 dev questions", difference, difference > .05, "max absolute score difference > 0.05", condition)
+        add("batch1_repeatability", "256 dev questions; batch 1 repeated", difference, difference > .05,
+            "max absolute score difference > 0.05", condition)
+    benchmark = output / "diagnostics/batch_benchmark"
+    if (benchmark / "summary.csv").exists():
+        reference = pd.read_csv(output / "batch_sample_ids.csv", dtype={"question_id": str})
+        sampled = pd.read_csv(benchmark / "sample_ids.csv", dtype={"question_id": str})
+        if not reference.equals(sampled):
+            raise ValueError("Cross-batch benchmark does not use the frozen 256-question sample")
+        summary = pd.read_csv(benchmark / "summary.csv")
+        for row in summary[summary.batch_size.gt(1)].itertuples():
+            add("cross_batch_invariance", f"256 dev questions; batch {row.batch_size} vs 1",
+                row.max_score_difference, row.max_score_difference > .05,
+                "max absolute score difference > 0.05", row.condition)
     add("image_coverage", "train/dev/val registry images", 1, False, "all required images verified")
     return pd.DataFrame(checks)
 
@@ -200,7 +212,10 @@ def write_report(output, models, images, checks):
             "Ties use smallest absolute threshold, then lower threshold.", "",
             f"Shortcut table: shortcut_control_{model}.csv. source=none denotes zero-shot, not a transfer effect. "
             "target_no_image_gain uses the target primary metric; the pooled Stage 2 blind gain is labelled secondary.", ""]
-    lines += ["## Registered checks", "", markdown_table(checks), "", "## Figures", ""]
+    lines += ["## Registered checks and batch diagnostics", "",
+        "The batch1_repeatability rows compare two batch-1 passes. Cross_batch_invariance rows compare larger batches "
+        "against batch 1 on the same 256 dev questions in the separate post-run benchmark. Larger batches are FLAGged; "
+        "the scored experiment used batch 1 throughout.", "", markdown_table(checks), "", "## Figures", ""]
     lines += [f"![{path.stem}](figures/{path.name})" for path in sorted((output / "figures").glob("*.png"))]
     lines += ["", "Each figure is also saved as PDF; PNG resolution is 200 dpi.", "", "## Open decisions for the human", ""]
     lines += ["Preflight found score differences beyond 0.05 between bf16 batch 16 and batch 1 in the official model. "
@@ -221,6 +236,6 @@ def write_report(output, models, images, checks):
         "Qwen2.5-VL may have seen GQA or Visual Genome derived data during training. These scores measure available headroom, "
         "and do not establish generalization to unseen training data.", "",
         "Sampling choices: sorted frozen dev union, tasks sorted alphabetically, NumPy default_rng(0), 400/template and "
-        "100/generation per task. Batch check uses 256 dev union IDs. Samples are persisted as CSVs. Runtime warnings are "
+        "100/generation per task. Batch checks use 256 dev union IDs. Samples are persisted as CSVs. Runtime warnings are "
         "recorded in runtime_warnings.json; batch-size effects are reported without changing the frozen scoring protocol.", ""]
     (output / "STAGE3_REPORT.md").write_text("\n".join(lines))
