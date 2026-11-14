@@ -2,7 +2,7 @@
   "model_id": "Qwen/Qwen2.5-VL-3B-Instruct",
   "source_url": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct",
   "revision": "66285546d2b821cf421d4f5eb2576359d3770cd3",
-  "local_path": "data/models/Qwen2.5-VL-3B-Instruct",
+  "local_path": "checkpoints/Qwen2.5-VL-3B-Instruct",
   "verified_at_utc": "2026-11-14T04:34:03.989983+00:00",
   "verification": "Official Hugging Face revision metadata: file sizes, LFS SHA-256 for weights, Git blob SHA-1 for other files; all local files additionally SHA-256 hashed.",
   "file_count": 14,
