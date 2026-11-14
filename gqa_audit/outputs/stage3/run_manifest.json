@@ -216,12 +216,12 @@
     "preparation.log": "30cdffcbfbf4fd36827f852e29b88ba6d7e9b2cfc0b7d56ec9fea1e2b438c80e",
     "profile_grouped.txt": "9b94f9eb1000c44ef06565fe2fcc7032a03a6a3d08bdfe56bccfa823d3f4ab90",
     "profile_official.txt": "11d3aea83e787acf0d0678f8a9f1c48cebdd426221ff6fc33b99f15ad437f7bf",
-    "profile_optimized.txt": "e2e2d3f3fe88f2304166da0c07b06377f13d160dca4a07c297268bfb73c83cb6",
     "pytest_report.txt": "1edb43ce18f26dc520d95cdeb8ec15a26161c47cc52b12b3fac263efba5c7925",
     "run.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "runtime_warnings.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
     "template_sample_ids.csv": "4aa55ecba1c9e2286c0144ca0bd83f507783abc724c7b1cba5c2934583fee20d",
-    "tokens_3b.json": "5f9eac10986b0abcafef337d1e2ceba5ef8644d5002f212f6113b0a5479149cd"
+    "tokens_3b.json": "5f9eac10986b0abcafef337d1e2ceba5ef8644d5002f212f6113b0a5479149cd",
+    "diagnostics/rejected_channels_last/profile_optimized.txt": "e2e2d3f3fe88f2304166da0c07b06377f13d160dca4a07c297268bfb73c83cb6"
   },
   "preparation_note": "Human will launch the full run; final source and optimization validation passed."
 }
