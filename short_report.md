@@ -1,39 +1,60 @@
-# Transfer-Guided Multi-Task Learning for Visual Question Answering
+# Defining and Measuring Directed Task Transfer in Multi-Task Visual Question Answering
 
-*Concise experimental report | Proposed method, setup, and results*
+## 1. Research Problem and Questions
 
-## 1. Proposed Method
+Multi-task learning (MTL) can exploit shared knowledge across related visual question answering (VQA) tasks, but jointly training arbitrary tasks does not guarantee positive transfer. Before designing a task grouping or curriculum, two questions must be addressed: **what constitutes a distinct reasoning task**, and **which tasks actually benefit from knowledge learned on other tasks**?
 
-This study investigates **directed knowledge transfer between reasoning tasks** in binary visual question answering (VQA). The central question is whether adding examples from a *source* task improves performance on a *target* task when the number of target training examples is held fixed. All tasks share the same `yes`/`no` label space, reducing the influence of differences in answer vocabularies.
+The project's **primary research question** is:
 
-Questions from **GQA balanced** are organized into five groups based on their annotated reasoning type: **existence** (`exist`), **attribute verification** (`verifyAttr`), **relation verification** (`verifyRel`), **comparison** (`compare`), and **logical reasoning** (`logic`). Reasoning programs are used only for task definition and analysis; the model receives the image and original English question, **not** task IDs or program annotations. The strict filtering protocol removes selected relation-containing questions and strongly label-imbalanced question families to reduce task overlap and shortcut effects.
+> **When the number of target-task training examples is held fixed, does adding labeled data from a source task reliably improve target-task performance relative to target-only learning?**
 
-### 1.1. Shared VQA probe
+This question is grounded in a broader task-definition problem. A VQA question has a **task-level label** (e.g., attribute verification) but may require several **operation-level reasoning steps** (e.g., identifying an object, following a relation, and verifying an attribute). Consequently, different task groups may share underlying operations without being identical tasks. The study is organized around three related questions:
 
-The main measurement model uses **frozen CLIP ViT-L/14 image and text encoders**. The image encoder provides 257 tokens of dimension 1,024, and the text encoder provides 768-dimensional question features. Both modalities are projected into a shared 512-dimensional space, combined with modality embeddings and a `[FUS]` token, and passed through a **four-layer pre-LN Transformer** (8 attention heads, feed-forward width 2,048). A single binary prediction head at `[FUS]` outputs a `yes` logit. No task-specific head is used. The resulting model has approximately **13.53 million trainable parameters** in the fusion/probe configuration. An earlier CLIP ViT-B/16 variant is used for preliminary validity checks.
+- **RQ1 — Task definition:** How can annotated reasoning types and programs be used to define consistent VQA task groups while distinguishing the evaluated task from its component reasoning operations?
+- **RQ2 — Directed transfer:** Which source-to-target task combinations yield reliable improvements or degradation under a fixed target-data budget, and how do sequential and joint training differ?
+- **RQ3 — Operation-level explanation (future investigation):** To what extent can overlapping reasoning operations explain or predict measured transfer between tasks?
 
-### 1.2. Directed transfer measurement
+**Scope:** The completed experiments operationalize RQ1 and measure RQ2. They **do not directly establish** the explanatory relationship proposed in RQ3 or test an automatically selected MTL curriculum.
 
-For each distinct source–target pair $(S,T)$, transfer is measured against a target-only model trained with the **same target sample and random seed**:
+## 2. Proposed Method
+
+### 2.1. Task definition and reasoning-operation separation
+
+The study uses binary (`yes`/`no`) questions from **GQA balanced**, avoiding differences in answer vocabularies across task groups. GQA detailed types define five research tasks:
+
+| Task | GQA type | Capability assessed |
+|---|---|---|
+| Existence | `exist` | Determine whether a specified object exists |
+| Attribute verification | `verifyAttr` | Verify an object's attribute |
+| Relation verification | `verifyRel` | Verify a relation between objects |
+| Comparison | `compare` | Compare attributes of objects |
+| Logical reasoning | `logic` | Combine multiple conditions |
+
+The `program_strict` protocol requires reasoning programs, removes `relate`-containing questions from existence, attribute verification, and comparison, and excludes selected strongly label-imbalanced families. **Reasoning programs and task identifiers are used for grouping, filtering, and analysis only**, never as model inputs. This is a controlled taxonomy based on existing GQA annotations, **not yet a newly learned, cross-dataset-validated operation-based taxonomy**. Shared operations motivate transfer hypotheses but are not assumed to prove task compatibility.
+
+### 2.2. Shared VQA probe and transfer measurement
+
+The final transfer experiment uses **frozen CLIP ViT-L/14 visual and text encoders**. Image tokens (257 × 1,024) and text representations (768 dimensions) are projected to width 512, combined with a `[FUS]` token and modality embeddings, and processed by a four-layer, eight-head Transformer fusion module. One shared binary head predicts `yes` or `no`, with approximately **13.53M trainable probe parameters**. An earlier ViT-B/16 probe and **Qwen2.5-VL-3B-Instruct** are used for learnability and image-dependence checks; Qwen is **not** used to construct the final transfer matrix.
+
+For source task $S$, target task $T$, regime $A$, and seed $r$, the directed transfer effect is:
 
 $$
-\Delta_A(S\rightarrow T)=M_T(f_{A(S\rightarrow T)})-M_T(f_{\mathrm{Base}(T)}),\qquad A\in\{\mathrm{Seq},\mathrm{Joint}\}.
+\Delta_A(S\!\rightarrow\!T,r) = M_T\!\left(f_{A(S\rightarrow T,r)}\right) - M_T\!\left(f_{\mathrm{Base}(T,r)}\right),\qquad A\in\{\mathrm{Seq},\mathrm{Joint}\}.
 $$
 
-Here, $M_T$ denotes target-task performance, and $\Delta$ is reported in **percentage points (pp)**. The two regimes examine different ways of using source information:
+Here $M_T$ is the target-task evaluation metric and $\Delta$ is measured in **percentage points (pp)**. Every intervention is compared with a target-only baseline using the **same target sample and seed**:
 
-- **Sequential transfer (Seq):** train on source examples first, then fine-tune the resulting model on target examples with a fresh optimizer and learning-rate schedule.
-- **Joint training (Joint):** train a newly initialized model on the union of source and target examples with shared parameters and no task-specific loss weighting.
+- **Target-only:** Train on target examples alone.
+- **Sequential (Seq):** Train on source examples, then fine-tune on target examples with a reset optimizer and schedule.
+- **Joint:** Train from scratch on pooled source and target examples using one shared model.
 
-The design covers **20 directed pairs** (five sources × four other targets) in each regime. Three diagnostic controls use additional **same-group** examples, **out-of-group** questions, or **shuffled source labels**. These controls test whether observed gains are specific to source-task information rather than simply reflecting additional data or optimization. The directed map is intended to inform later task grouping or curriculum design; **a learned curriculum itself has not yet been tested**.
+The five tasks produce **20 directed source-target pairs**, each tested under Seq and Joint. Additional **same-group**, **out-of-group**, and **shuffled-label** controls help distinguish potentially meaningful transfer from generic effects of additional training data. These comparisons measure *training-regime effects*: without compute-matched controls, they cannot isolate semantic knowledge transfer from extra optimizer updates.
 
-## 2. Experimental Setup
+## 3. Experimental Setup
 
-### 2.1. Dataset and evaluation
+The strict-filtered GQA data are divided by **image ID**, preventing the same image from appearing in both `train_core` and the internal `dev` set. A fixed seed (0) allocates 10% of original training images to `dev`. The original validation split is used for separate reference analyses; **the final transfer map is evaluated on `dev`**, while `testdev` is not used for model evaluation.
 
-The project uses GQA balanced with strict binary-question filtering (`program_strict`). The original training images are split by image ID into **90% `train_core` and 10% internal `dev`**, using seed 0. All questions about one image stay in the same split to avoid image-level leakage. The original validation split is retained for separate reference/confirmation analyses, and `testdev` is **not used for model evaluation** in the reported transfer experiments.
-
-| Task group | Train core | Dev | Validation |
+| Group | Train core | Dev | Validation |
 |---|---:|---:|---:|
 | Existence | 18,921 | 2,083 | 2,879 |
 | Attribute verification | 23,462 | 2,721 | 3,633 |
@@ -42,59 +63,46 @@ The project uses GQA balanced with strict binary-question filtering (`program_st
 | Logical reasoning | 101,611 | 11,117 | 15,926 |
 | **Total** | **210,935** | **23,202** | **32,875** |
 
-The primary metric is **accuracy** for four groups and **balanced accuracy** for relation verification, evaluated specifically on the `verifyRel_relation` subset to avoid a misleading majority-label advantage. Log-loss and AUROC are supplementary diagnostics.
+The final L/14 matrix uses **10,000 source** and **1,000 target** questions per directed pair, with seeds **1000, 1001, 1002**. Target-only models train for **10 epochs**; Seq performs **10 source + 10 target epochs**; Joint performs **10 epochs on pooled data**. The shared recipe uses AdamW ($10^{-4}$ learning rate), batch size 64, cosine decay, 5% warmup, dropout 0.1, gradient clipping at 1, and BCE-with-logits loss.
 
-### 2.2. Training protocol and statistical criteria
+**Primary metric:** accuracy for four groups; **balanced accuracy** for relation verification on the predefined `verifyRel_relation` subset, which is locally label-imbalanced. Log-loss and AUROC are secondary diagnostics. Paired 95% confidence intervals use a **hierarchical bootstrap (2,000 replicates)** over seeds and image clusters. To qualify as *supportive*, an effect must exceed **+1 pp throughout its CI**, have a positive sign in all three seeds, pass Benjamini–Hochberg-adjusted significance ($p\leq0.05$), and satisfy the predefined control and hard-question checks. *Harmful* effects face analogous criteria below **−1 pp**. The final analysis remains **exploratory**, not independently confirmed on held-out seeds and validation data.
 
-The final CLIP L/14 experiment uses **1,000 target questions, 10,000 source questions**, and three seeds (1000, 1001, 1002). The target-only baseline trains for **10 epochs**. Seq uses **10 source epochs followed by 10 target epochs**; Joint uses **10 epochs on the pooled data**. The common recipe is AdamW (learning rate $10^{-4}$), batch size 64, cosine schedule with 5% warmup, dropout 0.1, gradient clipping at 1, binary cross-entropy with logits, and bf16 autocast. The encoders remain frozen.
+## 4. Results and Discussion
 
-Reported transfer estimates are paired by seed and target sample. **Hierarchical paired bootstrap** confidence intervals (2,000 replicates) resample seeds and image clusters. A *supportive* edge must have a 95% CI entirely above **+1 pp**, positive effects in all three seeds (the ≥80% rule), Benjamini–Hochberg-adjusted $p\leq 0.05$, and satisfy the prespecified controls and hard-question criteria. *Harmful* edges face analogous criteria below **−1 pp**. The final matrix is **exploratory on `dev`**, not a held-out confirmatory evaluation.
+### 4.1. Measurement-model validity and learnability
 
-## 3. Results and Discussion
+The original **CLIP B/16** probe exhibits limited visual grounding: when trained on full target data, real images improve over blank-image training for existence (**+5.38 pp**) and logic (**+6.24 pp**), but not for attribute verification (**−0.88 pp**), relation verification (**−1.38 pp**), or comparison (**−2.79 pp**). Upgrading to **CLIP L/14** does not consistently resolve the weakness; its 1,000-example target-only scores on `dev` remain **51.39%** for attribute verification and **49.64%** for comparison. The full L/14 quality-validation suite was not rerun.
 
-### 3.1. Model validity and task learnability
+In contrast, **Qwen2.5-VL-3B-Instruct** achieves **71.73%** zero-shot comparison accuracy *with images* versus **50.60%** *without images* on validation. In a **single-task**, two-seed comparison LoRA pilot, mean `dev` accuracy reaches **75.37%** with 1,000 examples and **76.83%** with 4,000, compared with **72.14%** zero-shot accuracy on that same `dev` split. Thus, comparison is learnable by a stronger VLM; near-chance CLIP probe performance cannot establish that comparison lacks useful cross-task relationships. These Qwen experiments **do not test MTL transfer**.
 
-The earlier CLIP B/16 probe had limited image-grounding ability: at full training size, real images improved performance over blank-image training by **+5.38 pp** for existence and **+6.24 pp** for logic, but not for attribute verification (**−0.88 pp**), relation verification (**−1.38 pp**), or comparison (**−2.79 pp**). This makes weak or negative transfer difficult to interpret as evidence of incompatibility between reasoning tasks.
+### 4.2. Directed transfer map (CLIP L/14)
 
-The CLIP L/14 variant did not consistently improve 1,000-example target-only baselines. Its mean `dev` scores were **53.14%** (existence), **51.39%** (attribute), **52.86%** (relation), **49.64%** (comparison), and **54.79%** (logic). In contrast, **Qwen2.5-VL-3B-Instruct** achieved substantially better zero-shot performance with images on validation, including **71.73%** for comparison versus **50.60%** without images. A separate **single-task** Qwen LoRA pilot on comparison achieved **75.37%** mean `dev` accuracy with 1,000 examples and **76.83%** with 4,000 (two seeds each). These results support task learnability with a stronger VLM, but **do not demonstrate inter-task transfer**.
+Each off-diagonal cell below shows **Seq / Joint mean transfer effects (pp)** on `dev`, measured against paired target-only baselines. Rows are **source tasks**; columns are **target tasks**.
 
-### 3.2. Complete directed transfer map (CLIP L/14)
+| Source ↓ / Target → | Exist | Attribute | Relation | Compare | Logic |
+|---|---:|---:|---:|---:|---:|
+| **Exist** | — | −0.87 / −0.61 | −1.85 / −0.44 | +1.29 / +1.13 | +0.40 / −0.85 |
+| **Attribute** | −1.14 / −2.19 | — | +0.24 / +0.05 | +1.72 / +0.49 | −1.35 / −1.73 |
+| **Relation** | −0.22 / −2.45 | −1.24 / −0.10 | — | +1.04 / +1.52 | −0.69 / −1.94 |
+| **Compare** | −1.44 / −1.55 | −0.83 / −1.30 | −0.24 / −0.62 | — | −1.73 / −1.51 |
+| **Logic** | +0.78 / −1.04 | −1.38 / −1.41 | −0.47 / −2.17 | +0.18 / +0.16 | — |
 
-Each cell is the mean change in target `dev` score, in **pp**, relative to the paired target-only baseline (three seeds). Source and target directions are not interchangeable.
+Across **40 cross-task effects**, **12 means are positive and 28 negative**, but **all 40 are classified as *insufficient evidence*** under the prespecified criteria. For example, Attribute → Comparison under Seq has a mean effect of **+1.72 pp** (95% CI **[−0.66, +4.18]**), so its CI does not establish an improvement above +1 pp. Relation → Existence under Joint is **−2.45 pp** (95% CI **[−5.03, −0.05]**), which does not establish harm beyond −1 pp. Transfer can appear **direction-dependent** and **regime-dependent**, but these observed differences are not yet statistically confirmed task relationships.
 
-| Source → target | Seq Δ (pp) | Joint Δ (pp) |
-|---|---:|---:|
-| Existence → Attribute | −0.87 | −0.61 |
-| Existence → Relation | −1.85 | −0.44 |
-| Existence → Comparison | +1.29 | +1.13 |
-| Existence → Logic | +0.40 | −0.85 |
-| Attribute → Existence | −1.14 | −2.19 |
-| Attribute → Relation | +0.24 | +0.05 |
-| Attribute → Comparison | +1.72 | +0.49 |
-| Attribute → Logic | −1.35 | −1.73 |
-| Relation → Existence | −0.22 | −2.45 |
-| Relation → Attribute | −1.24 | −0.10 |
-| Relation → Comparison | +1.04 | +1.52 |
-| Relation → Logic | −0.69 | −1.94 |
-| Comparison → Existence | −1.44 | −1.55 |
-| Comparison → Attribute | −0.83 | −1.30 |
-| Comparison → Relation | −0.24 | −0.62 |
-| Comparison → Logic | −1.73 | −1.51 |
-| Logic → Existence | +0.78 | −1.04 |
-| Logic → Attribute | −1.38 | −1.41 |
-| Logic → Relation | −0.47 | −2.17 |
-| Logic → Comparison | +0.18 | +0.16 |
+### 4.3. Controls, interpretation, and research status
 
-Among **40 cross-task effects**, **12** mean differences are positive and **28** are negative. However, **all 40 are classified as having insufficient evidence** under the prespecified criteria. For example, Attribute → Comparison under Seq reaches **+1.72 pp**, but its 95% CI is **[−0.66, +4.18] pp**, which does not establish a gain above the +1 pp threshold. Relation → Existence under Joint reaches **−2.45 pp** with CI **[−5.03, −0.05] pp**, but does not establish harm of at least −1 pp. Positive cells therefore identify candidates for follow-up, **not confirmed transfer relationships**.
+Adding **same-group** data gives clearer mean gains for existence (**+4.26 / +4.93 pp**, Seq/Joint), relation verification (**+4.24 / +5.68 pp**), and logic (**+7.75 / +8.81 pp**). Such gains show that the probe can benefit from additional relevant data, even when evidence for *cross-group* transfer is inconclusive.
 
-### 3.3. Controls, limitations, and conclusion
+The completed study supports the following interpretation:
 
-Adding **same-group** data provides clearer improvements than cross-group transfer for several targets: Seq/Joint effects are **+4.26/+4.93 pp** for existence, **+4.24/+5.68 pp** for relation verification, and **+7.75/+8.81 pp** for logic. This shows that the probe can benefit from additional relevant examples even when cross-group gains remain uncertain.
+- **RQ1:** A reproducible five-task taxonomy and operation-aware filtering protocol have been established, but the proposed broader framework has **not been validated across datasets**.
+- **RQ2:** All directed pairs have been measured under two regimes, but **no supportive or harmful cross-task edge has been confirmed**.
+- **RQ3:** Whether shared reasoning operations explain or predict transfer **remains untested** by the reported transfer matrix.
 
-The current evidence is constrained by a weak CLIP measurement probe on some groups, **only one target budget and three seeds**, and the absence of complete L/14 image-grounding checks, image-disjoint-source controls, and independent validation of candidate transfer edges. Joint training also processes more examples and performs more optimizer updates than the target-only baseline, so measured effects cannot be attributed uniquely to semantic knowledge sharing.
+Major limitations include weak CLIP probe quality on some tasks; only **one target budget and three seeds**; additional computation in Seq and Joint relative to target-only; missing L/14 blank-image and image-disjoint-source transfer controls; and no independent confirmation of candidate edges. The pairwise matrix also does **not** evaluate three-task interactions, joint training across all five tasks, or any **transfer-guided curriculum**.
 
-**Conclusion.** The project establishes an auditable task taxonomy and a controlled method for measuring directed transfer in binary VQA. Its full 20-pair CLIP L/14 map is complete but **does not yet confirm any supportive or harmful cross-task relation**. The next step is to validate probe quality and test a small set of candidate directions with stronger visual models, matched computational budgets, stronger controls, and held-out confirmation before designing transfer-guided curricula.
+**Conclusion.** The contribution established so far is a controlled, auditable **task-definition and directed-transfer measurement framework** for binary VQA, **not a demonstrated transfer-guided curriculum algorithm**. Future work should first validate model learnability and image grounding, then confirm selected transfer directions using computation-matched controls, stronger models, and held-out evaluation. Only after reliable edges are established can operation-level analysis and transfer-informed MTL grouping or curricula be tested meaningfully.
 
 ---
 
-*Source and detailed records: [full project report](https://github.com/Datyth/Transfer-MTL/blob/main/PROJECT_OVERVIEW_EXPERIMENT_REPORT.md), [CLIP L/14 edge results](https://github.com/Datyth/Transfer-MTL/blob/main/gqa_audit/outputs/bao_cao_chuyen_giao_clip_l14/edges.csv), and [frozen experimental design](https://github.com/Datyth/Transfer-MTL/blob/main/gqa_audit/outputs/bao_cao_chuyen_giao_clip_l14/design.FROZEN.json).*
+*Detailed sources: [Original project report](https://github.com/Datyth/Transfer-MTL/blob/main/PROJECT_OVERVIEW_EXPERIMENT_REPORT.md), [CLIP L/14 transfer results](https://github.com/Datyth/Transfer-MTL/blob/main/gqa_audit/outputs/bao_cao_chuyen_giao_clip_l14/edges.csv), and [Frozen experimental design](https://github.com/Datyth/Transfer-MTL/blob/main/gqa_audit/outputs/bao_cao_chuyen_giao_clip_l14/design.FROZEN.json).*
