@@ -1,0 +1,7 @@
+{
+  "error": "Dừng vì giới hạn 24 giờ GPU hoặc dự toán vượt phần còn lại",
+  "gpu_seconds": 1706.4040242850024,
+  "pid": 592331,
+  "state": "STOP_BUDGET",
+  "updated_unix": 1794943197.1532972
+}

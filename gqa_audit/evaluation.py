@@ -44,6 +44,229 @@ def point_metrics(frame: pd.DataFrame) -> dict:
             "yes_recall": yes_recall, "no_recall": no_recall}
 
 
+def probabilistic_metrics(frame: pd.DataFrame, *, class_balanced=False) -> dict:
+    """Pilot log-loss and score AUROC, with decision-H class balancing."""
+    from sklearn.metrics import roc_auc_score
+    if not {"answer", "p_yes", "score"} <= set(frame):
+        raise ValueError("Probability metrics require answer, p_yes and score")
+    yes = frame.answer.eq("yes").to_numpy()
+    if not frame.answer.isin(("yes", "no")).all() or len(frame) == 0:
+        raise ValueError("Probability metrics require binary labels and nonempty data")
+    probabilities = frame.p_yes.to_numpy(dtype=np.float64)
+    scores = frame.score.to_numpy(dtype=np.float64)
+    if not np.isfinite(probabilities).all() or not np.isfinite(scores).all():
+        raise ValueError("Nonfinite probability or score")
+    probabilities = np.clip(probabilities, 1e-6, 1 - 1e-6)
+    loss = -np.where(yes, np.log(probabilities), np.log1p(-probabilities))
+    if class_balanced:
+        if not yes.any() or yes.all():
+            raise ValueError("Class-balanced log-loss requires both classes")
+        value = (loss[yes].mean() + loss[~yes].mean()) / 2
+    else:
+        value = loss.mean()
+    auroc = float(roc_auc_score(yes, scores)) if yes.any() and not yes.all() else np.nan
+    return {"log_loss": float(value), "auroc": auroc}
+
+
+def paired_contrast(arm_a, arm_c, seeds, *, class_balanced=False, bootstrap_seed=1000,
+                    resamples=2000):
+    """Hierarchical paired bootstrap; a single image draw shared across seeds/arms.
+
+    Each arm is a mapping seed -> primary-scope frame containing question_id,
+    imageId, answer, pred, p_yes, score. Log-loss is C minus A.
+    """
+    from sklearn.metrics import roc_auc_score
+    seeds = list(seeds)
+    if not seeds or len(set(seeds)) != len(seeds):
+        raise ValueError("Nonempty unique paired seeds required")
+    first = arm_a[seeds[0]].sort_values("question_id").reset_index(drop=True)
+    if first.question_id.map(type).ne(str).any() or first.question_id.duplicated().any():
+        raise ValueError("Unique string question IDs required")
+    if "part" in first and not first.part.eq("dev").all():
+        raise ValueError("Stage 3.5 contrasts are dev-only")
+    images, group = np.unique(first.imageId.to_numpy(), return_inverse=True)
+    yes = first.answer.eq("yes").to_numpy()
+    if not yes.any() or yes.all() or first.imageId.isna().any():
+        raise ValueError("Both classes and image IDs required")
+    arrays = []
+    for seed in seeds:
+        pair = []
+        for mapping in (arm_a, arm_c):
+            frame = mapping[seed].sort_values("question_id").reset_index(drop=True)
+            for name in ("question_id", "imageId", "answer"):
+                if frame[name].tolist() != first[name].tolist():
+                    raise ValueError("Paired arms/seeds must have identical IDs, images and labels")
+            if "part" in frame and not frame.part.eq("dev").all():
+                raise ValueError("Stage 3.5 contrasts are dev-only")
+            probabilistic_metrics(frame, class_balanced=class_balanced)
+            probability = np.clip(frame.p_yes.to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+            pair.append((frame.pred.eq(frame.answer).to_numpy(dtype=float),
+                         -np.where(yes, np.log(probability), np.log1p(-probability)),
+                         frame.score.to_numpy(dtype=float)))
+        arrays.append(pair)
+
+    def metrics(values, weights):
+        correct, loss, score = values
+        if weights[yes].sum() == 0 or weights[~yes].sum() == 0:
+            return np.full(3, np.nan)
+        primary = ((np.average(correct[yes], weights=weights[yes]) +
+                    np.average(correct[~yes], weights=weights[~yes])) / 2 if class_balanced else
+                   np.average(correct, weights=weights))
+        logloss = ((np.average(loss[yes], weights=weights[yes]) +
+                    np.average(loss[~yes], weights=weights[~yes])) / 2 if class_balanced else
+                   np.average(loss, weights=weights))
+        return np.array([primary, logloss, roc_auc_score(yes, score, sample_weight=weights)])
+
+    def difference(seed_indices, weights):
+        return np.mean([ (metrics(arrays[i][0], weights) - metrics(arrays[i][1], weights)) *
+                        np.array([1, -1, 1]) for i in seed_indices], axis=0)
+
+    point = difference(range(len(seeds)), np.ones(len(first)))
+    generator = np.random.default_rng(bootstrap_seed)
+    samples = []
+    for _ in range(resamples):
+        drawn_seeds = generator.integers(0, len(seeds), len(seeds))
+        drawn_images = generator.integers(0, len(images), len(images))
+        weights = np.bincount(drawn_images, minlength=len(images))[group]
+        samples.append(difference(drawn_seeds, weights))
+    samples = np.asarray(samples)
+    result = {}
+    for column, name in enumerate(("primary_gain", "log_loss_gain", "auroc_gain")):
+        finite = samples[np.isfinite(samples[:, column]), column]
+        if len(finite) < 2:
+            raise ValueError("Too few valid bootstrap resamples")
+        low, high = np.quantile(finite, [.025, .975])
+        se = float(finite.std(ddof=1))
+        z = float(point[column] / se) if se else (0.0 if point[column] == 0 else float(np.copysign(np.inf, point[column])))
+        result[name] = {"mean": float(point[column]), "ci_low": float(low), "ci_high": float(high),
+                        "se": se, "z": z, "valid_resamples": len(finite)}
+    return result
+
+
+def seed_primary_interval(frames, *, class_balanced=False, seed=1000, resamples=2000):
+    """CI of mean seed performance, resampling seeds and shared image clusters."""
+    ordered = [frame.sort_values("question_id").reset_index(drop=True) for frame in frames]
+    first = ordered[0]
+    _, inverse = np.unique(first.imageId, return_inverse=True)
+    groups = int(inverse.max()) + 1
+    yes = first.answer.eq("yes").to_numpy()
+    correct = []
+    for frame in ordered:
+        if frame.question_id.tolist() != first.question_id.tolist() or frame.imageId.tolist() != first.imageId.tolist():
+            raise ValueError("Seed CI requires paired question/image sets")
+        if "part" in frame and not frame.part.eq("dev").all():
+            raise ValueError("Stage 3.5 intervals are dev-only")
+        correct.append(frame.pred.eq(frame.answer).to_numpy(dtype=float))
+    correct = np.asarray(correct)
+    generator, samples = np.random.default_rng(seed), []
+    for _ in range(resamples):
+        selected = generator.integers(0, len(correct), len(correct))
+        weights = np.bincount(generator.integers(0, groups, groups), minlength=groups)[inverse]
+        if class_balanced:
+            if weights[yes].sum() == 0 or weights[~yes].sum() == 0:
+                continue
+            values = (np.average(correct[selected][:, yes], axis=1, weights=weights[yes]) +
+                      np.average(correct[selected][:, ~yes], axis=1, weights=weights[~yes])) / 2
+        else:
+            values = np.average(correct[selected], axis=1, weights=weights)
+        samples.append(values.mean())
+    low, high = np.quantile(samples, [.025, .975])
+    return {"ci_low": float(low), "ci_high": float(high)}
+
+
+def study_contrast(arms, controls, *, balanced=False, delta=0., metric='primary',
+                   resamples=2000, bootstrap_seed=1000):
+    """Main-study paired bootstrap over initializations and image clusters.
+
+    Keep the pilot's dev-only API unchanged. This explicit study API permits dev
+    or val, never testdev. Aggregate additive metrics by image before resampling.
+    AUROC is secondary and reported as a point difference, not a bootstrap CI.
+    One-sided centered-bootstrap tests evaluate effects beyond +/- delta.
+    """
+    if metric not in ('primary', 'log_loss') or len(arms) != len(controls) or not arms:
+        raise ValueError('Invalid paired study contrast')
+    first = arms[0].sort_values('question_id').reset_index(drop=True)
+    if (not len(first) or first.question_id.duplicated().any()
+            or first.question_id.map(type).ne(str).any()
+            or first.imageId.isna().any() or not first.part.isin(['dev', 'val']).all()
+            or first.part.nunique() != 1):
+        raise ValueError('Study frames require unique dev/val IDs')
+    yes = first.answer.eq('yes').to_numpy()
+    if not yes.any() or yes.all():
+        raise ValueError('Study contrast requires both answer classes')
+    _, groups = np.unique(first.imageId.to_numpy(), return_inverse=True)
+    n_groups = int(groups.max()) + 1
+    denominator = np.stack([np.bincount(groups, weights=mask, minlength=n_groups)
+                            for mask in ((yes, ~yes) if balanced else (np.ones(len(first)),))])
+    differences, auc = [], []
+    for a, c in zip(arms, controls):
+        pair = []
+        for f in (a, c):
+            f = f.sort_values('question_id').reset_index(drop=True)
+            if not f[['question_id', 'imageId', 'answer', 'part']].equals(
+                    first[['question_id', 'imageId', 'answer', 'part']]):
+                raise ValueError('Study arms must use identical IDs, labels and split')
+            m = probabilistic_metrics(f, class_balanced=balanced)
+            p = np.clip(f.p_yes.to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+            value = (f.pred.eq(f.answer).to_numpy(dtype=float) if metric == 'primary' else
+                     np.where(yes, np.log(p), np.log1p(-p)))
+            pair.append((value, m['auroc']))
+        diff = pair[0][0] - pair[1][0]
+        differences.append(np.stack([np.bincount(groups, weights=diff * mask, minlength=n_groups)
+                                    for mask in ((yes, ~yes) if balanced else (np.ones(len(first)),))]))
+        auc.append(pair[0][1] - pair[1][1])
+    differences = np.asarray(differences)
+    points = (differences.sum(axis=-1) / denominator.sum(axis=-1)).mean(axis=-1)
+    generator = np.random.default_rng(bootstrap_seed)
+    samples = []
+    for _ in range(resamples):
+        selected = generator.integers(0, len(arms), len(arms))
+        weights = np.bincount(generator.integers(0, n_groups, n_groups), minlength=n_groups)
+        den = denominator @ weights
+        if (den == 0).any():
+            continue
+        samples.append(float(((differences[selected].mean(axis=0) @ weights) / den).mean()))
+    samples = np.asarray(samples)
+    if len(samples) < 2:
+        raise ValueError('Insufficient bootstrap draws')
+    mean = float(points.mean())
+    low, high = np.quantile(samples, [.025, .975])
+    error = samples - mean
+    se = float(samples.std(ddof=1))
+    return {'mean': mean, 'ci_low': float(low), 'ci_high': float(high), 'se': se,
+            'z': mean / se if se else (0. if mean == 0 else float(np.sign(mean) * np.inf)),
+            'positive_fraction': float((points > 0).mean()),
+            'negative_fraction': float((points < 0).mean()), 'auroc_gain': float(np.mean(auc)),
+            'p_positive': float((1 + (error >= mean - delta - 1e-12).sum()) / (len(error) + 1)),
+            'p_negative': float((1 + (-error >= -mean - delta - 1e-12).sum()) / (len(error) + 1)),
+            'valid_resamples': len(samples)}
+
+
+def probabilistic_cluster_intervals(frame: pd.DataFrame, settings: dict, *, class_balanced=False) -> dict:
+    """Image-cluster percentile intervals for probabilistic pilot metrics."""
+    if frame.imageId.isna().any():
+        raise ValueError("Image IDs are required for confidence intervals")
+    clusters = [group for _, group in frame.groupby("imageId", sort=True)]
+    generator = np.random.default_rng(settings["seed"])
+    samples = []
+    for _ in range(settings["resamples"]):
+        draw = generator.integers(0, len(clusters), size=len(clusters))
+        sampled = pd.concat([clusters[i] for i in draw], ignore_index=True)
+        try:
+            metric = probabilistic_metrics(sampled, class_balanced=class_balanced)
+            samples.append((metric["log_loss"], metric["auroc"]))
+        except ValueError:
+            samples.append((np.nan, np.nan))
+    values = np.asarray(samples)
+    tail = (1 - settings["level"]) / 2
+    result = {}
+    for column, name in enumerate(("log_loss", "auroc")):
+        finite = values[np.isfinite(values[:, column]), column]
+        result[f"{name}_ci_low"], result[f"{name}_ci_high"] = (
+            map(float, np.quantile(finite, [tail, 1 - tail])) if len(finite) else (np.nan, np.nan))
+    return result
+
+
 def cluster_intervals(frame: pd.DataFrame, settings: dict, *, return_samples=False):
     """Sample images with replacement, retaining every question of each image."""
     names = ("accuracy", "balanced_accuracy", "yes_prediction_rate")
@@ -83,7 +306,11 @@ def cluster_intervals(frame: pd.DataFrame, settings: dict, *, return_samples=Fal
 
 
 class Evaluator:
-    def __init__(self, root: Path = ROOT, *, metadata=None, registry=None, subsets=None, plan=None, questions=None):
+    def __init__(self, root: Path = ROOT, *, metadata=None, registry=None, subsets=None, plan=None, questions=None,
+                 mode=None):
+        if mode not in (None, "stage3_5"):
+            raise ValueError("Unknown evaluation mode")
+        self.mode = mode
         self.root = Path(root)
         self.registry = registry if registry is not None else load_registry(self.root / "gqa_audit/outputs/stage2/task_registry.json")
         self.subsets = subsets if subsets is not None else load_subsets(self.root / "gqa_audit/outputs/stage2b/analysis_subsets.json")
@@ -167,6 +394,8 @@ class Evaluator:
 
     def evaluate(self, predictions, variant, parts, final=False):
         parts = [parts] if isinstance(parts, str) else list(parts)
+        if self.mode == "stage3_5" and any(part != "dev" for part in parts):
+            raise ValueError("Stage 3.5 evaluation is dev-only")
         if not parts or len(set(parts)) != len(parts) or not set(parts) <= {"train_core", "dev", "val", "testdev"}:
             raise ValueError("Invalid or duplicate evaluation parts")
         if "testdev" in parts and not final:
@@ -241,8 +470,8 @@ class Evaluator:
         return pd.DataFrame(rows)
 
 
-def evaluate(predictions, variant, parts, final=False):
-    return Evaluator().evaluate(predictions, variant, parts, final=final)
+def evaluate(predictions, variant, parts, final=False, mode=None):
+    return Evaluator(mode=mode).evaluate(predictions, variant, parts, final=final)
 
 
 def shortcut_control_table(edges, root: Path = ROOT):

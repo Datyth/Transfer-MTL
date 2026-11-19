@@ -82,8 +82,8 @@ def preflight(root: Path, questions: Path) -> tuple[dict, dict, dict]:
     config_dir = root / "gqa_audit/config"
     for path in sorted(config_dir.glob("*.yaml")):
         inputs[input_name(path)] = file_hash(path)
-    for path in (config_dir / "FROZEN_MANIFEST.json", root / "codex_prompt_gqa_stage2b_analysis.md"):
-        inputs[input_name(path)] = file_hash(path)
+    path = config_dir / "FROZEN_MANIFEST.json"
+    inputs[input_name(path)] = file_hash(path)
     context["analysis_plan"] = plan
     context["analysis_runtime"] = yaml.safe_load((config_dir / "stage2b_runtime.yaml").read_text())
     context["input_hashes_stage2b"] = inputs

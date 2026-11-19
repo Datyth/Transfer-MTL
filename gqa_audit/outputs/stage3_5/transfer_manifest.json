@@ -1,0 +1,1500 @@
+{
+  "runs": [
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "5bcf6e0a8bbc119f582ac02bd4677cf09e5c3912709423ed48380a0869959ad0"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "2fc6ca6a0036686688f449d5de07ff1c33ec24bac80fe8180d1880169abf9ef5"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "e6d94e1b3ecd831117e3859bf1a3533eefc3618ef0f5c9133ccbe9bc0c1511ec"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "3bd1856ccef83cc9599e542fbe7c0a8e22a1ed0bfa22bfb440cd4d2b575941d8"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "fb5bb5a14adee92214b8c2ab21bb3aeb08b953e2953b9f537745673db885ed18"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "a46d6cc9b0212e21021fafa85ec65044ea3ade4b721366c19109178a562a7ec0"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "5c2a535d2b7e9f59d7d1684faa6ccf746e09fedc6f738b83c42856a0e7710bdc"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "0f1fb928c4bc00543407d5a5d8cdc5b67b4ee01d73d0a81eeac44af2757ef0f8"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "d5f9979d851c8b24722ff519f552f44f1e8eee2a40ba3ea543db4a94f4da1516"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "434082339c3b5d48189c7134869bb23cffe446c1e33a7156c62802d73d6fd48f"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "d61d641461c4f34c9b632d85d7ab1a984af0d8e6e33abab4b4164967f47cc11e"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "6a603aadc77d7b57df3c97da234ca8c662cd570f918446077bfce7da95ded58e"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "fe302175b72f5b311fc73b5b9a9ff1dd96612e0b6e0cd3e627c7b57d74bd801a"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "9648e71e4dd493f73ef453c5ff00f8d17d36464f891543af3f0d6b592bc37722"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "95b09d8d5b2dec14982f0c2e1dbbf92e1d9deed3bf2c1bdc79736666428de394"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "31dc93c540e82e1e9845164bce28099a137c868d54ac9ff30cecb2dd1c8939bc"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "dd6bb907d96ad194468885a957f39212caff084a4098772769bd522436e4348c"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "550f30ddba0f348f284826c2448aaf1afb9ab2a859c30b64cafa6b92b45c8ede"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "61c6a78079d51d439f289f6c228a988f359c809e99350a7763d532509b0bfc79"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "8d6ec2cda77d1b2a711af463e498c8bba622a51ed177c5ec1d1480ac0086c23d"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "65902feecd571b1b6b22af3b84d31d1c64944182a456fc1cfd6837e3cec49b56"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "2ddd5b8cf3561ee206d30d7a90fd79c06f9468ac9df80ad80e82208a49044e0e"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "66bcf02382a970f57c052161ded7fe89af57fec5be21b54358558fd0bc5f6d7b"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "dc61e37f181f0f30571dece6200fc22555a3e54b4dfcd3fc2731a4d5bb9fb4ca"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "ae84d3e7f00cd2379c1587c59f1b0633a402d8dd26273b39d88dd8a9de56d279"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "6c235768373e16d90817604ad4256b33742dc6a8e9661683ee1d097fea3011eb"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "5e63506c65c5818d0f3149652e1246df4dc33f658c8114eb45bb692d57bc2de4"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "1a41a35b267204d48e2352d99fbc521fdb72c5cd8fe4a81bf78c2d66dc8608fc"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "07596c4e8a9af96c25c00879edaa23b9032bba12c884aa6cd176ba363fcbdbdb"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "7e587771b37bd5504e15ecfe95e13ad4c5fdfaf4e1131eec265f7a4a62287d29"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "a88c795e5cf13647448cc0c634aae9a2da6c1af9962756b0a5147e75931d4b33"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "4d16cb7e9bceeb391948b4935c323c9f48e97a8e63aba76f9684d2f9cd082cd6"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "bc7700eab4d5d07b3e44e2c1036678c114c5f6e1276d7230d74a6677abf8919a"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "4f5817d47deaa21afefd51575f9dfdffb91ee3ee9c946a53c7761f93ca5e3069"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "ab292556bea18ad98ce734ded3112683be9357001c3ebf6ca28cc64b4e96a92e"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "944f02e4cbcec5b17b9f50c84b869906e5d3b099f9bd6cd84edd2c29f0752375"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "47a8ed2954ed87b9fd54b3e18281e3f8920fbc5126ce0a2a684fe277e24fbb60"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "fae46c3f777c0d172745c3ad0fe943458f7cbd6b7cfabf2a1301496ac128269b"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "8a894d194a700ce4e34f5d588665b75c954387648cbe383ea8e859dad5e136d0"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "aa05b35b3d2d3374e7beb2d9e4e45c2573b089caee52affe5edb3968dcd4d8c0"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "9c8083c9dbc3cbbb4cd08e701643011ba5fed1177360236a4b00f5a38f1df602"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "af4db3eee9dd40615707214fc1d9429942ca0cb86ea36eb2e82ed17a6ed0564e"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "de4c24237bef04116d073768a4ce2354a820a69f8f4f938a6fa021503fcb816c"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "538df562dd41fd4ccac0f7aa1f8a4354565280882f0dd5969f6ff200569ec203"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "53d3fae0b2c51ccdb9a9c6955065e86ca2fdc9b9c32ce2f1c3897dbe2406c807"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "9f6802aa671545bdd435b83ac8a01f812f2ff2a812a8a75c882b8ecfad64912a"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "6b6664aafa844eef1594482e51f41fd9a84312eebda0b310ae9906ff546c8bc0"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "f60f7143a6d79b24a03d4d31b49a629c577a32cd191e73c0f42058750684a0b5"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "7619e0528bfa35bbb8876dfe043d9f2c7b7639001fad68c6b73b5f5466ec5058"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "764e48e285ad0d422dca12e2e236f2cdcac4248be22500be0e915b6e970730b7"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "bc632b78cd6c281b323f1d7b0dcccb6b36aa4e6332f6fcded089f0e5ca7e9323"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "b0569b5c124e4f187fe7630cb816d834b6dcdff645cd144570fa21c7ed3f2788"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "351afd5937bd6685bb07759ab9e552dde8a4ee38f082ae6d72c2b7449841cb67"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "f761558159fe3d5387ab43d8c50251bb8810cade1797ea17075903c2af8a54f2"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "e32fecebddf2cf727d49f479ae499768900e31d928b2ab9b12d39a35c719c21c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "2a2d7ab999f2e264bc9cd11dd85cf1532a1be54326c806401ac00d7f85ccb464"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "bed1963ef610865d5f28e3f04d3d5f20f4cb4c3178c77df02dfba07d6d8dcd55"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "388917d38c4ae11044f4a663aabfdae765b282d942af659ffe1d1c77599135a3"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "247f699bf6186b95f41eb8ba69d807e1bbfda8421dae224ec74227e943ca7aef"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "40b3c41d31234d9efec7ccf72443d6d015640f58fd87b807280b06c7114b09e1"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "4861dcca0cb7f37e0c715f6d9c0d7cd337fc6d47c95f6f7cc09f10e7c0489700"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "3377558ea228a400877c68ce5b4b6504d550835e2e06d3e9913c695a0c2dc501"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "3b484906aae2d038710f28bb89dc5f84cdc29b37e81d6e32053eecdd703baf6d"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "ca9f06059719393377f11a385b4ff61177c8a48927a07d4f28f3667ba3ac9349"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "230cab5e5b2484e387ba7fc76c2eb4f625f1e452902178df3b085683b3ea3eab"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "f0e3af9916a072974abe41896cccce29f954160bd027c541cbc78a8400a4749b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "77b4c5c74f3f37f6bbffaa8d01e4401ef74dfe0cee523193744151a216d43b5b"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "20edb50b2853168a57dadb0188cc02b361c6ae86c0d4e8ca7b37de1c953bd481"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "eb5a9cbb6750532712e16a248e079ad19177bef3e5e5f8b080753fef38a6cdfa"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "c2988e7b7d8ca3e04bfe29daf2606f7dcc50909e916178a13279bbbc1197a049"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "compare",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "106b4c296cb9839ef1ec8e717a513560f87be6e8f7608da445f7e55e79b4d80f"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "85fcdbdec871c71f7ae61e1b602b186550af3e18d4baa38df17fd8d78fd88873"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "b65ee01f3d0b33d77996ce823d1ae5301da9e2777666da1714b75abf4e2898e8"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "dff608cd408b2a269ef0999b525da1277da8fe78d5de3336049e047d91162847"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:exist",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "bf889a877bf6274ff7afe9d9a77112fb93be877c6f489cf5fd7400b013d193bb"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "3c021af54773f92e874d96fea8ecd142a0156a0ed6e378a9cf634b3e2d07c027"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:logic",
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "6a9eae7dc09529ebec2537143f01fbc741d383791a93edc8bf5a7ff4c9ebb227"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "487e1002149b9deec31c556c59cda6c0eac30ccb4d8406352e707fc69ccb9c9c"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "4695d61865162f5d22aa0d56eca65151c4ddcccc24d224323136a1e0c82c22de"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "5de17c1e5b8822b68dde15bdaebbace20e1e0aaf5e85f4ad275a6a8023854eab"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "e6533542783b766c731c1f49bc2c75e2eda7c0329234fcf67ec5666fcf0fd721"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "compare",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "f3c147108b6c17b63c3499c3fc356121362e981cac135b1a43411e34acb325dc"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "bcdba6b883c329f34905f4edabac9678683e6efb15e70b2fc9ab4295d01c860c"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "9a40d14fa37e0cdc91984a1732f49de24ffb5c111b6dbd2308f8ee55bc47753b"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "d4ff96b2018340b687d7dc6136e502b02168ed96e462434760fbd7c19ad812b4"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:exist",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "2a07a5e323959430def1671b10543f598a1a34ff2c59dbf4748f21a4a93c3269"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "f3e39588eb3aee67cbb5cc6925aadc2420cb2b54e5e2a1a03848d4d2bce292c6"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:verifyRel",
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "485b193c7752bf3c2b5fa2433a1afd8e69f050350331b5e05132eed0f89b4883"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "f0c7c04cd7d260783e967de87612bb2c78ed2a4a11f9f1b38e8cb5738d3e5836"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "b96fe415aa1e654d982b7c34abec153aa3846fa5d6b2c6beb5ad63f696210bf0"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "ab6e14a79a36e5b89ad4881c0eed5e258e085d4126e6f39ed549e85061c87cd6"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "c7c7359453f1b8a660479aaa5fcab837b781b1757edc0d5973ef955182d5b74d"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "exist",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "cf43f7b2b981e0b4b3c47b4d575b817f5e7ea449725ce0b3992b85f50f4d818e"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "586b3045130abd00ddf90600922b5dc6e12e0dbc3486061c72ee8cccdfcfffd3"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "placebo_global",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "6d5cf445e256e123a56ce829d97d2cf69b4b1dca017209084ebef3d0d9f0e63c"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "be8b38768656eee49dbf2c92defb2ee2e9ad1e770ed4efede73bb933587d1b62"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "shuffled:verifyAttr",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "6fe8022cad2ca3f1dd236e36446ea9c67e00798260247c03907d2956ae822234"
+    },
+    {
+      "config": {
+        "arm": "Seq",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "29e800208678b371107601bd1e7aef56afbfbe13d8da2a816b0cdc81c9c42973"
+    },
+    {
+      "config": {
+        "arm": "Joint",
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "source": "self:compare",
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "3ca1c495ffe32720047fdc10d7432dbd00edcba555f315fa7d3464c5cc77535f"
+    }
+  ],
+  "sources": [
+    "5bc21dd812c01d2be473c1f73a186a260c5c8a1f259aef7d45e12fab307c2e13",
+    "5dd2dd24bd2c178e2a413c0813d87823eba4d64233e1e05825f55fca07fee673",
+    "7102445a67ac526fd54be38b09a78e888bbe390d36a06f2a12e4cb974f73c69d",
+    "6de461904a98747b5b7d1364125b5d81f1ae89b7b43db9988883f745cd7d6e5f",
+    "1c1c221ab438239074ee7271898be43292e58b6eaacc0269294db4cbbbc7c25a",
+    "4c45e93e919055766fd0908cd47a62574fc0d123a0836b5bfdcd4efa32d20e75",
+    "73c061a92efdc06a73723b1c605d98925d4707ced34a6e54da763af62d56d9a8",
+    "a48962b8071a0ca62f375628653520158da4cc8fe5b889dff47a5f47af6a0927",
+    "c5a4c273c43a2f49ce9b65d3f110f25afedff9f4455860c459e8bb14d0178211",
+    "dec74047d6eb387c1c89545446eba7e614811eeb76490e51c57b4035788cd7b0",
+    "fb9023fd9314350eff89a7ad56ce1f8dc8430f5a641280e43100bc119b7c332f",
+    "7891a1f9c845ea4f4941920f190dde564b575f65591002f1a002f045eb280c36",
+    "40ad4f3928b6f6b0d48738ebf081ae0137c7710d59f1ce2628faf8231416d3c6",
+    "a6123abdcf57fb49ad536b886cfe461c65db044671fcb7207c5d70b5a05930c9",
+    "60ef6446eb1d5cb96944e42d41d03b284cf1de1355244b27b1c960b816ac88ee",
+    "5f7256172b53ed92989b6e42d4ef40e4f3bef1904a7df0fc0d10bf2904716f8f",
+    "aae4522be16a5f9c43beb6a71a55c70969192a71d597813f22811420f8d2af5a",
+    "f5986459b410d37faaf5b5e8036f6b78fd279077290b1f83f3597916e6744377",
+    "8ce4fea6156c7740f9b147dbd09ac794415e8c62058048fc767845a409505ed2",
+    "18bdd4c192b071e0a4c72479910fb4ec1da5115ed525d551050905bddce39554",
+    "698e79407ee141826c69de900d0ed51696cf211e4efd0484d425efd2b1ded368",
+    "353cac6508407b793bc34eeeab5749a640d281bd95a402d84aeff81af34541b5",
+    "2e7148590a2a8530a7123b7a387c6143a88830e7c41e1602315ce399247c7988",
+    "51e92a7e5f5183d58b058731a6431b128050bbda218c608cd5d6db58e4cc5f35",
+    "39c46393d7c39499484a34ba4cd2cf8a10047ed6b31be1e874dab9b58da87f21",
+    "78bc845479d23b7b8c001396c8766eeb5ddaddd86696027fd63918c0205043ef",
+    "f5b2f984d3b655c606f9a35553f32ad5c555e23de6ab4fbe9fe60efa673d4961"
+  ]
+}

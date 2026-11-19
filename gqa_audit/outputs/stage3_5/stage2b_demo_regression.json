@@ -1,0 +1,12 @@
+[
+  {
+    "variant": "program_strict",
+    "rows": 35,
+    "status": "PASS"
+  },
+  {
+    "variant": "unfiltered",
+    "rows": 37,
+    "status": "PASS"
+  }
+]

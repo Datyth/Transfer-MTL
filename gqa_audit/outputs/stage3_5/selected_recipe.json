@@ -1,0 +1,9 @@
+{
+  "mean_rank": 1.2666666666666666,
+  "recipe": {
+    "epochs": 10,
+    "lr_fusion": 0.0001,
+    "train_text": false
+  },
+  "recipe_hash": "0cde11246fabf143ed3a4b1a32b2eb6d35c345137e7146812c03e89bd7460512"
+}

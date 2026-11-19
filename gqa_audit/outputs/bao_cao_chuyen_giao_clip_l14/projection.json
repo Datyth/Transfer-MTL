@@ -1,0 +1,10 @@
+{
+  "overhead_seconds_per_run": 0.7284768749668729,
+  "remaining_gpu_hours": 13.541715633939715,
+  "run_count": 264,
+  "seconds_per_evaluation": 0.0018743808293179814,
+  "seconds_per_example": 0.002577337958996395,
+  "spent_gpu_hours": 0.4959865816713864,
+  "status": "PASS",
+  "total_projected_gpu_hours": 14.037702215767228
+}

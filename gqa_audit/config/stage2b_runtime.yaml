@@ -1,6 +1,6 @@
 schema_version: 1
-source: codex_prompt_gqa_stage2b_analysis.md
-# Execution details and diagnostic expectations stated in the supplied prompt.
+source: stage2b_runtime.yaml
+# Execution details and diagnostic expectations for the Stage 2b analysis.
 # The immutable H-L analysis plan remains byte-for-byte unchanged.
 overlap_contrast_bounds: [0.05, 0.95]
 minimum_family_questions: 100

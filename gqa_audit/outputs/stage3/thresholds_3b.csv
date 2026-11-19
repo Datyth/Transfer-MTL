@@ -1,0 +1,11 @@
+task,threshold,dev_balanced_accuracy,fit_part,fit_population,tie_rule,condition,model
+compare,0.12644195556640622,0.7349362361436764,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",image,3b
+exist,0.12575721740722653,0.878268579173255,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",image,3b
+logic,-0.2516536712646485,0.8703447930975997,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",image,3b
+verifyAttr,-0.11005783081054689,0.852189147532258,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",image,3b
+verifyRel,-0.37429809570312506,0.8946272663281062,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",image,3b
+compare,-0.8212642669677735,0.5243861662428586,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",no_image,3b
+exist,-0.5946979522705079,0.5336856223175965,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",no_image,3b
+logic,-0.8212642669677735,0.5458992884230207,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",no_image,3b
+verifyAttr,-0.4491462707519532,0.5359676606109258,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",no_image,3b
+verifyRel,-0.3602027893066407,0.5959104354826404,dev,"unfiltered task union, whole task","smallest absolute threshold, then lower threshold",no_image,3b

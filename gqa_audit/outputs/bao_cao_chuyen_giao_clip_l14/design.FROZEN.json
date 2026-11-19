@@ -1,0 +1,97 @@
+{
+  "evidence_level": "exploratory",
+  "identity": {
+    "cache_manifest_hash": "a07a1865471932246f9c0bf031cffe7407015fdb01e99484180cf5eeb38db70f",
+    "code": {
+      "gqa_audit/evaluation.py": "1adc79ffb6fa90a208b85b8a3e5d3d0ecce4cf952fcfd78952547c2d77fd7dd0",
+      "src/vqa_research/chuyen_giao/__init__.py": "c5ed3f47076a1c78eb24d5e7dadb11bbf733054094f28fb407631efc04e0bc6c",
+      "src/vqa_research/chuyen_giao/analysis.py": "1c2e9174cb8a230763b4506d53ef01c1be00e23bb1f5e7406e20df8e01e2b709",
+      "src/vqa_research/chuyen_giao/core.py": "c53d07d9c1aca26f07686284526f53f6cd54f81e45b989ac0cb2a170f6f6e6d9",
+      "src/vqa_research/chuyen_giao/engine.py": "5b1033f647cd1c4fcc1fdca496d26b982a597ec4fe3f0e4316b2122150a0e2a6",
+      "src/vqa_research/chuyen_giao/features.py": "f3a93500f7e5cb9de084fd157edcac17ca51d4a1e72bc8dbe027f886c847f7ed",
+      "src/vqa_research/chuyen_giao/pipeline.py": "c75f20191cf7fb77a0fa47651d53328b8e68303cd4f926e40b3cd1fb49603fad",
+      "src/vqa_research/probe/features.py": "c918996f6758c358d7714991752f70a596483d462b866afc815af4c93e22ec16",
+      "src/vqa_research/probe/model.py": "ef4a7de2ff55d35c1f50ecd14ea2909d8f53922f5f7bfba4cd47965249fdd330",
+      "src/vqa_research/probe/train.py": "6fe991c8e7771e5625942f5826743a5b88d55669f2e664e4c947e3a0d759e240"
+    },
+    "inputs": {
+      "configs/pilot_protocol.FROZEN.yaml": "6a4581783f269f93d1e92bfc6f47f490eb1f08fe66c0f059f57c89284e0a9793",
+      "configs/stage3_protocol.FROZEN.yaml": "a0201c1a0a163d81d102f8f1aca677812238c7328305d69774d7101e4ada7ab2",
+      "gqa_audit/config/analysis_plan.FROZEN.yaml": "0d23283638bbfa254994156fe30650ef5db6254f50c943f27c7233452b99520b",
+      "gqa_audit/outputs/stage2/cache/questions_train.parquet": "e997779324c1cf97275dfb4abccd939ce2bac1c19bb5d1516ab3b8d8e9f7c5db",
+      "gqa_audit/outputs/stage2/cache/questions_val.parquet": "adaf9a4b33e1a436e8a50873717165f34a172f6e2c70d4d7cf2fc8e3e957a9ab",
+      "gqa_audit/outputs/stage2/task_registry.json": "fc4b9448fa5744cbf9a6c348cb512715a6abecdb20baeec1104c6f78a1075083",
+      "gqa_audit/outputs/stage2b/analysis_subsets.json": "77e70cc7e5af04e77d15bea365f128fe3549ee2cafe2ddae270d8fba5537f199",
+      "gqa_audit/outputs/stage2b/registry_questions.parquet": "dd8514e8291ea4b936f31ccc8043ff56b023a0717f14de919fc4484463b1855a"
+    },
+    "max_text_tokens": 32,
+    "model": {
+      "files": {
+        "config.json": "8a09b467700c58138c29d53c605b34ebc69beaadd13274a8a2af8ad2c2f4032a",
+        "merges.txt": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a",
+        "preprocessor_config.json": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd",
+        "pytorch_model.bin": "f1a17cdbe0f36fec524f5cafb1c261ea3bbbc13e346e0f74fc9eb0460dedd0d3",
+        "special_tokens_map.json": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf",
+        "tokenizer.json": "a83e0809aa4c3af7208b2df632a7a69668c6d48775b3c3fe4e1b1199d1f8b8f4",
+        "tokenizer_config.json": "deef455e52fa5e8151e339add0582e4235f066009601360999d3a9cda83b1129",
+        "vocab.json": "3f0c4f7d2086b61b38487075278ea9ed04edb53a03cbb045b86c27190fa8fb69"
+      },
+      "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41"
+    },
+    "spec": {
+      "attention": "sdpa_math",
+      "batch_size": 64,
+      "bootstrap": 2000,
+      "budgets": [
+        1000
+      ],
+      "epochs": 10,
+      "evaluation": "dev",
+      "family_budget": 500,
+      "family_seeds": [],
+      "family_source": 2000,
+      "fusion_layers": 4,
+      "fusion_width": 512,
+      "gate_seeds": [
+        1000,
+        1001,
+        1002,
+        1003,
+        1004
+      ],
+      "gpu_hours": 24,
+      "group_seeds": [
+        1000,
+        1001,
+        1002
+      ],
+      "image_shape": [
+        257,
+        1024
+      ],
+      "lr": 0.0001,
+      "minimum_effect": 0.01,
+      "mode": "exploratory_report",
+      "model": "openai/clip-vit-large-patch14",
+      "primary_edges": [],
+      "primary_metric": "primary",
+      "quality_gates": "waived_by_user",
+      "qwen": false,
+      "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+      "source": 10000,
+      "train_text": false,
+      "version": 1
+    }
+  },
+  "limitations": [
+    "quality_gates_not_run",
+    "no_blank_replication",
+    "no_image_disjoint_replication",
+    "no_val_inference"
+  ],
+  "metric": "primary",
+  "plan_hash": "81877fee19b3bf878fbe2e316411fe88023442fa91c0567937f5cba36c3aa043",
+  "thresholds": {
+    "group": 0.01
+  }
+}

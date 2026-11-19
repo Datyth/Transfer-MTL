@@ -1,0 +1,233 @@
+schema_version: 1
+status: FROZEN
+name: stage3_5_pilot_protocol
+applies_to:
+  registry_sha256: c122aac0bbb9ed8ad6eaa93843d95df664ba75c767946003e90ff2469c27b451
+  analysis_plan_sha256: 0d23283638bbfa254994156fe30650ef5db6254f50c943f27c7233452b99520b
+  stage3_protocol_sha256: a0201c1a0a163d81d102f8f1aca677812238c7328305d69774d7101e4ada7ab2
+purpose: 'Pilot before the transfer study: build the probe model, choose its training recipe on dev, measure learning curves,
+  seed noise, image reliance, effect sizes of a few transfer contrasts, run times, and Qwen-LoRA training cost. Results
+  set the frozen transfer design. Pilot results are exploratory and are never reused as main-study evidence.'
+splits:
+  train_from: train_core
+  evaluate_on: dev
+  val: NOT USED in this stage (no val inference of any kind)
+  testdev: sealed (no features, no inference)
+variant: program_strict
+seeds:
+  pilot:
+  - 1000
+  - 1001
+  - 1002
+  - 1003
+  - 1004
+  reserved_for_main_study:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  derivation: 'numpy.random.SeedSequence([seed, component_id]); component_id: 1 target-budget permutation, 2 source-sample
+    permutation, 3 model init, 4 data order, 5 label shuffle, 6 dropout/torch'
+feature_cache:
+  model_id: openai/clip-vit-base-patch16
+  revision: pin the resolved commit at first download and record it
+  images: all train images (train_core and dev) and all val images of the GQA balanced files; no testdev images
+  expected_image_count: 82374
+  preprocess: RGB; pad to a square canvas centred, fill = CLIP mean colour (122, 116, 104); resize to 224x224 bicubic; normalise
+    with CLIP mean/std. No cropping.
+  layer: vision_model hidden_states[-2] (penultimate layer), all 197 tokens (CLS + 196 patches), no post_layernorm
+  dtype: float16
+  shape_per_image:
+  - 197
+  - 768
+  storage: one numpy memmap file (N, 197, 768) float16 + index parquet (imageId -> row) + manifest with SHA-256
+  blank_image: a 224x224 image filled with the CLIP mean colour, encoded once with the same pipeline; used for the blank-image
+    condition
+  validation: recompute 64 seeded random images on the fly; max abs difference vs cache <= 0.02; all registry train_core/dev/val
+    imageIds and placebo-pool imageIds present
+probe_model:
+  text_encoder: CLIP text model from the same checkpoint (openai/clip-vit-base-patch16), all token states (512-d), attention
+    mask; trainable or frozen per recipe
+  max_text_tokens: max CLIP token length over all pilot questions, rounded up to a multiple of 8; STOP if any question exceeds
+    77 tokens
+  image_input: cached 197 x 768 tokens -> Linear(768, 512) + LayerNorm
+  text_input: CLIP text token states -> Linear(512, 512) + LayerNorm
+  type_embeddings: learned, one vector for text tokens, one for image tokens
+  fusion:
+    tokens: '[FUS] learned token + text tokens + 197 image tokens'
+    layers: 4
+    d_model: 512
+    heads: 8
+    ffn: 2048
+    norm: pre-LN
+    activation: GELU
+    dropout: 0.1
+    padding_mask: true
+  head: LayerNorm then Linear(512, 1) on the [FUS] output = logit score; p_yes = sigmoid(score); pred = yes if score > 0
+  loss: BCEWithLogits, label yes = 1, no class weights
+  inputs_allowed: image features and question text only; never task, family, detailed type, program or any audit column
+  single_head: one yes/no head for all tasks; the model is never told the task
+training:
+  optimizer: AdamW, betas (0.9, 0.999), eps 1e-8, weight decay 0.01 except biases and LayerNorm weights
+  schedule: cosine decay to 0 with linear warmup over the first 5% of optimizer steps
+  batch_size: 64
+  grad_clip_norm: 1.0
+  precision: bf16 autocast, fp32 master weights
+  length: E epochs over the training set of the phase (E from the selected recipe)
+  full_budget_length: full train_core of a task is trained for exactly 10 epochs (fixed, not tuned)
+  determinism: torch.use_deterministic_algorithms(True, warn_only=True); record warnings; one repeat run measures run-to-run
+    logit difference
+recipe_grid:
+  lr_fusion:
+  - 0.0001
+  - 0.0003
+  text_encoder:
+  - frozen
+  - trainable_lr_1e-5
+  epochs:
+  - 10
+  - 30
+  selection: 'phase P1, seed 1000, all 5 tasks x budgets 250/1000/4000; for each (task, budget) cell rank the 8 configs
+    by dev primary-scope log-loss (rank 1 = lowest); choose the config with the lowest mean rank; ties: fewer epochs, then
+    frozen text encoder, then lower lr. One recipe for all tasks.'
+target_budgets:
+- 250
+- 1000
+- 4000
+budget_sampling: 'per task and seed: one seeded permutation of the program_strict train_core pool; budget b = first b questions
+  (budgets are nested prefixes); record family and yes/no composition'
+phases:
+  P1_recipe:
+    tasks: all 5
+    budgets:
+    - 250
+    - 1000
+    - 4000
+    seeds:
+    - 1000
+    configs: 8
+    runs: 120
+  P2_curves:
+    tasks: all 5
+    budgets:
+    - 250
+    - 1000
+    - 4000
+    seeds:
+    - 1000
+    - 1001
+    - 1002
+    - 1003
+    - 1004
+    full:
+      seeds:
+      - 1000
+      - 1001
+    runs: 85
+    note: selected recipe; reuse a P1 run only if its config hash is identical
+  P3_blank_image:
+    tasks: all 5
+    budgets:
+    - 4000
+    seeds:
+    - 1000
+    - 1001
+    - 1002
+    full:
+      seeds:
+      - 1000
+      - 1001
+    runs: 25
+    condition: blank-image features at training and evaluation
+  P4_transfer:
+    budget: 1000
+    seeds:
+    - 1000
+    - 1001
+    - 1002
+    source_size: 10000
+    targets:
+      logic:
+      - exist
+      - compare
+      verifyRel:
+      - exist
+      - compare
+      compare:
+      - verifyAttr
+      - exist
+    controls_per_target:
+      placebo_global: 'all global-scene yes/no questions in train_core: locationVerify, locationVerifyC, placeVerify, placeVerifyC,
+        weatherVerify, weatherVerifyC (5,371 questions: yes 2,718, no 2,653; smaller than 10,000, declared deviation; same
+        question set for every seed, order from seed component 2)'
+      placebo_shuffled: the 10,000-question sample of the first listed real source for that target, with answers randomly
+        permuted within the sample (seed component 5); logic and verifyRel use shuffled exist, compare uses shuffled verifyAttr
+      self: 10,000 questions of the target task at permutation positions 4000 to 13999 (disjoint from every budget prefix)
+    arms:
+      B: target budget only
+      Seq: train on source (E epochs), then new optimizer and schedule, train on the target budget (E epochs)
+      Joint: train from scratch on the shuffled union of source and target budget (E epochs over the union)
+      Z: evaluate every source-phase checkpoint on all 5 dev tasks (no target training)
+    runs:
+      source_phase: 27
+      target_phase: 99
+  P5_qwen_lora:
+    model: checkpoints/Qwen2.5-VL-3B-Instruct, revision 66285546d2b821cf421d4f5eb2576359d3770cd3
+    task: compare
+    budgets:
+    - 1000
+    - 4000
+    seeds:
+    - 1000
+    - 1001
+    lora:
+      r: 16
+      alpha: 32
+      dropout: 0.05
+      target_modules:
+      - q_proj
+      - k_proj
+      - v_proj
+      - o_proj
+      - gate_proj
+      - up_proj
+      - down_proj
+      scope: language model only; vision tower and merger frozen
+      adapter_dtype: float32
+    prompt: Stage 3 template A, Stage 3 chat template and image resolution (min_pixels 200704, max_pixels 802816)
+    loss: cross-entropy on the first assistant token only; target token = the single token for lowercase "yes" or "no"
+    optimizer: AdamW lr 1e-4, weight decay 0, cosine with 5% warmup, 2 epochs, micro-batch 4, gradient accumulation 4 (effective
+      16), gradient checkpointing, bf16 base weights, official sdpa attention
+    evaluation: full compare dev (1,705 questions), unmerged adapter, official sdpa, batch size 1, Stage 3 scoring rule
+    regression_check: re-score 128 seeded compare dev questions with the base model through the pilot evaluation code; max
+      |score difference| vs Stage 3 dev predictions <= 1e-3, else STOP
+metrics:
+  library: gqa_audit.evaluation, extended (see prompt); never re-implement metrics elsewhere
+  primary: 'decision H: accuracy (exist, verifyAttr, compare, logic); balanced accuracy on verifyRel_relation'
+  log_loss: mean binary log-loss of p_yes, clipped to [1e-6, 1 - 1e-6]; for verifyRel_relation the class-balanced log-loss
+    (mean of the per-class means)
+  auroc: ROC AUC of the logit score on the primary scope
+  contrast_interval: 'hierarchical paired bootstrap: 2,000 resamples; each resample draws seeds with replacement, then images
+    with replacement (the same image draw for both arms and all seeds); statistic = mean over drawn seeds of (metric arm
+    A - metric arm C)'
+  z_score: mean paired difference / bootstrap standard error
+text_floor_dev: 'Stage 2 frozen question-only model on dev, primary metric: pooled task model for accuracy tasks (from stage2b
+  demo_eval_blind.csv, dev rows), verifyRel = within-subset model balanced accuracy on verifyRel_relation dev (0.6411, stage2b
+  verifyrel_within_subset_baselines.csv)'
+gates:
+  G1_beats_text: P2 full-budget mean dev primary metric >= dev text floor + 0.10, every task
+  G2_uses_image: P2 full minus P3 full (mean over seeds 1000 and 1001) >= 0.10 on the dev primary metric, every task; the
+    P3 blank model is recorded as the probe-specific text floor
+  G3_not_saturated: (mean dev primary at b 4000 - mean at b 1000) / 2 >= 0.01 per task (at least 1 point per doubling)
+  G4_low_noise: standard deviation over the 5 P2 seeds of the dev primary metric at b 1000 <= 0.015 per task
+  status_rule: each gate PASS or FLAG per task; FLAGs never change the protocol; the human decides
+  pre_specified_fallback_if_G1_or_G2_fails: 'F1: same probe with openai/clip-vit-large-patch14 at 224 px (penultimate layer,
+    257 x 1024 tokens); only after human approval'
+metric_selection:
+  contrasts: all P4 (Seq vs B, Joint vs B) contrasts and the P2 budget contrasts (1000 vs 250, 4000 vs 1000)
+  rule: log-loss gain becomes the primary transfer metric if the median |z| over contrasts for log-loss is at least 1.25
+    times the median |z| for the primary-metric gain; otherwise the primary-metric gain is primary. AUROC is always secondary.
+cost_projection: 'from measured run times: GPU-hours for the task-level matrix (816 runs at 3 seeds, 1,360 at 5), the family-level
+  matrix (about 630 runs) and the Qwen confirmatory set (93 trainings plus evaluation at batch size 1)'
+stop_and_ask: after P1, if the projected time for P2 to P5 exceeds 24 GPU-hours

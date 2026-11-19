@@ -1,0 +1,14 @@
+{
+  "device": "cpu",
+  "image_shape": [
+    1,
+    257,
+    1024
+  ],
+  "output_shape": [
+    1
+  ],
+  "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+  "status": "PASS",
+  "text_width": 768
+}

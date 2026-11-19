@@ -1,0 +1,608 @@
+{
+  "calibration_runs": 42,
+  "code": {
+    "gqa_audit/evaluation.py": "1adc79ffb6fa90a208b85b8a3e5d3d0ecce4cf952fcfd78952547c2d77fd7dd0",
+    "src/vqa_research/chuyen_giao/__init__.py": "c5ed3f47076a1c78eb24d5e7dadb11bbf733054094f28fb407631efc04e0bc6c",
+    "src/vqa_research/chuyen_giao/analysis.py": "96304baa5a95ccbfa00fdb0ae51eb63a2763e0e41221f92e4cd3639ce0896e51",
+    "src/vqa_research/chuyen_giao/core.py": "2ad25900594109887ee911cd44d010bf3a438c69b11dcfdc84ab8769006c3a0c",
+    "src/vqa_research/chuyen_giao/engine.py": "5b1033f647cd1c4fcc1fdca496d26b982a597ec4fe3f0e4316b2122150a0e2a6",
+    "src/vqa_research/chuyen_giao/features.py": "f3a93500f7e5cb9de084fd157edcac17ca51d4a1e72bc8dbe027f886c847f7ed",
+    "src/vqa_research/chuyen_giao/pipeline.py": "0e92ddd27b53f8d73b5136f008365a75ba42de158c98739eeb485dcf96a3f6b0",
+    "src/vqa_research/probe/features.py": "c918996f6758c358d7714991752f70a596483d462b866afc815af4c93e22ec16",
+    "src/vqa_research/probe/model.py": "ef4a7de2ff55d35c1f50ecd14ea2909d8f53922f5f7bfba4cd47965249fdd330",
+    "src/vqa_research/probe/train.py": "6fe991c8e7771e5625942f5826743a5b88d55669f2e664e4c947e3a0d759e240"
+  },
+  "definitions": [
+    {
+      "counts": {
+        "dev": 2083,
+        "train_core": 18921,
+        "val": 2879
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existThat",
+          "question": "Is there any helmet in this photograph that is pink?"
+        },
+        {
+          "answer": "no",
+          "family": "exist",
+          "question": "Is there a frisbee in the photo?"
+        }
+      ],
+      "families": [
+        "exist",
+        "existAttr",
+        "existAttrNot",
+        "existMaterial",
+        "existMaterialNot",
+        "existThat",
+        "existThatNot"
+      ],
+      "level": "group",
+      "metric": "accuracy",
+      "name": "exist",
+      "title": "Tồn tại"
+    },
+    {
+      "counts": {
+        "dev": 2721,
+        "train_core": 23462,
+        "val": 3633
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "verifyAttrK",
+          "question": "Does the blue sky look clear?"
+        },
+        {
+          "answer": "yes",
+          "family": "verifyAttr",
+          "question": "Is the hat orange?"
+        }
+      ],
+      "families": [
+        "verifyAttr",
+        "verifyAttrK",
+        "verifyAttrThis"
+      ],
+      "level": "group",
+      "metric": "accuracy",
+      "name": "verifyAttr",
+      "title": "Thuộc tính"
+    },
+    {
+      "counts": {
+        "dev": 5576,
+        "train_core": 50947,
+        "val": 7933
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "relVerify",
+          "question": "Is the person inside the bathroom wearing a backpack?"
+        },
+        {
+          "answer": "no",
+          "family": "relVerify",
+          "question": "Is the bottle on a desk?"
+        }
+      ],
+      "families": [
+        "relVerify"
+      ],
+      "level": "group",
+      "metric": "balanced_accuracy@relation",
+      "name": "verifyRel",
+      "title": "Quan hệ"
+    },
+    {
+      "counts": {
+        "dev": 1705,
+        "train_core": 15994,
+        "val": 2504
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "twoDifferent",
+          "question": "Does the shirt have a different color than the jar?"
+        },
+        {
+          "answer": "yes",
+          "family": "twoSame",
+          "question": "Are both the toilet seat and the wire the same color?"
+        }
+      ],
+      "families": [
+        "twoDifferent",
+        "twoSame"
+      ],
+      "level": "group",
+      "metric": "accuracy",
+      "name": "compare",
+      "title": "So sánh"
+    },
+    {
+      "counts": {
+        "dev": 11117,
+        "train_core": 101611,
+        "val": 15926
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existAnd",
+          "question": "Are there both helmets and fences in the image?"
+        },
+        {
+          "answer": "yes",
+          "family": "verifyAttrs",
+          "question": "Does the fence look black and wooden?"
+        }
+      ],
+      "families": [
+        "existAnd",
+        "existAttrOr",
+        "existOr",
+        "existThatOr",
+        "verifyAttrs"
+      ],
+      "level": "group",
+      "metric": "accuracy",
+      "name": "logic",
+      "title": "Suy luận logic"
+    },
+    {
+      "counts": {
+        "dev": 5576,
+        "train_core": 50947,
+        "val": 7933
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "relVerify",
+          "question": "Is the cheese to the left of the food on the plate?"
+        },
+        {
+          "answer": "yes",
+          "family": "relVerify",
+          "question": "Is the bird wearing a coat?"
+        }
+      ],
+      "families": [
+        "relVerify"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "relVerify",
+      "title": "relVerify"
+    },
+    {
+      "counts": {
+        "dev": 4214,
+        "train_core": 38702,
+        "val": 6135
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existOr",
+          "question": "Are there giraffes or elephants in this image?"
+        },
+        {
+          "answer": "yes",
+          "family": "existOr",
+          "question": "Are there any lamps or books?"
+        }
+      ],
+      "families": [
+        "existOr"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existOr",
+      "title": "existOr"
+    },
+    {
+      "counts": {
+        "dev": 2241,
+        "train_core": 21500,
+        "val": 3411
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "verifyAttrs",
+          "question": "Is the grass green and striped?"
+        },
+        {
+          "answer": "no",
+          "family": "verifyAttrs",
+          "question": "Does the table seem to be white and wooden?"
+        }
+      ],
+      "families": [
+        "verifyAttrs"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "verifyAttrs",
+      "title": "verifyAttrs"
+    },
+    {
+      "counts": {
+        "dev": 2189,
+        "train_core": 19247,
+        "val": 2946
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "existAnd",
+          "question": "Are there both bikes and cars in this scene?"
+        },
+        {
+          "answer": "no",
+          "family": "existAnd",
+          "question": "Are there both bicycles and helmets in the image?"
+        }
+      ],
+      "families": [
+        "existAnd"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existAnd",
+      "title": "existAnd"
+    },
+    {
+      "counts": {
+        "dev": 1633,
+        "train_core": 14703,
+        "val": 2314
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existAttrOr",
+          "question": "Are there any red umbrellas or motorcycles in the photograph?"
+        },
+        {
+          "answer": "yes",
+          "family": "existAttrOr",
+          "question": "Is there either a red traffic light or stop sign?"
+        }
+      ],
+      "families": [
+        "existAttrOr"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existAttrOr",
+      "title": "existAttrOr"
+    },
+    {
+      "counts": {
+        "dev": 1290,
+        "train_core": 11258,
+        "val": 1713
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "verifyAttr",
+          "question": "Is the sky dark?"
+        },
+        {
+          "answer": "no",
+          "family": "verifyAttr",
+          "question": "Is that pipe red?"
+        }
+      ],
+      "families": [
+        "verifyAttr"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "verifyAttr",
+      "title": "Thuộc tính"
+    },
+    {
+      "counts": {
+        "dev": 1269,
+        "train_core": 11107,
+        "val": 1727
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "verifyAttrK",
+          "question": "Does the shirt look white?"
+        },
+        {
+          "answer": "yes",
+          "family": "verifyAttrK",
+          "question": "Does the folding chair look wooden?"
+        }
+      ],
+      "families": [
+        "verifyAttrK"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "verifyAttrK",
+      "title": "verifyAttrK"
+    },
+    {
+      "counts": {
+        "dev": 1137,
+        "train_core": 10148,
+        "val": 1582
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "exist",
+          "question": "Are there surfboards?"
+        },
+        {
+          "answer": "yes",
+          "family": "exist",
+          "question": "Are there any chairs?"
+        }
+      ],
+      "families": [
+        "exist"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "exist",
+      "title": "Tồn tại"
+    },
+    {
+      "counts": {
+        "dev": 856,
+        "train_core": 8006,
+        "val": 1250
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "twoSame",
+          "question": "Do the bike and the helmet have the same color?"
+        },
+        {
+          "answer": "no",
+          "family": "twoSame",
+          "question": "Is the color of the belt the same as the glove?"
+        }
+      ],
+      "families": [
+        "twoSame"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "twoSame",
+      "title": "twoSame"
+    },
+    {
+      "counts": {
+        "dev": 849,
+        "train_core": 7988,
+        "val": 1254
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "twoDifferent",
+          "question": "Do the shirt and the soccer ball have a different colors?"
+        },
+        {
+          "answer": "yes",
+          "family": "twoDifferent",
+          "question": "Does the saucer have a different color than the mug?"
+        }
+      ],
+      "families": [
+        "twoDifferent"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "twoDifferent",
+      "title": "twoDifferent"
+    },
+    {
+      "counts": {
+        "dev": 840,
+        "train_core": 7459,
+        "val": 1120
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "existThatOr",
+          "question": "Are there either any mirrors or coffee tables that are made of glass?"
+        },
+        {
+          "answer": "no",
+          "family": "existThatOr",
+          "question": "Are there pillows or towels that are not red?"
+        }
+      ],
+      "families": [
+        "existThatOr"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existThatOr",
+      "title": "existThatOr"
+    },
+    {
+      "counts": {
+        "dev": 279,
+        "train_core": 2674,
+        "val": 385
+      },
+      "examples": [
+        {
+          "answer": "no",
+          "family": "existAttrNot",
+          "question": "Are there chairs that are not brown?"
+        },
+        {
+          "answer": "yes",
+          "family": "existAttrNot",
+          "question": "Do you see cats that are not orange?"
+        }
+      ],
+      "families": [
+        "existAttrNot"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existAttrNot",
+      "title": "existAttrNot"
+    },
+    {
+      "counts": {
+        "dev": 291,
+        "train_core": 2631,
+        "val": 403
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existThat",
+          "question": "Do you see any potatoes in this image that are yellow?"
+        },
+        {
+          "answer": "yes",
+          "family": "existThat",
+          "question": "Is there grass in this scene that is short?"
+        }
+      ],
+      "families": [
+        "existThat"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existThat",
+      "title": "existThat"
+    },
+    {
+      "counts": {
+        "dev": 275,
+        "train_core": 2553,
+        "val": 382
+      },
+      "examples": [
+        {
+          "answer": "yes",
+          "family": "existAttr",
+          "question": "Is there any black computer mouse in the photo?"
+        },
+        {
+          "answer": "no",
+          "family": "existAttr",
+          "question": "Is there a train in this picture that is black?"
+        }
+      ],
+      "families": [
+        "existAttr"
+      ],
+      "level": "family",
+      "metric": "accuracy",
+      "name": "existAttr",
+      "title": "existAttr"
+    }
+  ],
+  "family_directions": 182,
+  "gate_runs": 110,
+  "group_directions": 20,
+  "inputs": {
+    "configs/pilot_protocol.FROZEN.yaml": "6a4581783f269f93d1e92bfc6f47f490eb1f08fe66c0f059f57c89284e0a9793",
+    "configs/stage3_protocol.FROZEN.yaml": "a0201c1a0a163d81d102f8f1aca677812238c7328305d69774d7101e4ada7ab2",
+    "gqa_audit/config/analysis_plan.FROZEN.yaml": "0d23283638bbfa254994156fe30650ef5db6254f50c943f27c7233452b99520b",
+    "gqa_audit/outputs/stage2/cache/questions_train.parquet": "e997779324c1cf97275dfb4abccd939ce2bac1c19bb5d1516ab3b8d8e9f7c5db",
+    "gqa_audit/outputs/stage2/cache/questions_val.parquet": "adaf9a4b33e1a436e8a50873717165f34a172f6e2c70d4d7cf2fc8e3e957a9ab",
+    "gqa_audit/outputs/stage2/task_registry.json": "fc4b9448fa5744cbf9a6c348cb512715a6abecdb20baeec1104c6f78a1075083",
+    "gqa_audit/outputs/stage2b/analysis_subsets.json": "77e70cc7e5af04e77d15bea365f128fe3549ee2cafe2ddae270d8fba5537f199",
+    "gqa_audit/outputs/stage2b/registry_questions.parquet": "dd8514e8291ea4b936f31ccc8043ff56b023a0717f14de919fc4484463b1855a"
+  },
+  "source_runs": 323,
+  "spec": {
+    "attention": "sdpa_math",
+    "batch_size": 64,
+    "bootstrap": 2000,
+    "budgets": [
+      250,
+      1000,
+      4000
+    ],
+    "epochs": 10,
+    "family_budget": 500,
+    "family_seeds": [
+      0,
+      1,
+      2
+    ],
+    "family_source": 2000,
+    "fusion_layers": 4,
+    "fusion_width": 512,
+    "gate_seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "gpu_hours": 24,
+    "group_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "image_shape": [
+      257,
+      1024
+    ],
+    "lr": 0.0001,
+    "model": "openai/clip-vit-large-patch14",
+    "primary_edges": [
+      [
+        "exist",
+        "logic"
+      ],
+      [
+        "verifyAttr",
+        "logic"
+      ],
+      [
+        "verifyRel",
+        "logic"
+      ],
+      [
+        "verifyAttr",
+        "compare"
+      ],
+      [
+        "exist",
+        "verifyRel"
+      ]
+    ],
+    "qwen": false,
+    "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+    "source": 10000,
+    "train_text": false,
+    "version": 1
+  },
+  "status": "PASS",
+  "target_runs": 3086
+}

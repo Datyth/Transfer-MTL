@@ -1,0 +1,19 @@
+{
+  "blank_sha256": "10022b843d4f0f7835075b03bb3fee4e0753e43c352db981a89ba43269347aff",
+  "commit": "57c216476eefef5ab752ec549e440a49ae4ae5f3",
+  "count": 82374,
+  "dtype": "float16",
+  "index_sha256": "c0a95e5ab197f1c05d4ecde54214b11e825f91f98703aa8a8929af161fc4f22a",
+  "layer": "vision_model.hidden_states[-2]",
+  "model_id": "openai/clip-vit-base-patch16",
+  "preprocess": "RGB; centred square pad fill (122,116,104); bicubic 224; CLIP mean/std; no crop",
+  "shape": [
+    82374,
+    197,
+    768
+  ],
+  "tokens_sha256": "84f02b9c2c071971ea312867c219e768c79082576ea830de4bc69047e091c1ad",
+  "validation_batch_size": 32,
+  "validation_images": 64,
+  "validation_max_abs_difference": 0.0
+}

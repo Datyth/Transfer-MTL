@@ -1,0 +1,7 @@
+{
+  "assumptions": "P1 median seconds/example; end-only task evaluation; Qwen 8 optimizer steps and 32 dev questions",
+  "projected_gpu_hours_P2_P5": 7.848561633224873,
+  "qwen_evaluation_hours": 0.266204621377205,
+  "qwen_training_hours": 1.5700508812067762,
+  "status": "PASS"
+}

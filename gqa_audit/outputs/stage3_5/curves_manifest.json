@@ -1,0 +1,1109 @@
+{
+  "runs": [
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "d4472b44b8165d89ac04dc6a1dbaa23aa2cad59c904c09dcaf2660dde1dcc3c8"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "c5b4c834aa6e6dc4259d8163b44354f81f70592fe2674b1a458447dbb7ace433"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "532e4e0c6cf0f24cdf92780e888c14a7e382e896464d1f6657e60f3c363c652c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "b8fa58072a2b676a3860ab6faefff95b1df93dcec3e78d7fcd3649db925f9b01"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "5b143b9fa192e1c98678694d552765ffa976a97695b8061312e454accaa0db6d"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "137415db2bdece8f0c36d6920ef40931fff46f06d8880c032b5de17a12f52b4d"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "44eace179f5143dc1914f0301e211712d65b5ac88cd042d2f48254e9f4faea75"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "056019352b4ff3717ad5871e78bfe5229cf4362d3cb4cac1d6b7baf5b7a04357"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "83c9d03d2f59fdc9e0adb551014ed6ae0855b32eee85dfd65492de8bd3482350"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "0284e62c96de17f7b6fafd8014ee429602e9c2bdb248c854fe8231b43c91cdbf"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "c06c54fa6631262739fd7f933aa8ac9410aef6dd7f10af07c0430be23d7ceca9"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "8b2e65d0b0331e4b949845a694a06d2fbbfee7c0003ad980b03c74418d2e50c8"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "1f9a91d22748051742d08aafe667226d475542c14d3fb0f1bbfcb781bc2bf010"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "46a2c45ce9909c38f490bed87c92741f6789acd67835fab3a4a4d26c9e608565"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "746efa42494d048f678c772bddd541d11cbcf6c0d797d504cbac308a067a8dea"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "c9c9f6f051e44345d32d8e0f0e733974fa2be282daa9bfec4440e596cfed8bf5"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "exist",
+        "train_text": false
+      },
+      "run_id": "477c6e9460eaa143cdf002af2e0d115f33e4f3f423ac623a6f310db10fbb08ad"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "d59d09ee68f6c8177e131c1b597d2f90c93e6af54f0fa5ebfd0aafd44035782b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "5600b9359096bc883e4d35362678584bbcef9104d048d1603da516bc1f536b87"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "d7328ce71986f98cbb61d278136f66324e2fb2b6170d142578710c0c3d99b0c6"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "1a98d16e55de8bbbc951163d468cd010571dfb0bd23b8d188304c07781de4a5b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "373a9768a9a183d49fdc740b49c55211a899be3318d5f508ac3cf9dae6ceb040"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "13f399e6a42fe8ba20f9e518e74dbf9a693e0950ac6d7820571f78368c77eff5"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "98ebdd9f862e7f6df728f683fd69fef45317a2ef1503ddeaf8e7cd072fafc442"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "920af436739c08f4aece3578be58313ead601c181d74f979389731c91d0c1aed"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "f8ed1b4c536f6c880d234c978b037766828aabc3958b4a51ef2b504af4b2cc16"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "358a4e1aeae718fa0b030a22e0d6f3aab47dce48832573e7025a7c1986a699a6"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "5ae8e52adb80eabac6470983d01683896e13a0fc29bcc2dfc0b7806cae4beb5c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "f4cc0f4f7b49964f47b7168c5ab37b65559350bf0cad94c3d431c5af6e66829a"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "3c0b8c28366a9364eeb9b09f9f8b4e9cb0da2215b38937fead3f9a6ff9c84cfd"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "0ea5c0f98b362d44a3c5e1cde4f563a21230dd8e1bf50472d1963d2fc60420df"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "001cba0a952a0d640a6b38d45ee1e822a6020d68ca95e76092722ecd972acb7b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "af7fc8e60dcd9500f93be9fc1e831298c1cb06c6ffba6b6092e732d9638351db"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyAttr",
+        "train_text": false
+      },
+      "run_id": "eda1915ad994a562b27a0d46a5460b04dad7323bf85d15275e147375990aa56b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "54a88ba4306bd03294bb72f7dae59dd3e7234393176d8cc12d3151b1515e6411"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "bc2d94bc7a2b8573a4bee6b302a651fdaad92f0a08180f8228257c3e292073ff"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "9207ed2d6e7199249da55af7ddc1d93d6ec3912548ff1e4e39084a494479e5a0"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "cbdc7c8d9694bafcdba578f9bcfddbbac15ee0670e1c79f12acf0612aee8f188"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "c72f55b9756fa3557b5ea93e315a38b9b3f74cbb7002a616312c447ad5eb1739"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "6a603aadc77d7b57df3c97da234ca8c662cd570f918446077bfce7da95ded58e"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "53d3fae0b2c51ccdb9a9c6955065e86ca2fdc9b9c32ce2f1c3897dbe2406c807"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "487e1002149b9deec31c556c59cda6c0eac30ccb4d8406352e707fc69ccb9c9c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "f1d64bcc5e17263c1513b157d2488b23d62e453bd4eca9cae3108d650e23f6f9"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "e523f4cd478a638a42edc44b5e3c466992cb14875e999e277ae9d01692e7f8bd"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "82ecdd57f43d87de8ff9c8d9e5ed5be1eef48c440bac5513418f29641e994dfd"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "1490a91ea1e7a653df5a90d4e102413865cf3d58a1d9d13ac3423cc8e490443c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "3087f4120649c4397a78b39d90050e68779a8ca00d36ee38a5f8df7ece380f87"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "e5245f3d1f9eac124477bb51163fabcae9d13ecf1a7ab508e4a76b7037166c29"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "45cc7d832c3a85df2b256233e55170409ad8a4ca4dbd4aec2b3c3e7641e9c4d5"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "30804cf6339394f33475d71bf270c236bb9c7b1677806d1a60d8ad335eb30575"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "verifyRel",
+        "train_text": false
+      },
+      "run_id": "b37e0a5cb7a4481f782b92b95b67a2a4a1ea25c2b86e6339611c861399845bf5"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "29737eac81b43436ed01f5c150d46924ec82937d0eab6650765eb5cf6ccc8305"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "46c04779c972b650ec8f3e96774669285e532cec2218a826e62db2a9900024c3"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "07e749c076f6c492854a9ec083875c7ca847fb1489bb0e799277bad36c582e1b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "9257d8fb5e43cbf69a900f85256001258d2036184033ffb500a0b83be71a1238"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "fe13e31331f5a214bbe62afe3f6c78848828fd4a141f5b05a869bd3d64f48de9"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "66bcf02382a970f57c052161ded7fe89af57fec5be21b54358558fd0bc5f6d7b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "2a2d7ab999f2e264bc9cd11dd85cf1532a1be54326c806401ac00d7f85ccb464"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "f0c7c04cd7d260783e967de87612bb2c78ed2a4a11f9f1b38e8cb5738d3e5836"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "37b29565635564e5be3b387a03b422e759e9317da2ac65c1544f7f9ac7479009"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "299f3265ca26ef7b5e77ec0e9faa1afa5611e788453ee3406e7d6fd55f311cba"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "da3be8081bac5e3fa1833941451e90703144b58c28bf11ac7b344d7e90d89ea3"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "1dcf0b5f4c199d7d9338729b8375cb155bc67278c18faa2b7ab7f7b22d26c8ed"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "55aa158b3dd2a9076b924eaed8c1b2709dcee29ce764a45577991a1068bddd5b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "5413f2022d91f9ee3da9959cd6a03fc9e2a7265eedf667979548416be35fe0d2"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "b6fe4e6bb4230752aaa019a50043b1ea694d12372a254a8a641b630eec36388d"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "8413136da3f7cbd7779d7952397b2a841ec986cbd0420d993e5cef65b5493320"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "compare",
+        "train_text": false
+      },
+      "run_id": "84622436d01fc2d334303b7708b0bbaa692da68fe494b0af9d8820392346960c"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "10b3f12edc376916af604007cad92073671fbefbc6cce3dd4a29fbba90a6b222"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "f4cf114b70d521e5202535bc6f12a7457cc800f0506257b1a2558e4db51fcb6e"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "ca320e0049d1bfd1d0299acfd041fd96e95304c0c44947a5039e63d01d9cd7c8"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "f39b21a69e129bcf1dbcec7483a6cd5bbd95e6fa21cb833a1a66de76aa2c4d83"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 250,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "61c594102551d03f0c6a78ba209a773da1192422d73149be7d09889066ce4d65"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "5bcf6e0a8bbc119f582ac02bd4677cf09e5c3912709423ed48380a0869959ad0"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "4f5817d47deaa21afefd51575f9dfdffb91ee3ee9c946a53c7761f93ca5e3069"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "77b4c5c74f3f37f6bbffaa8d01e4401ef74dfe0cee523193744151a216d43b5b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "eae631913cd5354447dec4179bb8fa547a29c4979a58be343e47358870745e2b"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 1000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "2757d9817efe8a5fa12ca747f5aee8885ae07c8e862d81cf07d0472ce6548ede"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "8db019d224b9e21e6b7c43fd3d6677b140ac55759969148884f649df9f5bc3d1"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "9f54470199d4c5f41e09e88eae438aa038749a1fc4f48cdbd21afd212fc605bd"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1002,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "1f354d241c0b39adac7ca8b992c92babfafe29de87bb5a1b5e2b40b9526aeac3"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1003,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "367128068fa94ce2114bec2e56c61051da384a02df7d39afdd96d91955a715b1"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": 4000,
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1004,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "30fc3d05e80fa8e59d7034b0644100967d774be2965703ea5223f74dd55cecd2"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1000,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "4d8cc022187817a62aa4858d1134630d2a5e6383eb0fb282665051727538f396"
+    },
+    {
+      "config": {
+        "blank": false,
+        "budget": "full",
+        "cublas_workspace_config": ":4096:8",
+        "epochs": 10,
+        "lr_fusion": 0.0001,
+        "seed": 1001,
+        "task": "logic",
+        "train_text": false
+      },
+      "run_id": "fa8ce5835307e0cb52b0c849cad7a821f42329715010e8118551dbe399c2dd24"
+    }
+  ]
+}

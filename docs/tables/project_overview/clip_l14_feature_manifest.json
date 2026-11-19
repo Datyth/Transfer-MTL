@@ -1,0 +1,26 @@
+{
+  "batch_size": 16,
+  "dtype": "float16",
+  "files": {
+    "blank_tokens.npy": "7ad557262e8d0b6568a350c453b6664b37a9f2b468a44db6efe9d769eb3788f7",
+    "index.parquet": "63da2e9756074307653052437440dd042d54d4a14805f0d48ed5a59dbb3e6cae",
+    "tokens.float16.memmap": "7087f67c8f0b2d43966346473a390653fd4d2faff229ba95d8853a571677baf6"
+  },
+  "identity": {
+    "batch_size": 16,
+    "encoder_code_hash": "f3a93500f7e5cb9de084fd157edcac17ca51d4a1e72bc8dbe027f886c847f7ed",
+    "ids_hash": "6fc409559c19f006312e51e30b4ba6971fdd3f8f1e9b20c1e018332ab7a85770",
+    "preprocessing_code_hash": "c918996f6758c358d7714991752f70a596483d462b866afc815af4c93e22ec16",
+    "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+    "weights_hash": "f1a17cdbe0f36fec524f5cafb1c261ea3bbbc13e346e0f74fc9eb0460dedd0d3"
+  },
+  "revision": "32bd64288804d66eefd0ccbe215aa642df71cc41",
+  "seconds_this_session": 1455.715888767998,
+  "shape": [
+    82374,
+    257,
+    1024
+  ],
+  "validation_images": 64,
+  "validation_max_abs_difference": 0.0
+}
